@@ -1,0 +1,27 @@
+GET http://localhost:3000/users
+
+####
+
+GET http://localhost:3000/users/blinky
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "username": "blinky"
+}
+
+###
+
+DELETE http://localhost:3000/users/blinky
+
+###
+
+PATCH http://localhost:3000/users/blinky
+Content-Type: application/json 
+
+{
+  "username": "blinko"
+}
