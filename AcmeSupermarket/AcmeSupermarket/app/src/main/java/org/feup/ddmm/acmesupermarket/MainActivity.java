@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         this.mQueue = Volley.newRequestQueue(this);
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, "http://10.0.2.2:3000/users", null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, "http://192.168.1.226:3000/users", null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.e("Response:", response.toString());
@@ -68,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
             JSONObject payload = new JSONObject();
             payload.put("name", name);
             payload.put("username", username);
-            // payload.put("password", password);
+            payload.put("password", password);
 
-            JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, "http://10.0.2.2:3000/users", payload, new Response.Listener<JSONObject>() {
+            JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, "http://192.168.1.226:3000/users", payload, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
