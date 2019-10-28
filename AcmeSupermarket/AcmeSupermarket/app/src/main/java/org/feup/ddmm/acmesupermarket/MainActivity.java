@@ -63,10 +63,6 @@ public class MainActivity extends AppCompatActivity {
         this.mQueue.add(req);
     }
 
-    private void loginUser(String username, String password) {
-        
-    }
-
     private void registerUser(String name, String username, String password) {
         try {
             JSONObject payload = new JSONObject();

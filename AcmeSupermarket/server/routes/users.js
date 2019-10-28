@@ -25,12 +25,12 @@ router.post('/', async (req, res) => {
     const user = new User({
         name: req.body.name,
         username: req.body.username,
+        password: req.body.password
     })
 
     try {
         const newUser = await user.save()
-        // res.status(201).json(newUser)
-        res.status(201).json({'uuid': require('uuid/v1')()})
+        res.status(201).json(newUser)
     } catch (err) {
         res.status(400).json({ message: err.message })
     }
