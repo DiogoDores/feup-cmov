@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">QRCodeZX</string>
+    <string name="tv_message_template">Value(%d b): \"%s\"</string>
+    <string name="bt_generate">Generate</string>
+    <string name="sz_message">message size (nr bytes)</string>
+    <string name="img_qr_code_description">generated QR code</string>
+</resources>

@@ -5,37 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/edit_register_name"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/button_main_login"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/register_name_hint"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/edit_register_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/register_username_hint"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/edit_register_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/register_password_hint"
-        android:inputType="textPassword" />
+        android:text="@string/login_button_confirm" />
 
     <Button
-        android:id="@+id/button_register_confirm"
-        android:layout_width="213dp"
+        android:id="@+id/button_main_register"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/register_button_confirm" />
-
 </LinearLayout>

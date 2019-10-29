@@ -1,0 +1,7 @@
+<resources>
+  <string name="app_name">ReadTags</string>
+  <string name="msg_keyinfo">Key Info</string>
+  <string name="msg_taginfo">Tag Info</string>
+  <string name="tv_nokey">No Key</string>
+  <string name="mn_scan">Scan QR</string>
+</resources>

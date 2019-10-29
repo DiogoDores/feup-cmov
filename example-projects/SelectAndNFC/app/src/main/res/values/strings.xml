@@ -1,0 +1,6 @@
+<resources>
+  <string name="app_name">SelectAndNFC</string>
+  <string name="but_send">Send</string>
+  <string name="but_QRCode">QRCode</string>
+  <string name="nfc_send_msg">Tap and touch to send</string>
+</resources>

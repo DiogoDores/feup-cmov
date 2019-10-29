@@ -1,0 +1,21 @@
+<resources>
+  <string name="app_name">Gen Product Tag</string>
+  <string name="bt_ugen">Generate</string>
+  <string name="bt_gentag">Generate Tag</string>
+  <string name="bt_dectag">Decrypt Tag</string>
+  <string name="bt_genkey">Generate Keys</string>
+  <string name="bt_showkey">Show Key</string>
+  <string name="bt_send">Send Key</string>
+  <string name="msg_empty">Empty field or no key!</string>
+  <string name="msg_enctag">Tag (%1$d):\n%2$s</string>
+  <string name="msg_notag">Generate the tag!</string>
+  <string name="ed_uuid">uuid</string>
+  <string name="ed_name">Name (max 35chars)</string>
+  <string name="ed_euros">euros</string>
+  <string name="ed_cents">cents</string>
+  <string name="tv_price">Price:  €</string>
+  <string name="tv_separator">.</string>
+  <string name="tv_nokey">No keys</string>
+  <string name="tv_qrtitle">Product Code</string>
+  <string name="tv_nfcsend">Tap and touch to send</string>
+</resources>

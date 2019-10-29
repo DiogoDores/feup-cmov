@@ -1,7 +1,10 @@
 <resources>
+    <string name="ip">http://192.168.1.5:3000/users</string>
+
     <string name="app_name">AcmeSupermarket</string>
     <string name="register_name_hint">Name</string>
-    <string name="register_username_hint">Username</string>
-    <string name="register_password_hint">Password</string>
+    <string name="all_username_hint">Username</string>
+    <string name="all_password_hint">Password</string>
     <string name="register_button_confirm">Register</string>
+    <string name="login_button_confirm">Login</string>
 </resources>
