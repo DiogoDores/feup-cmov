@@ -1,15 +1,16 @@
 package org.feup.ddmm.acmesupermarket;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.security.keystore.KeyGenParameterSpec;
+import android.security.KeyPairGeneratorSpec;
 import android.security.keystore.KeyProperties;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,9 +22,19 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigInteger;
+import java.security.Key;
+import java.security.KeyPair;
 import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
+import java.security.KeyStore;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.spec.AlgorithmParameterSpec;
+import java.util.Base64;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import javax.security.auth.x500.X500Principal;
 
 public class RegisterActivity extends AppCompatActivity {
     private RequestQueue mQueue;
@@ -61,14 +72,35 @@ public class RegisterActivity extends AppCompatActivity {
     private void registerUser(String name, String username, String password) {
         try {
             JSONObject payload = new JSONObject();
+
+            getCryptographicKeyPair();  // Generate a cryptographic key pair.
+            String publicKey = encodeKeyToString(getPublicKey());    // Get public key from generated key pair.
+            payload.put("public_key", publicKey);
+
             payload.put("name", name);
             payload.put("username", username);
             payload.put("password", password);
 
             JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, getString(R.string.ip), payload, new Response.Listener<JSONObject>() {
                 @Override
-                public void onResponse(JSONObject response) {
-                    Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                public void onResponse(JSONObject res) {
+                    //Toast.makeText(RegisterActivity.this, res.toString(), Toast.LENGTH_SHORT).show();
+
+                    // Parse response JSON.
+                    try {
+                        // Save response parameters in shared preferences.
+                        SharedPreferences pref = getSharedPreferences("pref", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+
+                        editor.putString("uuid", res.getString("uuid"));
+                        editor.putString("sm_public_key", res.getString("sm_public_key"));
+                        editor.apply();
+
+                        Toast.makeText(RegisterActivity.this, pref.getString("uuid", "No UUID found."), Toast.LENGTH_SHORT).show();
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -82,13 +114,63 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void getCryptographicKeyPair() {
+    private KeyPair getCryptographicKeyPair() {
         try {
-            KeyPairGenerator kpg = KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_EC, "AndroidKeyStore");
-        } catch (NoSuchAlgorithmException ex) {
-            ex.printStackTrace();
-        } catch (NoSuchProviderException ex) {
+            KeyStore ks = KeyStore.getInstance(Constants.ANDROID_KEYSTORE);
+            ks.load(null);
+
+            if (ks.getEntry(Constants.keyName, null) == null) {
+                Calendar start = new GregorianCalendar(), end = new GregorianCalendar();
+                KeyPairGenerator kpg = KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_RSA, Constants.ANDROID_KEYSTORE);
+
+                AlgorithmParameterSpec spec = new KeyPairGeneratorSpec.Builder(this)
+                    .setKeySize(Constants.KEY_SIZE)
+                    .setAlias(Constants.keyName)
+                    .setSubject(new X500Principal("CN=" + Constants.keyName))
+                    .setSerialNumber(BigInteger.valueOf(12121212))
+                    .setStartDate(start.getTime())
+                    .setEndDate(end.getTime())
+                    .build();
+
+                kpg.initialize(spec);
+                return kpg.generateKeyPair();
+            }
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return null;
+    }
+
+    @TargetApi(26)
+    private String encodeKeyToString(Key key) {
+        return Base64.getEncoder().encodeToString(key.getEncoded());
+    }
+
+    private PublicKey getPublicKey() {
+        try {
+            KeyStore ks = KeyStore.getInstance(Constants.ANDROID_KEYSTORE);
+            ks.load(null);
+            KeyStore.Entry entry = ks.getEntry(Constants.keyName, null);
+
+            PublicKey publicKey = ((KeyStore.PrivateKeyEntry) entry).getCertificate().getPublicKey();
+            return publicKey;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private PrivateKey getPrivateKey() {
+        try {
+            KeyStore ks = KeyStore.getInstance(Constants.ANDROID_KEYSTORE);
+            ks.load(null);
+            KeyStore.Entry entry = ks.getEntry(Constants.keyName, null);
+
+            PrivateKey privateKey = ((KeyStore.PrivateKeyEntry) entry).getPrivateKey();
+            return privateKey;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

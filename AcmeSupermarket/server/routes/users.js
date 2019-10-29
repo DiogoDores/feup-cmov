@@ -22,6 +22,7 @@ router.get('/:username', mw.getUser, (req, res) => {
 // Create one user.
 router.post('/', async (req, res) => {
   const user = new User({
+    public_key: req.body.public_key,
     name: req.body.name,
     username: req.body.username,
     password: req.body.password,
@@ -29,7 +30,7 @@ router.post('/', async (req, res) => {
 
   try {
     const newUser = await user.save();
-    res.status(201).json(newUser);
+    res.status(201).json({ uuid: newUser.uuid, sm_public_key: 'Supermarket Public Key' });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -37,12 +38,8 @@ router.post('/', async (req, res) => {
 
 // Update one user.
 router.patch('/:username', mw.getUser, async (req, res) => {
-  if (req.body.username != null) {
-    res.user.username = req.body.username;
-  }
-
-  if (req.body.name != null) {
-    res.user.name = req.body.name;
+  if (req.body.public_key != null) {
+    res.user.public_key = req.body.public_key;
   }
 
   try {
