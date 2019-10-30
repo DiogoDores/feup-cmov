@@ -2,6 +2,8 @@
     <string name="ip">http://192.168.1.5:3000/users</string>
 
     <string name="app_name">AcmeSupermarket</string>
+    <string name="app_title">ACME</string>
+    <string name="app_subtitle">SUPERMARKET</string>
     <string name="register_name_hint">Name</string>
     <string name="all_username_hint">Username</string>
     <string name="all_password_hint">Password</string>
