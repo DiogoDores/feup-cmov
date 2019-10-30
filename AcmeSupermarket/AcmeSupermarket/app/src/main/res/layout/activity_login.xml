@@ -6,27 +6,67 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/gradient"
+    android:paddingLeft="80dp"
+    android:paddingRight="80dp"
     tools:context=".LoginActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dip">
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="42dp"
+            android:fontFamily="@font/oswald_light"
+            android:layout_marginLeft="5dp"
+            android:text="@string/app_title"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/login_title"
+            android:layout_width="240dp"
+            android:layout_height="113dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/oswald"
+            android:text="@string/login_button_confirm"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="80sp" />
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/edit_login_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dip"
         android:ems="10"
+        android:textColorHint="@color/textColorWhite"
         android:hint="@string/all_username_hint"
+        android:backgroundTint="@color/textColorWhite"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/edit_login_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="50dip"
         android:ems="10"
+        android:textColorHint="@color/textColorWhite"
         android:hint="@string/all_password_hint"
+        android:backgroundTint="@color/textColorWhite"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/button_login_confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login_button_confirm" />
+        android:paddingVertical="7dip"
+        android:background="@drawable/roundedbutton"
+        android:text="@string/login_button_confirm"
+        android:textColor="@color/textColorPink"
+        android:fontFamily="@font/catamaran"
+        android:includeFontPadding="false"
+        android:textSize="25sp" />
 </LinearLayout>
