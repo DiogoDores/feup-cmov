@@ -39,7 +39,8 @@
         android:textColor="@color/textColorPink"
         android:fontFamily="@font/catamaran"
         android:includeFontPadding="false"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:onClick="openLoginActivity" />
 
     <Button
         android:id="@+id/button_main_register"
@@ -52,5 +53,6 @@
         android:text="@string/register_button_confirm"
         android:textColor="@color/textColorPink"
         android:fontFamily="@font/catamaran"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:onClick="openRegisterActivity"/>
 </LinearLayout>
