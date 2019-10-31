@@ -58,6 +58,7 @@
         android:textColorHint="@color/textColorWhite"
         android:hint="@string/register_name_hint"
         android:backgroundTint="@color/textColorWhite"
+        android:textColor="@color/textColorWhite"
         android:inputType="textPersonName" />
 
     <EditText
@@ -69,6 +70,7 @@
         android:textColorHint="@color/textColorWhite"
         android:hint="@string/all_username_hint"
         android:backgroundTint="@color/textColorWhite"
+        android:textColor="@color/textColorWhite"
         android:inputType="textPersonName" />
 
     <EditText
@@ -80,6 +82,7 @@
         android:textColorHint="@color/textColorWhite"
         android:hint="@string/all_password_hint"
         android:backgroundTint="@color/textColorWhite"
+        android:textColor="@color/textColorWhite"
         android:inputType="textPassword" />
 
     <Button

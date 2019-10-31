@@ -17,10 +17,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Find both login and register buttons on the view.
-        this.login = findViewById(R.id.button_main_login);
-        this.register = findViewById(R.id.button_main_register);
     }
 
     public void openLoginActivity(View view) {
