@@ -2,6 +2,7 @@ package org.feup.ddmm.acmesupermarket;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.security.KeyPairGeneratorSpec;
@@ -54,17 +55,11 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         this.mQueue = Volley.newRequestQueue(this);
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, getString(R.string.ip), null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.e("Response:", response.toString());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Log.e("Response:", error.toString());
-            }
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, getString(R.string.ip), null, res -> {
+            Log.e("Response:", res.toString());
+        }, err -> {
+            err.printStackTrace();
+            Log.e("Response:", err.toString());
         });
         this.mQueue.add(req);
     }
@@ -76,10 +71,14 @@ public class RegisterActivity extends AppCompatActivity {
             getCryptographicKeyPair();  // Generate a cryptographic key pair.
             String publicKey = encodeKeyToString(getPublicKey());    // Get public key from generated key pair.
             payload.put("public_key", publicKey);
-
             payload.put("name", name);
             payload.put("username", username);
-            payload.put("password", password);
+
+            // Store password locally, don't send it to the server.
+            SharedPreferences pref = getSharedPreferences("pref", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("password", password);
+            editor.apply();
 
             JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, getString(R.string.ip), payload, new Response.Listener<JSONObject>() {
                 @Override
@@ -98,6 +97,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                         Toast.makeText(RegisterActivity.this, pref.getString("uuid", "No UUID found."), Toast.LENGTH_SHORT).show();
 
+                        startActivity(new Intent(getApplicationContext(), BasketActivity.class));
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }

@@ -2,7 +2,11 @@ GET http://localhost:3000/users
 
 ####
 
-GET http://localhost:3000/users/blinky
+GET http://localhost:3000/users/a
+
+###
+
+GET http://localhost:3000/users/login/a
 
 ###
 
@@ -10,8 +14,7 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "username": "blinky",
-    "password": 123456,
+    "username": "a",
     "name": "Miguel"
 }
 
