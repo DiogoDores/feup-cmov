@@ -33,18 +33,73 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="5dip">
+        android:paddingVertical="5dip"
+        android:background="@color/textColorRed">
+
+        <TextView
+            android:id="@+id/quantity_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dip"
+            android:text="Quantity"
+            android:layout_centerVertical="true"
+            android:textColor="@color/textColorWhite"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quantity"
-
+            android:layout_toRightOf="@id/quantity_text"
+            android:text="Name"
             android:layout_centerVertical="true"
-            android:textColor="@color/textColorRed"
+            android:textColor="@color/textColorWhite"
             android:layout_marginLeft="10dp"
             android:textSize="15sp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"
+            android:text="Price"
+            android:layout_centerVertical="true"
+            android:textColor="@color/textColorWhite"
+            android:textSize="15sp" />
+
     </RelativeLayout>
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="603dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/textColorRed"
+        android:gravity="bottom"
+        android:paddingVertical="5dip">
+
+        <Button
+            android:id="@+id/basket_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"/>
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:background="@color/textColorWhite" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="50dp"/>
+
+    </RelativeLayout>
+
 
 </LinearLayout>
