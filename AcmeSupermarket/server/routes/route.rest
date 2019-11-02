@@ -10,6 +10,29 @@ GET http://localhost:3000/users/login/a
 
 ###
 
+POST http://localhost:3000/purchase/a
+Content-Type: application/json
+
+{
+  "uuid": "user-test-uuid",
+  "products": [
+    {
+      "name": "Frozen Lasagne",
+      "uuid": "product-uuid-test",
+      "price": 20.9
+    },
+    {
+      "name": "Warm Lasagne",
+      "uuid": "another-test-uuid",
+      "price": 2.45
+    }
+  ],
+  "voucher-id": "example-voucher",
+  "apply-discount": true
+}
+
+###
+
 POST http://localhost:3000/users
 Content-Type: application/json
 
