@@ -69,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
             JSONObject payload = new JSONObject();
 
             getCryptographicKeyPair();  // Generate a cryptographic key pair.
-            String publicKey = encodeKeyToString(getPublicKey());    // Get public key from generated key pair.
+            String publicKey = encodeKeyToString(RSAEncryption.getPublicKey());    // Get public key from generated key pair.
             payload.put("public_key", publicKey);
             payload.put("name", name);
             payload.put("username", username);
@@ -145,34 +145,6 @@ public class RegisterActivity extends AppCompatActivity {
     @TargetApi(26)
     private String encodeKeyToString(Key key) {
         return Base64.getEncoder().encodeToString(key.getEncoded());
-    }
-
-    private PublicKey getPublicKey() {
-        try {
-            KeyStore ks = KeyStore.getInstance(Constants.ANDROID_KEYSTORE);
-            ks.load(null);
-            KeyStore.Entry entry = ks.getEntry(Constants.keyName, null);
-
-            PublicKey publicKey = ((KeyStore.PrivateKeyEntry) entry).getCertificate().getPublicKey();
-            return publicKey;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private PrivateKey getPrivateKey() {
-        try {
-            KeyStore ks = KeyStore.getInstance(Constants.ANDROID_KEYSTORE);
-            ks.load(null);
-            KeyStore.Entry entry = ks.getEntry(Constants.keyName, null);
-
-            PrivateKey privateKey = ((KeyStore.PrivateKeyEntry) entry).getPrivateKey();
-            return privateKey;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     @Override

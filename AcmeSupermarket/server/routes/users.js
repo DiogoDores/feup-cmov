@@ -1,5 +1,4 @@
 const express = require('express');
-
 const router = express.Router();
 const User = require('../models/user');
 const mw = require('../middlewares/user');
@@ -29,7 +28,7 @@ router.post('/', async (req, res) => {
 
   try {
     const newUser = await user.save();
-    res.status(201).json({ uuid: newUser.uuid, sm_public_key: 'Supermarket Public Key' });
+    res.status(201).json({ uuid: newUser.uuid, sm_public_key: process.env.PUBLIC_KEY });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

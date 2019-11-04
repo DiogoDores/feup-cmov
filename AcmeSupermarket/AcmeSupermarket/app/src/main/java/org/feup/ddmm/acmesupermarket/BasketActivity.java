@@ -3,7 +3,10 @@ package org.feup.ddmm.acmesupermarket;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class BasketActivity extends AppCompatActivity {
+    private ArrayList<Product> basket = new ArrayList<Product>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
