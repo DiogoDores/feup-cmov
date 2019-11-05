@@ -1,5 +1,7 @@
 package org.feup.ddmm.acmesupermarket;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +13,10 @@ public class BasketActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket);
+
+        findViewById(R.id.button_camera_open).setOnClickListener(v -> {
+            startActivity(new Intent(this, ScanActivity.class));
+        });
     }
 
     @Override

@@ -27,6 +27,9 @@ const kp = key.generateKeyPair();
 process.env.PUBLIC_KEY = kp.exportKey('public');
 process.env.PRIVATE_KEY = kp.exportKey('private');
 
+const QRCode = require('qrcode');
+QRCode.toString('I am a pony', { type: 'terminal' }, (err, url) => console.log(url));
+
 app.listen(process.env.PORT, () => {
   console.log(`Example app listening on port ${process.env.PORT}!`);
 });
