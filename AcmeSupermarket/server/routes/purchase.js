@@ -7,14 +7,23 @@ const mw = require('../middlewares/user');
 
 router.get('/', (req, res) => {
   const key = new NodeRSA({ b: 512 }).importKey(process.env.PRIVATE_KEY);
-  console.log('Encrypting Hello world');
 
-  const encrypted = key.encrypt('Hello world', 'base64');
+  const dummyProduct = JSON.stringify({
+    uuid: 'dummy-uuid',
+    price: 2.99,
+    name: 'Frozen Lasagne',
+  });
+
+  const encrypted = key.encrypt(dummyProduct, 'base64');
   console.log(encrypted);
-
   const decrypted = key.decrypt(encrypted, 'utf8');
   console.log(decrypted);
-  
+
+  QRCode.toDataURL(encrypted, { type: 'image/png' }, (err, url) => {
+    const img = Buffer.from(url.split(',')[1], 'base64');
+    res.writeHead(200, { 'Content-Type': 'image/png', 'Content-Length': img.length });
+    res.end(img);
+  });
 });
 
 router.post('/:username', mw.getUser, (req, res) => {
