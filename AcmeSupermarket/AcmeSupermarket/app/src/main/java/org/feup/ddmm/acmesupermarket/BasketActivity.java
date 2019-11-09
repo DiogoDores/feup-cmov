@@ -14,6 +14,8 @@ import android.nfc.tech.Ndef;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,10 +30,14 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BasketActivity extends AppCompatActivity {
     private ArrayList<Product> basket = new ArrayList<Product>();
     private NfcAdapter nfcAdapter;
+    private List basketFrontend = new ArrayList();
+    ListView listView;
+    ArrayAdapter adapter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +68,14 @@ public class BasketActivity extends AppCompatActivity {
                 Toast.makeText(BasketActivity.this, "Sent!", Toast.LENGTH_SHORT).show();
             }
         }, this);
+
+        listView = (ListView)findViewById(R.id.list_view);
+
+        this.basketFrontend.add("Hello");
+
+        adapter = new ArrayAdapter(BasketActivity.this, android.R.layout.simple_list_item_1, basketFrontend);
+
+        listView.setAdapter(adapter);
     }
 
     public NdefRecord createMimeRecord(String mimeType, byte[] payload) {
