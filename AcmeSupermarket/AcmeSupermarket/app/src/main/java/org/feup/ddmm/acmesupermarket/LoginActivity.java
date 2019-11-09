@@ -39,16 +39,16 @@ public class LoginActivity extends AppCompatActivity {
 
     private void openBasketActivity() {
         startActivity(new Intent(this, BasketActivity.class));
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     private void saveLoginInfo(String uuid, String smpk) {
         SharedPreferences.Editor editor = this.pref.edit();
         editor.putString("uuid", uuid);
-        editor.putString("sm_public_key", smpk);
+        editor.putString("sm_public_key", RSAEncryption.formatPKCS8(smpk));
         editor.apply();
 
-        Toast.makeText(this, "UUID " + this.pref.getString("uuid", null) + " successfully logged in!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "sm_public_key: " + this.pref.getString("sm_public_key", null), Toast.LENGTH_SHORT).show();
         this.openBasketActivity();
     }
 

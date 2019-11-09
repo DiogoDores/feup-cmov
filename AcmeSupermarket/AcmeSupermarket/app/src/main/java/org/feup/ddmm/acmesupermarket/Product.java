@@ -10,4 +10,16 @@ public class Product {
         this.price = price;
         this.name = name;
     }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
 
 // Attempt to login.
 router.get('/login/:username', mw.getUser, async (req, res) => {
-  res.status(200).json({ uuid: res.user.uuid, sm_public_key: 'SPK' });
+  res.status(200).json({ uuid: res.user.uuid, sm_public_key: process.env.PUBLIC_KEY });
 });
 
 // Update one user.

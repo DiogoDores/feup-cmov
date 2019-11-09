@@ -24,8 +24,8 @@ app.use('/purchase', purchaseRouter);
 const key = new NodeRSA({ b: 512 });
 const kp = key.generateKeyPair();
 
-process.env.PUBLIC_KEY = kp.exportKey('public');
-process.env.PRIVATE_KEY = kp.exportKey('private');
+process.env.PUBLIC_KEY = kp.exportKey('pkcs8-public');
+process.env.PRIVATE_KEY = kp.exportKey('pkcs8-private');
 
 app.listen(process.env.PORT, () => {
   console.log(`Example app listening on port ${process.env.PORT}!`);

@@ -6,7 +6,10 @@ const router = express.Router();
 const mw = require('../middlewares/user');
 
 router.get('/', (req, res) => {
-  const key = new NodeRSA({ b: 512 }).importKey(process.env.PRIVATE_KEY);
+  const key = new NodeRSA();
+  console.log(process.env.PRIVATE_KEY);
+  key.importKey(process.env.PRIVATE_KEY, 'pkcs8-private');
+  key.setOptions({ encryptionScheme: 'pkcs1' });
 
   const dummyProduct = JSON.stringify({
     uuid: 'dummy-uuid',
@@ -19,7 +22,7 @@ router.get('/', (req, res) => {
   const decrypted = key.decrypt(encrypted, 'utf8');
   console.log(decrypted);
 
-  QRCode.toDataURL(encrypted, { type: 'image/png' }, (err, url) => {
+  QRCode.toDataURL(dummyProduct, { type: 'image/png' }, (err, url) => {
     const img = Buffer.from(url.split(',')[1], 'base64');
     res.writeHead(200, { 'Content-Type': 'image/png', 'Content-Length': img.length });
     res.end(img);

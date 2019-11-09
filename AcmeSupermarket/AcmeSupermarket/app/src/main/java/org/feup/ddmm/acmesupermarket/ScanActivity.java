@@ -4,14 +4,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.nfc.NfcAdapter;
+import android.nfc.tech.NfcA;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.zxing.Result;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.security.PublicKey;
+
+import javax.crypto.Cipher;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -49,7 +63,24 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
     @Override
     public void handleResult(Result rawResult) {
-        Toast.makeText(this, "Contents = " + rawResult.getText() +", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_LONG).show();
+        // TODO: Eventually encrypt and decrypt these messages.
+        //SharedPreferences preferences = getSharedPreferences("pref", MODE_PRIVATE);
+        //String smpk_str = preferences.getString("sm_public_key", null);
+        //PublicKey publicKey = RSAEncryption.transformPublicKey(smpk_str);
+        //String rsa = RSAEncryption.decrypt(rawResult.getRawBytes().toString(), smpk_str);
+
+        try {
+            JSONObject jsonObject = new JSONObject(rawResult.getText());
+
+            Intent intent = new Intent();
+            intent.putExtra("MESSAGE", rawResult.getText());
+            setResult(1, intent);
+
+            Toast.makeText(this, "Contents = " + rawResult.getText() +", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_LONG).show();
+
+        } catch (JSONException err) {
+            err.printStackTrace();
+        }
         finish();
     }
 }
