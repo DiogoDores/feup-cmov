@@ -71,10 +71,7 @@ public class BasketActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.list_view);
 
-        this.basketFrontend.add("Hello");
-
-        adapter = new ArrayAdapter(BasketActivity.this, android.R.layout.simple_list_item_1, basketFrontend);
-
+        adapter = new ArrayAdapter(BasketActivity.this, android.R.layout.simple_list_item_1, this.basket);
         listView.setAdapter(adapter);
     }
 
@@ -95,6 +92,7 @@ public class BasketActivity extends AppCompatActivity {
             Gson gson = new Gson();
             Product product = gson.fromJson(data.getStringExtra("MESSAGE"), Product.class);
             this.basket.add(product);
+            this.adapter.notifyDataSetChanged();
         }
     }
 

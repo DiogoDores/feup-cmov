@@ -1,5 +1,7 @@
 package org.feup.ddmm.acmesupermarket;
 
+import androidx.annotation.NonNull;
+
 public class Product {
     private String uuid;
     private float price;
@@ -21,5 +23,11 @@ public class Product {
 
     public String getName() {
         return name;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
