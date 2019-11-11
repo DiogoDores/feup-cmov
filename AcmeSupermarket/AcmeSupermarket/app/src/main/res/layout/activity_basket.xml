@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:gravity="center_vertical">
 
         <TextView
@@ -16,8 +17,9 @@
             android:text="@string/app_title"
             android:layout_centerVertical="true"
             android:textColor="@color/textColorRed"
-            android:layout_marginLeft="10dp"
-            android:textSize="30sp" />
+            android:layout_marginStart="10dp"
+            android:textSize="30sp"
+            android:includeFontPadding="false"/>
 
         <Button
             android:id="@+id/button_camera_open"
@@ -28,9 +30,9 @@
             android:layout_centerVertical="true"
             android:drawableStart="@drawable/ic_send_black_24dp"
             android:drawablePadding="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_marginRight="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_marginEnd="10dp"
             />
 
     </RelativeLayout>
@@ -40,9 +42,27 @@
         android:layout_height="1dp"
         android:background="@color/textColorRed" />
 
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_confirmation_number_black_24dp"
+            android:text="Basket" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Receipts" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:paddingVertical="5dip"
         android:background="@color/textColorRed">
 
@@ -51,10 +71,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dip"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dip"
             android:fontFamily="@font/catamaran_semibold"
-            android:text="Quantity"
+            android:text="@string/quantity"
             android:textColor="@color/textColorWhite"
             android:includeFontPadding="false"
             android:textSize="17sp" />
@@ -62,12 +82,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/quantity_text"
+            android:layout_toEndOf="@id/quantity_text"
             android:fontFamily="@font/catamaran_semibold"
-            android:text="Name"
+            android:text="@string/name"
             android:layout_centerVertical="true"
             android:textColor="@color/textColorWhite"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:includeFontPadding="false"
             android:textSize="17sp" />
 
@@ -75,8 +95,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="20dp"
-            android:text="Price"
+            android:layout_marginEnd="20dp"
+            android:text="@string/price"
             android:fontFamily="@font/catamaran_semibold"
             android:layout_centerVertical="true"
             android:textColor="@color/textColorWhite"
@@ -85,55 +105,92 @@
 
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/list_view"
-        android:layout_width="match_parent"
-        android:layout_height="586dp" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="567dp"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:id="@+id/list_container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:weightSum="1">
+
+            <ListView
+                android:id="@+id/list_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </ListView>
+
+            <Button
+                android:id="@+id/add"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignEnd="@+id/list_view"
+                android:layout_alignBottom="@+id/list_view"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/round_button"
+                android:drawableStart="@drawable/ic_center_focus_weak_black_24dp"
+                android:drawablePadding="5dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp" />
+
+        </RelativeLayout>
+
+    </ScrollView>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:background="@color/textColorRed"
         android:gravity="bottom"
-        android:paddingVertical="5dip">
+        android:paddingVertical="5dip"
+        android:weightSum="1">
 
         <Button
             android:id="@+id/basket_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp"
             android:layout_centerVertical="true"
             android:background="@color/textColorRed"
             android:drawableStart="@drawable/ic_shopping_cart_black_24dp"
-            android:text="Basket"
+            android:text="@string/basket"
             android:textColor="@color/textColorWhite"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:fontFamily="@font/catamaran_semibold"
             android:drawablePadding="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_alignParentBottom="true"/>
 
         <View
             android:layout_width="4dp"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-            android:background="@color/textColorWhite" />
+            android:background="@color/textColorWhite"
+            android:layout_alignParentBottom="true"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="50dp"
+            android:layout_marginEnd="50dp"
             android:layout_centerVertical="true"
             android:background="@color/textColorRed"
-            android:drawableStart="@drawable/ic_confirmation_number_black_24dp"
-            android:text="Receipts"
+
+            android:text="@string/receipts"
             android:textColor="@color/textColorWhite"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:fontFamily="@font/catamaran_semibold"
             android:drawablePadding="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 

@@ -65,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="7dip"
-        android:background="@drawable/roundedbutton"
+        android:background="@drawable/rounded_white_button"
         android:text="@string/login_button_confirm"
         android:textColor="@color/textColorRed"
         android:fontFamily="@font/catamaran"
