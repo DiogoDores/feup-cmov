@@ -11,4 +11,10 @@ public class ReceiptsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_receipts);
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
 }

@@ -14,7 +14,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/oswald_bold"
-            android:text="@string/app_title"
+            android:text="@string/basket"
+            android:textAllCaps="true"
             android:layout_centerVertical="true"
             android:textColor="@color/textColorRed"
             android:layout_marginStart="10dp"
@@ -22,7 +23,7 @@
             android:includeFontPadding="false"/>
 
         <Button
-            android:id="@+id/button_camera_open"
+            android:id="@+id/start_checkout_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
@@ -42,27 +43,9 @@
         android:layout_height="1dp"
         android:background="@color/textColorRed" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_confirmation_number_black_24dp"
-            android:text="Basket" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Receipts" />
-
-    </com.google.android.material.tabs.TabLayout>
-
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:paddingVertical="5dip"
         android:background="@color/textColorRed">
 
@@ -105,94 +88,31 @@
 
     </RelativeLayout>
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="567dp"
-        android:weightSum="2">
-
-        <RelativeLayout
-            android:id="@+id/list_container"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:weightSum="1">
-
-            <ListView
-                android:id="@+id/list_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </ListView>
-
-            <Button
-                android:id="@+id/add"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_alignEnd="@+id/list_view"
-                android:layout_alignBottom="@+id/list_view"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/round_button"
-                android:drawableStart="@drawable/ic_center_focus_weak_black_24dp"
-                android:drawablePadding="5dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp" />
-
-        </RelativeLayout>
-
-    </ScrollView>
-
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@color/textColorRed"
-        android:gravity="bottom"
-        android:paddingVertical="5dip"
-        android:weightSum="1">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
 
         <Button
-            android:id="@+id/basket_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_centerVertical="true"
-            android:background="@color/textColorRed"
-            android:drawableStart="@drawable/ic_shopping_cart_black_24dp"
-            android:text="@string/basket"
-            android:textColor="@color/textColorWhite"
-            android:textSize="20sp"
-            android:fontFamily="@font/catamaran_semibold"
-            android:drawablePadding="5dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:layout_alignParentBottom="true"/>
-
-        <View
-            android:layout_width="4dp"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:background="@color/textColorWhite"
-            android:layout_alignParentBottom="true"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/button_camera_open"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="50dp"
-            android:layout_centerVertical="true"
-            android:background="@color/textColorRed"
-
-            android:text="@string/receipts"
-            android:textColor="@color/textColorWhite"
-            android:textSize="20sp"
-            android:fontFamily="@font/catamaran_semibold"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/round_button"
+            android:drawableStart="@drawable/ic_center_focus_weak_black_24dp"
             android:drawablePadding="5dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:layout_alignParentBottom="true"/>
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp" />
 
     </RelativeLayout>
-
 
 </LinearLayout>

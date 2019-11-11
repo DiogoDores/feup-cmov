@@ -1,33 +1,19 @@
 package org.feup.ddmm.acmesupermarket;
 
-import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.Uri;
-import android.nfc.FormatException;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
-import android.nfc.Tag;
-import android.nfc.tech.Ndef;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +21,6 @@ import java.util.List;
 public class BasketActivity extends AppCompatActivity {
     private ArrayList<Product> basket = new ArrayList<Product>();
     private NfcAdapter nfcAdapter;
-    private List basketFrontend = new ArrayList();
     ListView listView;
     ArrayAdapter adapter;
 
@@ -46,6 +31,8 @@ public class BasketActivity extends AppCompatActivity {
         findViewById(R.id.button_camera_open).setOnClickListener(v -> {
             startActivityForResult(new Intent(this, ScanActivity.class), 1);
         });
+
+        findViewById(R.id.start_checkout_button).setOnClickListener(v -> openCheckoutActivity());
 
         this.nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
@@ -73,6 +60,11 @@ public class BasketActivity extends AppCompatActivity {
 
         adapter = new ArrayAdapter(BasketActivity.this, android.R.layout.simple_list_item_1, this.basket);
         listView.setAdapter(adapter);
+    }
+
+    public void openCheckoutActivity() {
+        startActivity(new Intent(getApplicationContext(), CheckoutActivity.class));
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     public NdefRecord createMimeRecord(String mimeType, byte[] payload) {

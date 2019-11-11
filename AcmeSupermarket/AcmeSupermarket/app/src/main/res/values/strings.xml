@@ -1,5 +1,5 @@
 <resources>
-    <string name="ip">http://192.168.1.6:3000/users</string>
+    <string name="ip">http://192.168.1.192:3000/users</string>
 
     <string name="app_name">AcmeSupermarket</string>
     <string name="app_title">ACME</string>

@@ -37,9 +37,9 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.button_login_confirm).setOnClickListener(v -> handleLogin());
     }
 
-    private void openBasketActivity() {
-        startActivity(new Intent(this, BasketActivity.class));
-        //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    private void openMenuActivity() {
+        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     private void saveLoginInfo(String uuid, String smpk) {
@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.apply();
 
         Toast.makeText(this, "sm_public_key: " + this.pref.getString("sm_public_key", null), Toast.LENGTH_SHORT).show();
-        this.openBasketActivity();
+        this.openMenuActivity();
     }
 
     private void sendLoginRequest(String username) {
