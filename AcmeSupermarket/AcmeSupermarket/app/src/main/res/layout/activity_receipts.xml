@@ -56,7 +56,7 @@
                 android:includeFontPadding="false" />
 
             <TextView
-                android:id="@+id/voucher_num"
+                android:id="@+id/no_vouchers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/catamaran"
@@ -74,7 +74,7 @@
                 android:fontFamily="@font/catamaran"
                 android:text="vouchers"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@id/voucher_num"
+                android:layout_below="@id/no_vouchers"
                 android:textColor="@color/textColorWhite"
                 android:layout_marginStart="10dp"
                 android:textSize="20sp"
@@ -101,7 +101,7 @@
                 android:includeFontPadding="false"/>
 
             <TextView
-                android:id="@+id/cum_shot"
+                android:id="@+id/accumulated_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/catamaran"
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/catamaran"
                 android:text="in your account"
-                android:layout_below="@id/cum_shot"
+                android:layout_below="@id/accumulated_amount"
                 android:textColor="@color/textColorWhite"
                 android:layout_marginStart="10dp"
                 android:textSize="20sp"
@@ -128,12 +128,12 @@
 
     </RelativeLayout>
 
-   <ListView
+   <ExpandableListView
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_marginHorizontal="20dp"
-       android:layout_marginVertical="20dp">
-   </ListView>
+       android:layout_marginTop="20dp">
+   </ExpandableListView>
 
 
 </LinearLayout>

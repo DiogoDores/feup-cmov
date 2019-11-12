@@ -8,6 +8,7 @@ import android.nfc.NfcEvent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,13 +17,14 @@ import com.google.gson.Gson;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.List;
 
 public class BasketActivity extends AppCompatActivity {
     private ArrayList<Product> basket = new ArrayList<Product>();
     private NfcAdapter nfcAdapter;
     ListView listView;
-    ArrayAdapter adapter;
+    ListAdapter adapter;
+    TextView totalPriceView;
+    private float totalPrice;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,9 @@ public class BasketActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.start_checkout_button).setOnClickListener(v -> openCheckoutActivity());
+
+        totalPriceView = (TextView) findViewById(R.id.total_price);
+        totalPrice = 0.00F;
 
         this.nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
@@ -58,7 +63,7 @@ public class BasketActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.list_view);
 
-        adapter = new ArrayAdapter(BasketActivity.this, android.R.layout.simple_list_item_1, this.basket);
+        adapter = new ListAdapter(this, R.layout.list_adapter_view, this.basket);
         listView.setAdapter(adapter);
     }
 
@@ -80,11 +85,25 @@ public class BasketActivity extends AppCompatActivity {
         if (requestCode == 1) {
             Toast.makeText(this, data.getStringExtra("MESSAGE"), Toast.LENGTH_SHORT).show();
 
+            boolean inBasket = false;
+
             // Convert string to JSON and to Product object and push it to basket.
             Gson gson = new Gson();
             Product product = gson.fromJson(data.getStringExtra("MESSAGE"), Product.class);
-            this.basket.add(product);
+
+            for(int i = 0; i < basket.size(); i++){
+                if(basket.get(i).getUuid().equals(product.getUuid())){
+                    basket.get(i).incrementQuantity();
+                    inBasket = true;
+                }
+            }
+            totalPrice += product.getPrice();
+            totalPriceView.setText(totalPrice + "€");
+
+            if(!inBasket)
+                this.basket.add(product);
             this.adapter.notifyDataSetChanged();
+
         }
     }
 

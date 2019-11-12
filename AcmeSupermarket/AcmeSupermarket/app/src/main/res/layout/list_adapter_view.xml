@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingVertical="15dp"
+    android:paddingHorizontal="10dp"
+    android:weightSum="100">
+
+
+    <TextView
+        android:textSize="18sp"
+        android:layout_weight="40"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="30dp"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/catamaran_light"
+        android:textColor="@color/colorPrimaryDark"
+        android:id="@+id/product_quantity"/>
+    <TextView
+        android:textSize="18sp"
+        android:layout_marginStart="15dp"
+        android:layout_weight="20"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/catamaran_light"
+        android:textColor="@color/colorPrimaryDark"
+        android:id="@+id/product_name"/>
+    <TextView
+        android:textSize="18sp"
+        android:layout_weight="40"
+        android:gravity="end"
+        android:paddingEnd="9dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/catamaran_light"
+        android:textColor="@color/colorPrimaryDark"
+        android:id="@+id/product_price"/>
+
+</LinearLayout>
