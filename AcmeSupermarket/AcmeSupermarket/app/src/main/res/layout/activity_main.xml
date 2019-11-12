@@ -36,8 +36,8 @@
         android:paddingVertical="7dip"
         android:background="@drawable/rounded_white_button"
         android:text="@string/login_button_confirm"
-        android:textColor="@color/textColorRed"
-        android:fontFamily="@font/catamaran"
+        android:textColor="@color/colorAccent"
+        android:fontFamily="@font/catamaran_semibold"
         android:includeFontPadding="false"
         android:textSize="25sp"
         android:onClick="openLoginActivity" />
@@ -51,8 +51,8 @@
         android:background="@drawable/rounded_white_button"
         android:includeFontPadding="false"
         android:text="@string/register_button_confirm"
-        android:textColor="@color/textColorRed"
-        android:fontFamily="@font/catamaran"
+        android:textColor="@color/colorAccent"
+        android:fontFamily="@font/catamaran_semibold"
         android:textSize="25sp"
         android:onClick="openRegisterActivity"/>
 </LinearLayout>

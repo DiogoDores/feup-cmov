@@ -6,7 +6,6 @@ import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +21,7 @@ public class BasketActivity extends AppCompatActivity {
     private ArrayList<Product> basket = new ArrayList<Product>();
     private NfcAdapter nfcAdapter;
     ListView listView;
-    ListAdapter adapter;
+    BasketAdapter adapter;
     TextView totalPriceView;
     private float totalPrice;
 
@@ -63,7 +62,7 @@ public class BasketActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.list_view);
 
-        adapter = new ListAdapter(this, R.layout.list_adapter_view, this.basket);
+        adapter = new BasketAdapter(this, R.layout.list_adapter_view, this.basket);
         listView.setAdapter(adapter);
     }
 

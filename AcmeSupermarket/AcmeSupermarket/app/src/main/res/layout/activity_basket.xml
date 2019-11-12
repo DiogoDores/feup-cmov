@@ -17,7 +17,7 @@
             android:text="@string/basket"
             android:textAllCaps="true"
             android:layout_centerVertical="true"
-            android:textColor="@color/textColorRed"
+            android:textColor="@color/colorAccent"
             android:layout_marginStart="10dp"
             android:textSize="30sp"
             android:includeFontPadding="false"/>
@@ -41,13 +41,13 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/textColorRed" />
+        android:background="@color/colorAccent" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:paddingVertical="5dip"
-        android:background="@color/textColorRed">
+        android:background="@color/colorAccent">
 
         <TextView
             android:id="@+id/quantity_text"
@@ -58,7 +58,7 @@
             android:layout_marginEnd="20dip"
             android:fontFamily="@font/catamaran_semibold"
             android:text="@string/quantity"
-            android:textColor="@color/textColorWhite"
+            android:textColor="@color/colorWhite"
             android:includeFontPadding="false"
             android:textSize="17sp" />
 
@@ -69,7 +69,7 @@
             android:fontFamily="@font/catamaran_semibold"
             android:text="@string/name"
             android:layout_centerVertical="true"
-            android:textColor="@color/textColorWhite"
+            android:textColor="@color/colorWhite"
             android:layout_marginStart="10dp"
             android:includeFontPadding="false"
             android:textSize="17sp" />
@@ -82,7 +82,7 @@
             android:text="@string/price"
             android:fontFamily="@font/catamaran_semibold"
             android:layout_centerVertical="true"
-            android:textColor="@color/textColorWhite"
+            android:textColor="@color/colorWhite"
             android:includeFontPadding="false"
             android:textSize="17sp" />
 
@@ -138,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total: "
-                android:textColor="@color/textColorWhite"
+                android:textColor="@color/colorWhite"
                 android:fontFamily="@font/catamaran_semibold"
                 android:textSize="25sp">
             </TextView>
@@ -149,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0.00€"
-                android:textColor="@color/textColorWhite"
+                android:textColor="@color/colorWhite"
                 android:fontFamily="@font/catamaran_semibold"
                 android:textSize="25sp">
             </TextView>

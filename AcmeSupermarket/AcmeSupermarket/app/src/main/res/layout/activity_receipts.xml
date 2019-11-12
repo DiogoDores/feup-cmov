@@ -16,7 +16,7 @@
             android:text="Vouchers and Receipts"
             android:textAllCaps="true"
             android:layout_centerVertical="true"
-            android:textColor="@color/textColorRed"
+            android:textColor="@color/colorAccent"
             android:layout_marginStart="10dp"
             android:textSize="25sp"
             android:includeFontPadding="false"/>
@@ -26,7 +26,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/textColorRed" />
+        android:background="@color/colorAccent" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                 android:fontFamily="@font/catamaran"
                 android:text="You have"
                 android:layout_centerHorizontal="true"
-                android:textColor="@color/textColorWhite"
+                android:textColor="@color/colorWhite"
                 android:layout_marginStart="10dp"
                 android:textSize="20sp"
                 android:includeFontPadding="false" />
@@ -62,7 +62,7 @@
                 android:fontFamily="@font/catamaran"
                 android:text="8"
                 android:layout_below="@id/you_have_id"
-                android:textColor="@color/textColorWhite"
+                android:textColor="@color/colorWhite"
                 android:layout_marginStart="10dp"
                 android:textSize="30sp"
                 android:layout_centerHorizontal="true"
@@ -75,7 +75,7 @@
                 android:text="vouchers"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/no_vouchers"
-                android:textColor="@color/textColorWhite"
+                android:textColor="@color/colorWhite"
                 android:layout_marginStart="10dp"
                 android:textSize="20sp"
                 android:includeFontPadding="false"/>
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/catamaran"
                 android:text="You've accumulated"
-                android:textColor="@color/textColorWhite"
+                android:textColor="@color/colorWhite"
                 android:layout_marginStart="10dp"
                 android:layout_centerHorizontal="true"
                 android:textSize="20sp"
@@ -107,7 +107,7 @@
                 android:fontFamily="@font/catamaran"
                 android:text="20.23€"
                 android:layout_below="@id/accumulated_text"
-                android:textColor="@color/textColorWhite"
+                android:textColor="@color/colorWhite"
                 android:layout_marginStart="10dp"
                 android:textSize="30sp"
                 android:layout_centerHorizontal="true"
@@ -119,7 +119,7 @@
                 android:fontFamily="@font/catamaran"
                 android:text="in your account"
                 android:layout_below="@id/accumulated_amount"
-                android:textColor="@color/textColorWhite"
+                android:textColor="@color/colorWhite"
                 android:layout_marginStart="10dp"
                 android:textSize="20sp"
                 android:layout_centerHorizontal="true"
@@ -129,6 +129,7 @@
     </RelativeLayout>
 
    <ExpandableListView
+       android:id="@+id/receipts_view"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_marginHorizontal="20dp"

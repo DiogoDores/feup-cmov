@@ -25,9 +25,7 @@ public class Product {
         return price;
     }
 
-    public float getTotalPrice() {
-        return totalPrice;
-    }
+    public float getTotalPrice() { return totalPrice + price; }
 
     public String getName() { return name; }
 
@@ -41,6 +39,9 @@ public class Product {
 
     public void incrementQuantity() {
         this.quantity += 1;
-        this.totalPrice = this.price * this.quantity;
+        if(this.quantity == 0)
+            this.totalPrice = this.price * (this.quantity + 1);
+        else
+            this.totalPrice = this.price * this.quantity;
     }
 }

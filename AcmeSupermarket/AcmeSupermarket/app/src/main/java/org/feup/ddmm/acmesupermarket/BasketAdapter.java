@@ -9,13 +9,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ListAdapter extends ArrayAdapter<Product> {
+public class BasketAdapter extends ArrayAdapter<Product> {
 
     private LayoutInflater mInflater;
     private ArrayList<Product> products;
     private int mViewResourceId;
 
-    public ListAdapter(Context context, int textViewResourceId, ArrayList<Product> products) {
+    public BasketAdapter(Context context, int textViewResourceId, ArrayList<Product> products) {
         super(context, textViewResourceId, products);
         this.products = products;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -37,7 +37,7 @@ public class ListAdapter extends ArrayAdapter<Product> {
             if (price != null)
                 price.setText(product.getTotalPrice() + "€");
             if (quantity != null)
-                quantity.setText(Integer.toString(product.getQuantity()));
+                quantity.setText(Integer.toString(product.getQuantity() + 1));
 
         }
 

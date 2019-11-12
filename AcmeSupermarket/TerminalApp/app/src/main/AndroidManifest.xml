@@ -21,6 +21,7 @@
                 <data android:mimeType="application/com.example.android.beam" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

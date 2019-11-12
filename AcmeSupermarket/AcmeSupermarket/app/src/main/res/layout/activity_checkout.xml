@@ -16,7 +16,7 @@
             android:text="Checkout"
             android:textAllCaps="true"
             android:layout_centerVertical="true"
-            android:textColor="@color/textColorRed"
+            android:textColor="@color/colorAccent"
             android:layout_marginStart="10dp"
             android:textSize="30sp"
             android:includeFontPadding="false"/>
@@ -26,7 +26,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/textColorRed" />
+        android:background="@color/colorAccent" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_red_button"
             android:text="Go Back"
-            android:textColor="@color/textColorWhite"
+            android:textColor="@color/colorWhite"
             android:fontFamily="@font/catamaran_semibold"
             android:textSize="25dp"
             android:includeFontPadding="false"

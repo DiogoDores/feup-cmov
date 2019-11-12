@@ -55,10 +55,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dip"
         android:ems="10"
-        android:textColorHint="@color/textColorWhite"
+        android:textColorHint="@color/colorWhite"
         android:hint="@string/register_name_hint"
-        android:backgroundTint="@color/textColorWhite"
-        android:textColor="@color/textColorWhite"
+        android:backgroundTint="@color/colorWhite"
+        android:textColor="@color/colorWhite"
         android:inputType="textPersonName" />
 
     <EditText
@@ -67,10 +67,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dip"
         android:ems="10"
-        android:textColorHint="@color/textColorWhite"
+        android:textColorHint="@color/colorWhite"
         android:hint="@string/all_username_hint"
-        android:backgroundTint="@color/textColorWhite"
-        android:textColor="@color/textColorWhite"
+        android:backgroundTint="@color/colorWhite"
+        android:textColor="@color/colorWhite"
         android:inputType="textPersonName" />
 
     <EditText
@@ -79,10 +79,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dip"
         android:ems="10"
-        android:textColorHint="@color/textColorWhite"
+        android:textColorHint="@color/colorWhite"
         android:hint="@string/all_password_hint"
-        android:backgroundTint="@color/textColorWhite"
-        android:textColor="@color/textColorWhite"
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="@color/colorWhite"
         android:inputType="textPassword" />
 
     <Button
@@ -92,8 +92,8 @@
         android:paddingVertical="7dip"
         android:background="@drawable/rounded_white_button"
         android:text="@string/register_button_confirm"
-        android:textColor="@color/textColorRed"
-        android:fontFamily="@font/catamaran"
+        android:textColor="@color/colorAccent"
+        android:fontFamily="@font/catamaran_semibold"
         android:includeFontPadding="false"
         android:textSize="25sp" />
 
