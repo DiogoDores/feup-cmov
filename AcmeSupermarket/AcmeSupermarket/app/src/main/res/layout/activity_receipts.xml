@@ -30,11 +30,40 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/amount_until_voucher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/catamaran_semibold"
+            android:includeFontPadding="false"
+            android:text="You're 99.00"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/catamaran_semibold"
+            android:includeFontPadding="false"
+            android:text="€ away from getting a new voucher!"
+            android:layout_toEndOf="@id/amount_until_voucher"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
         android:paddingVertical="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/rounded_red_button">
 
         <RelativeLayout
@@ -130,10 +159,13 @@
 
    <ExpandableListView
        android:id="@+id/receipts_view"
-       android:layout_width="wrap_content"
+       android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:layout_marginHorizontal="20dp"
-       android:layout_marginTop="20dp">
+       android:layout_marginTop="10dp"
+       android:groupIndicator="@null"
+       android:divider="@null"
+       android:dividerHeight="0dp">
    </ExpandableListView>
 
 

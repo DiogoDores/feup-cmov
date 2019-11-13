@@ -2,6 +2,7 @@ package org.feup.ddmm.acmesupermarket;
 
 import android.os.Bundle;
 
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ public class ReceiptsActivity extends AppCompatActivity {
 
     ReceiptAdapter listAdapter;
     ExpandableListView expListView;
-    ArrayList<Receipt> listData;
+    ArrayList<Receipt> receipts;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,20 +37,14 @@ public class ReceiptsActivity extends AppCompatActivity {
         vouchersTextView.setText(Integer.toString(noVouchers));
         accumAmountTextView.setText(accumAmount + "€");
 
-        // get the listview
         expListView = (ExpandableListView) findViewById(R.id.receipts_view);
-
-        // preparing list data
         prepareListData();
-
-        listAdapter = new ReceiptAdapter(this, listData);
-
-        // setting list adapter
+        listAdapter = new ReceiptAdapter(this, receipts, expListView);
         expListView.setAdapter(listAdapter);
     }
 
     private void prepareListData() {
-        listData = new ArrayList<Receipt>();
+        receipts = new ArrayList<Receipt>();
 
         // Adding child data
         Product p1 = new Product("id1", 10.5F, "poopoo");
@@ -61,7 +56,13 @@ public class ReceiptsActivity extends AppCompatActivity {
         Date date = new Date();
 
         Receipt r1 = new Receipt(date, products, 10.99F, false);
-        listData.add(r1);
+        Receipt r2 = new Receipt(date, products, 10.99F, false);
+        Receipt r3 = new Receipt(date, products, 10.99F, false);
+        Receipt r4 = new Receipt(date, products, 10.99F, false);
+        receipts.add(r1);
+        receipts.add(r2);
+        receipts.add(r3);
+        receipts.add(r4);
     }
 
     @Override
