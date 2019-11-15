@@ -10,7 +10,7 @@ GET http://localhost:3000/users/login/a
 
 ###
 
-POST http://localhost:3000/purchase/a
+POST http://localhost:3000/product/
 Content-Type: application/json
 
 {
@@ -37,13 +37,13 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "username": "a",
-    "name": "Miguel"
+    "username": "b",
+    "name": "Diogo"
 }
 
 ###
 
-DELETE http://localhost:3000/users/a
+DELETE http://localhost:3000/users/b
 
 ###
 

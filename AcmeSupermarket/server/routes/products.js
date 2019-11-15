@@ -2,19 +2,31 @@ const express = require('express');
 const QRCode = require('qrcode');
 const NodeRSA = require('node-rsa');
 
+const Product = require('../models/product');
+
 const router = express.Router();
 const mw = require('../middlewares/user');
 
-router.get('/', (req, res) => {
+// Get all products.
+router.get('/', async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.get('/dummy', (req, res) => {
   const key = new NodeRSA();
   console.log(process.env.PRIVATE_KEY);
   key.importKey(process.env.PRIVATE_KEY, 'pkcs8-private');
   key.setOptions({ encryptionScheme: 'pkcs1' });
 
   const dummyProduct = JSON.stringify({
+    name: 'Frozen Lasagne',
     uuid: 'dummy-uuid',
     price: 2.99,
-    name: 'Frozen Lasagne',
   });
 
   const encrypted = key.encrypt(dummyProduct, 'base64');

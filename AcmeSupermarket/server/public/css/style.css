@@ -1,0 +1,34 @@
+html {
+    background-image: linear-gradient(to top, #feada6 0%, #f5efef 100%);
+}
+
+img {
+    height: 128px;
+    width: 128px;
+}
+
+#header-logo {
+    height: 64px;
+    width: 64px;
+}
+
+.qrcode {
+    border: 3px dashed black;
+}
+
+p {
+    font-family: 'Rubik', sans-serif;
+}
+
+.description {
+    margin-top: -1.5em;
+    line-height: 15px;
+}
+
+h1 {
+    font-family: 'Calistoga', cursive;
+}
+
+h4 {
+    font-family: 'Calistoga', cursive;
+}

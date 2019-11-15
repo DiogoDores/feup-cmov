@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Frozen Lasagne",
+        "uuid": "uuid1",
+        "price": 2.99
+    },
+    {
+        "name": "Canned Spaghetti",
+        "uuid": "uuid2",
+        "price": 1.20
+    },
+    {
+        "name": "Spinach Ravioli",
+        "uuid": "uuid3",
+        "price": 3.49
+    },
+    {
+        "name": "Macaroni & Cheese",
+        "uuid": "uuid4",
+        "price": 1.50
+    }
+]
