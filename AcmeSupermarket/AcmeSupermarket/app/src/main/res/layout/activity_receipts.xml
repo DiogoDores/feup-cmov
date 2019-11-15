@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/basket_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/oswald_bold"
+            android:text="Vouchers and Receipts"
+            android:textAllCaps="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/colorAccent"
+            android:layout_marginStart="10dp"
+            android:textSize="25sp"
+            android:includeFontPadding="false"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/amount_until_voucher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/catamaran_semibold"
+            android:includeFontPadding="false"
+            android:text="You're 99.00"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/catamaran_semibold"
+            android:includeFontPadding="false"
+            android:text="€ away from getting a new voucher!"
+            android:layout_toEndOf="@id/amount_until_voucher"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded_red_button">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="30dp">
+
+            <TextView
+                android:id="@+id/you_have_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/catamaran"
+                android:text="You have"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorWhite"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"
+                android:includeFontPadding="false" />
+
+            <TextView
+                android:id="@+id/no_vouchers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/catamaran"
+                android:text="8"
+                android:layout_below="@id/you_have_id"
+                android:textColor="@color/colorWhite"
+                android:layout_marginStart="10dp"
+                android:textSize="30sp"
+                android:layout_centerHorizontal="true"
+                android:includeFontPadding="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/catamaran"
+                android:text="vouchers"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/no_vouchers"
+                android:textColor="@color/colorWhite"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"
+                android:includeFontPadding="false"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="30dp">
+
+            <TextView
+                android:id="@+id/accumulated_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/catamaran"
+                android:text="You've accumulated"
+                android:textColor="@color/colorWhite"
+                android:layout_marginStart="10dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="20sp"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:id="@+id/accumulated_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/catamaran"
+                android:text="20.23€"
+                android:layout_below="@id/accumulated_text"
+                android:textColor="@color/colorWhite"
+                android:layout_marginStart="10dp"
+                android:textSize="30sp"
+                android:layout_centerHorizontal="true"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/catamaran"
+                android:text="in your account"
+                android:layout_below="@id/accumulated_amount"
+                android:textColor="@color/colorWhite"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true"
+                android:includeFontPadding="false"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+   <ExpandableListView
+       android:id="@+id/receipts_view"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginHorizontal="20dp"
+       android:layout_marginTop="10dp"
+       android:groupIndicator="@null"
+       android:divider="@null"
+       android:dividerHeight="0dp">
+   </ExpandableListView>
+
+
+</LinearLayout>

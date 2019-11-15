@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:paddingVertical="10dp"
+    android:background="@drawable/red_border"
+    android:weightSum="100">
+
+
+    <TextView
+        android:id="@+id/purchase_date"
+        android:layout_weight="33"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/click_for_more"
+        android:layout_weight="33"
+        android:gravity="end"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Click for more"
+        android:textSize="14sp"
+        android:layout_marginEnd="5dp"
+        android:textColor="#666666" />
+
+    <TextView
+        android:id="@+id/total_price_receipts"
+        android:layout_weight="33"
+        android:gravity="end"
+        android:layout_marginEnd="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimaryDark" />
+
+</LinearLayout>

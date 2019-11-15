@@ -7,10 +7,8 @@ import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.widget.TextView;
+import android.widget.Button;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
     private NfcAdapter nfcAdapter;
@@ -29,10 +27,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void processIntent(Intent intent) {
-        TextView textView = (TextView) findViewById(R.id.text_ndef_main);
+        //TextView textView = (TextView) findViewById(R.id.text_ndef_main);
+        Button button =(Button) findViewById(R.id.checkout_basket_icon);
+        button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_check_big, 0, 0, 0);
         Parcelable[] rawMessages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
         NdefMessage msg = (NdefMessage) rawMessages[0];
-        textView.setText(new String(msg.getRecords()[0].getPayload()));
+        //textView.setText(new String(msg.getRecords()[0].getPayload()));
     }
 
     @Override
