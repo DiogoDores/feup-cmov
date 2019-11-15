@@ -10,25 +10,25 @@ GET http://localhost:3000/users/login/a
 
 ###
 
-POST http://localhost:3000/product/
+POST http://localhost:3000/users/buy/a
 Content-Type: application/json
 
 {
   "uuid": "user-test-uuid",
   "products": [
     {
-      "name": "Frozen Lasagne",
       "uuid": "product-uuid-test",
-      "price": 20.9
+      "name": "Frozen Lasagne",
+      "price": 80.90
     },
     {
-      "name": "Warm Lasagne",
       "uuid": "another-test-uuid",
+      "name": "Canned Spaghetti",
       "price": 2.45
     }
   ],
-  "voucher-id": "example-voucher",
-  "apply-discount": true
+  "voucher_id": "01fb0866-2ee9-4f71-9b87-d94c141a5d1b",
+  "apply_discount": true
 }
 
 ###
@@ -37,13 +37,13 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "username": "b",
-    "name": "Diogo"
+    "username": "a",
+    "name": "Miguel"
 }
 
 ###
 
-DELETE http://localhost:3000/users/b
+DELETE http://localhost:3000/users/a
 
 ###
 

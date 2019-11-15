@@ -1,6 +1,7 @@
 const express = require('express');
+const NodeRSA = require('node-rsa');
 const QRCode = require('qrcode');
-const path = require('path');
+
 const products = require('../seeds/product.json');
 
 const router = express.Router();
@@ -10,10 +11,18 @@ router.get('/', (req, res) => {
 });
 
 router.get('/generate', (req, res) => {
+  // Import supermarket private key.
+  const key = new NodeRSA();
+  key.importKey(process.env.PRIVATE_KEY, 'pkcs8-private');
+
   products.forEach((product) => {
-    QRCode.toFile(`public/images/${product.name}.png`, JSON.stringify(product), {
+    // Encrypt with supermarket private key.
+    const encrypted = key.encrypt(JSON.stringify(product), 'base64');
+    const decrypted = key.decrypt(encrypted, 'utf8');
+
+    QRCode.toFile(`public/images/${product.name}.png`, decrypted, {
       color: { light: '#0000' },
-    }, (err) => { if (err) console.log(err); });
+    }, (err) => { if (err) throw err; });
   });
   res.sendStatus(200);
 });

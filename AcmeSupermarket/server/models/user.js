@@ -21,6 +21,26 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: false,
   },
+  discount: {
+    type: Number,
+    required: false,
+    unique: false,
+  },
+  expense: {
+    type: Number,
+    required: false,
+    unique: false,
+  },
+  vouchers: [{
+    type: String,
+    required: false,
+    unique: false,
+  }],
+  receipts: [{
+    type: mongoose.Schema.Types.Mixed,
+    required: false,
+    unique: false,
+  }],
 });
 
 module.exports = mongoose.model('User', userSchema);

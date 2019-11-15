@@ -1,8 +1,13 @@
 const express = require('express');
+const uuid = require('uuid/v4');
 
 const router = express.Router();
 const User = require('../models/user');
+const Receipt = require('../models/receipt');
+
 const mw = require('../middlewares/user');
+
+const VOUCHER_CAP = 100;
 
 // Get all users.
 router.get('/', async (req, res) => {
@@ -25,6 +30,9 @@ router.post('/', async (req, res) => {
     public_key: req.body.public_key,
     name: req.body.name,
     username: req.body.username,
+    discount: 0.00,
+    expense: 0.00,
+    vouchers: [],
   });
 
   try {
@@ -52,6 +60,64 @@ router.patch('/:username', mw.getUser, async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
+});
+
+// Register purchase.
+router.post('/buy/:username', mw.getUser, async (req, res) => {
+  console.log(req.body);
+
+  const subtotal = req.body.products.map((prod) => prod.price).reduce((acc, prod) => acc + prod);
+  let total = subtotal;
+
+  // Spend accumulated discount if user requested.
+  if (req.body.apply_discount) {
+    total -= res.user.discount;
+
+    // If the accumulated discount is higher than the total, store the remaining cash.
+    if (total < 0) {
+      res.user.discount = Math.abs(total);
+      total = 0;
+    } else {
+      res.user.discount = 0;
+    }
+  }
+
+  // Apply 15% and add it to accumulated discount if there's a voucher.
+  if ('voucher_id' in req.body) {
+    if (res.user.vouchers.includes(req.body.voucher_id)) {
+      res.user.discount += (0.15 * subtotal);
+      res.user.vouchers = res.user.vouchers.filter((v) => v !== req.body.voucher_id);
+    } else {
+      console.log(`Voucher ${req.body.voucher_id} is invalid.`);
+    }
+  }
+
+  // Save new expense.
+  res.user.expense += total;
+
+  // Check if total expense is multiple of 100, and if so generate a new voucher.
+  if (res.user.expense >= VOUCHER_CAP) {
+    res.user.expense -= VOUCHER_CAP;
+    res.user.vouchers.push(uuid());
+  }
+
+  // Generate a new receipt.
+  const receipt = new Receipt({
+    products: req.body.products,
+    subtotal,
+    total,
+    voucher: ('voucher_id' in req.body && res.user.vouchers.includes(req.body.voucher_id)) ? req.body.voucher_id : null,
+    milestone: Math.round((VOUCHER_CAP - res.user.expense) * 100) / 100,
+  });
+
+  res.user.receipts.push(receipt);
+
+  // Round expense and discount to two decimal places.
+  res.user.expense = Math.round(res.user.expense * 100) / 100;
+  res.user.discount = Math.round(res.user.discount * 100) / 100;
+
+  await res.user.save();
+  res.json(receipt);
 });
 
 // Delete one user.

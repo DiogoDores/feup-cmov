@@ -5,7 +5,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const appRouter = require('./routes/app');
 const usersRouter = require('./routes/users');
-const productsRouter = require('./routes/products');
 
 const app = express();
 app.use(express.json());
@@ -24,7 +23,6 @@ db.once('open', () => {
 
 app.use('/', appRouter);
 app.use('/users', usersRouter);
-app.use('/products', productsRouter);
 
 // Generate new 512 bit-length key.
 const key = new NodeRSA({ b: 512 });
