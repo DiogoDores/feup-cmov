@@ -1,12 +1,25 @@
 package org.feup.ddmm.acmesupermarket;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,9 +37,18 @@ public class ReceiptsActivity extends AppCompatActivity {
     ExpandableListView expListView;
     ArrayList<Receipt> receipts;
 
+    private SharedPreferences pref;
+    private RequestQueue mQueue;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receipts);
+
+        // Register request queue.
+        this.mQueue = Volley.newRequestQueue(this);
+
+        this.pref = getSharedPreferences("pref", MODE_PRIVATE);
+
 
         vouchersTextView = (TextView) findViewById(R.id.no_vouchers);
         accumAmountTextView = (TextView) findViewById(R.id.accumulated_amount);
@@ -41,6 +63,36 @@ public class ReceiptsActivity extends AppCompatActivity {
         prepareListData();
         listAdapter = new ReceiptAdapter(this, receipts, expListView);
         expListView.setAdapter(listAdapter);
+
+        getVouchers();
+    }
+
+    private void getVouchers() {
+        String url = String.format("%s/users/%s", getResources().getString(R.string.ip), this.pref.getString("username", null));
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+            try {
+                // Delete saved voucher (it should not persist between accounts).
+                SharedPreferences.Editor editor = this.pref.edit();
+                editor.remove("voucher");
+
+                // Update no. of available vouchers.
+                JSONArray vouchers = response.getJSONArray("vouchers");
+                ((TextView) findViewById(R.id.no_vouchers)).setText(String.valueOf(vouchers.length()));
+
+                // Save next voucher on Shared Preferences so it may be consumed on checkout.
+                if (vouchers.length() > 0)
+                    editor.putString("voucher", response.getJSONArray("vouchers").getString(0));
+
+                editor.apply();
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }, error -> {
+            Toast.makeText(ReceiptsActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+        });
+
+        this.mQueue.add(req);
     }
 
     private void prepareListData() {

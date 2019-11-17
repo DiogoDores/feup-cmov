@@ -19,4 +19,8 @@
     <string name="basket">Basket</string>
     <string name="receipts">Receipts</string>
 
+    <string name="voucher_not_found">Couldn\'t find any vouchers in this account!</string>
+    <string name="voucher_applied">Applied voucher</string>
+    <string name="voucher_removed">Removed voucher</string>
+
 </resources>

@@ -66,6 +66,20 @@
             android:paddingVertical="5dp"
             android:layout_marginTop="25dp"/>
 
+        <Button
+            android:id="@+id/voucher_checkout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/rounded_red_button"
+            android:fontFamily="@font/catamaran_semibold"
+            android:includeFontPadding="false"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="5dp"
+            android:text="Apply voucher"
+            android:textColor="@color/colorWhite"
+            android:textSize="25dp" />
+
     </LinearLayout>
 
 </LinearLayout>

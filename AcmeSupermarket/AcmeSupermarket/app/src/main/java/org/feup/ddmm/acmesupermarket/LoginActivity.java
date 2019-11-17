@@ -42,10 +42,11 @@ public class LoginActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
-    private void saveLoginInfo(String uuid, String smpk) {
+    private void saveLoginInfo(String uuid, String username, String smpk) {
         SharedPreferences.Editor editor = this.pref.edit();
         editor.putString("uuid", uuid);
         editor.putString("sm_public_key", RSAEncryption.formatPKCS8(smpk));
+        editor.putString("username", username);
         editor.apply();
 
         Toast.makeText(this, "sm_public_key: " + this.pref.getString("sm_public_key", null), Toast.LENGTH_SHORT).show();
@@ -57,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null, res -> {
             try {
-                this.saveLoginInfo(res.getString("uuid"), res.getString("sm_public_key"));
+                this.saveLoginInfo(res.getString("uuid"), username, res.getString("sm_public_key"));
             } catch (JSONException ex) {
                 ex.printStackTrace();
             }
