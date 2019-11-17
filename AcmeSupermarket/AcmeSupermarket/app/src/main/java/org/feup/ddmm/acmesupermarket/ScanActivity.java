@@ -23,6 +23,7 @@ import com.google.zxing.Result;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.Buffer;
 import java.security.PublicKey;
 
 import javax.crypto.Cipher;
@@ -69,10 +70,12 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         String supermarketKey = preferences.getString("sm_public_key", null);
 
         try {
-            PublicKey publicKey = RSAEncryption.getPEMPublicKey(supermarketKey);
-            byte[] res = RSAEncryption.decrypt(rawResult.getRawBytes(), publicKey);
+            //PublicKey publicKey = RSAEncryption.getPEMPublicKey(supermarketKey);
+            //byte[] res = RSAEncryption.decrypt(rawResult.getRawBytes(), publicKey);
 
-            JSONObject jsonObject = new JSONObject(res.toString());
+            BufferHandler.decipherTag(rawResult.getRawBytes());
+
+            //JSONObject jsonObject = new JSONObject(res.toString());
 
             Intent intent = new Intent();
             intent.putExtra("MESSAGE", rawResult.getText());

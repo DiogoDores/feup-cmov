@@ -1,22 +1,22 @@
 [
     {
         "name": "Frozen Lasagne",
-        "uuid": "cdca3098-08c8-11ea-8d71-362b9e155667",
+        "uuid": "16762042-3f5d-4dd5-829a-451932901953",
         "price": 2.99
     },
     {
         "name": "Canned Spaghetti",
-        "uuid": "cdca3372-08c8-11ea-8d71-362b9e155667",
+        "uuid": "1241a238-fe62-4a49-a467-e9c746fdbce3",
         "price": 1.20
     },
     {
         "name": "Spinach Ravioli",
-        "uuid": "cdca3584-08c8-11ea-8d71-362b9e155667",
+        "uuid": "12115790-a3a1-4909-a903-c02c0a218128",
         "price": 3.49
     },
     {
         "name": "Macaroni & Cheese",
-        "uuid": "cdca36f6-08c8-11ea-8d71-362b9e155667",
+        "uuid": "140a43cc-b2a2-4a8d-b47e-dfbb2bf71881",
         "price": 1.50
     }
 ]
