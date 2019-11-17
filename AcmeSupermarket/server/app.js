@@ -26,10 +26,15 @@ app.use('/users', usersRouter);
 
 // Generate new 512 bit-length key.
 const key = new NodeRSA({ b: 512 });
+key.setOptions({ encryptionScheme: 'pkcs1_oaep' });
 const kp = key.generateKeyPair();
 
-process.env.PUBLIC_KEY = kp.exportKey('pkcs8-public');
-process.env.PRIVATE_KEY = kp.exportKey('pkcs8-private');
+// Generate the supermarket keypair.
+process.env.PUBLIC_KEY = kp.exportKey('pkcs8-public-pem');
+console.log(process.env.PUBLIC_KEY);
+
+process.env.PRIVATE_KEY = kp.exportKey('pkcs1-private-pem');
+console.log(process.env.PRIVATE_KEY);
 
 app.use(express.static('views'));
 app.use(express.static('public'));

@@ -55,13 +55,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         this.mQueue = Volley.newRequestQueue(this);
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, getString(R.string.ip), null, res -> {
-            Log.e("Response:", res.toString());
-        }, err -> {
-            err.printStackTrace();
-            Log.e("Response:", err.toString());
-        });
-        this.mQueue.add(req);
     }
 
     private void registerUser(String name, String username, String password) {
@@ -80,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
             editor.putString("password", password);
             editor.apply();
 
-            JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, getString(R.string.ip), payload, new Response.Listener<JSONObject>() {
+            JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, getString(R.string.ip) + "/users", payload, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject res) {
                     //Toast.makeText(RegisterActivity.this, res.toString(), Toast.LENGTH_SHORT).show();

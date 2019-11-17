@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void sendLoginRequest(String username) {
-        String url = getString(R.string.ip) + "/login/" + username;
+        String url = getString(R.string.ip) + "/users/login/" + username;
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null, res -> {
             try {
