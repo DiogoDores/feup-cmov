@@ -9,23 +9,28 @@ const router = express.Router();
 const generateBuffer = (product) => {
   // Trim string if its length is higher than 35.
   const trimmedName = product.name.length > 35 ? product.name.slice(0, 35) : product.name;
-  const buffer = Buffer.alloc(4 + 16 + 4 + 4 + 1 + trimmedName.length);
+  const buffer = Buffer.alloc(16 + 4 + 4 + 1 + trimmedName.length);
 
   const uuidMostSignificant = parseInt(product.uuid.replace(/-/g, '').slice(0, 16), 16);
   const uuidLeastSignificant = parseInt(product.uuid.replace(/-/g, '').slice(16), 16);
 
   const [euros, cents] = product.price.toString().split('.');
 
-  buffer.writeInt32BE(0x41636d65, 0); // Write ACME ID.
-  buffer.writeBigUInt64BE(0x167620423f5d4dd5n, 4);
-  buffer.writeBigUInt64BE(0x829a451932901953n, 12);
+  //buffer.writeUInt32BE(0x16762042, 0);
+  //buffer.writeUInt32BE(0x3f5d4dd5, 4);
 
-  buffer.writeInt16BE(euros, 20);
-  buffer.writeInt16BE(cents, 24);
+  //buffer.writeUInt32BE(0x829a4519, 8);
+  //buffer.writeUInt32BE(0x32901953, 12);
 
-  buffer.writeInt8(trimmedName.length, 28);
+  buffer.writeBigUInt64BE(0x167620423f5d4dd5n, 0); // Write most significant bits of UUID.
+  buffer.writeBigUInt64BE(0x829a451932901953n, 8); // Write least significant bits of UUID.
 
-  buffer.write(trimmedName, 29);
+  buffer.writeUInt32BE(euros, 16); // Write euros.
+  buffer.writeUInt32BE(cents, 20); // Write cents.
+
+  buffer.writeUInt8(trimmedName.length, 24); // Write name length.
+
+  buffer.write(trimmedName, 25); // Write name string.
   return buffer;
 };
 
@@ -49,7 +54,7 @@ router.get('/generate', (req, res) => {
     //console.log(decrypted);
 
     console.log(buffer);
-
+    
     QRCode.toFile(`public/images/${product.name}.png`, [{ data: buffer, mode: 'byte' }], {
       color: { light: '#0000' },
     }, (err) => { if (err) throw err; });

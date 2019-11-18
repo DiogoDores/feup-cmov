@@ -25,6 +25,7 @@ import org.json.JSONObject;
 
 import java.nio.Buffer;
 import java.security.PublicKey;
+import java.util.Arrays;
 
 import javax.crypto.Cipher;
 
@@ -73,7 +74,9 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
             //PublicKey publicKey = RSAEncryption.getPEMPublicKey(supermarketKey);
             //byte[] res = RSAEncryption.decrypt(rawResult.getRawBytes(), publicKey);
 
-            BufferHandler.decipherTag(rawResult.getRawBytes());
+            // Clear dumb bytes.
+            JSONObject obj = BufferHandler.decipherTag(isoRes);
+            Log.e("Output", obj.toString());
 
             //JSONObject jsonObject = new JSONObject(res.toString());
 

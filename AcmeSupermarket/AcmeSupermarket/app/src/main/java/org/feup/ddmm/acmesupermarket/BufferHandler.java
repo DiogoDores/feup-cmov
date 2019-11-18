@@ -2,6 +2,7 @@ package org.feup.ddmm.acmesupermarket;
 
 import android.util.Log;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.ByteBuffer;
@@ -9,16 +10,17 @@ import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 public class BufferHandler {
-    public static String decipherTag(byte[] clearTag) {
+    public static JSONObject decipherTag(byte[] clearTag) throws JSONException {
         JSONObject product = new JSONObject();
-
         ByteBuffer tag = ByteBuffer.wrap(clearTag);
-        int tagId = tag.getInt();
-        UUID id = new UUID(tag.getLong(), tag.getLong());
-        int euros = tag.getInt(), cents = tag.getInt();
-        byte[] bName = new byte[tag.get()];
-        tag.get(bName);
 
-        return new String(bName, StandardCharsets.ISO_8859_1);
+        product.put("uuid", new UUID(tag.getLong(), tag.getLong()));
+        product.put("price", tag.getInt() + tag.getInt() / 100);
+
+        byte[] name = new byte[tag.get()];
+        tag.get(name);
+        product.put("name", new String(name, StandardCharsets.ISO_8859_1));
+
+        return product;
     }
 }
