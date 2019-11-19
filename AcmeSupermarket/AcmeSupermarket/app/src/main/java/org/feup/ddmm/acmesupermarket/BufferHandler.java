@@ -15,7 +15,7 @@ public class BufferHandler {
         ByteBuffer tag = ByteBuffer.wrap(clearTag);
 
         product.put("uuid", new UUID(tag.getLong(), tag.getLong()));
-        product.put("price", tag.getInt() + tag.getInt() / 100);
+        product.put("price", tag.getInt() + tag.getInt() / 100.0);
 
         byte[] name = new byte[tag.get()];
         tag.get(name);

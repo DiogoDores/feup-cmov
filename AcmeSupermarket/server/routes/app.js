@@ -16,14 +16,13 @@ const generateBuffer = (product) => {
 
   const [euros, cents] = product.price.toString().split('.');
 
-  //buffer.writeUInt32BE(0x16762042, 0);
-  //buffer.writeUInt32BE(0x3f5d4dd5, 4);
+  const uuid = product.uuid.replace(/-/g, '');
 
-  //buffer.writeUInt32BE(0x829a4519, 8);
-  //buffer.writeUInt32BE(0x32901953, 12);
+  buffer.writeUInt32BE(parseInt(uuid.slice(0, 8), 16), 0); // Write most significant bits of UUID.
+  buffer.writeUInt32BE(parseInt(uuid.slice(8, 16), 16), 4);
 
-  buffer.writeBigUInt64BE(0x167620423f5d4dd5n, 0); // Write most significant bits of UUID.
-  buffer.writeBigUInt64BE(0x829a451932901953n, 8); // Write least significant bits of UUID.
+  buffer.writeUInt32BE(parseInt(uuid.slice(16, 24), 16), 8); // Write least significant bits of UUID.
+  buffer.writeUInt32BE(parseInt(uuid.slice(24, 32), 16), 12);
 
   buffer.writeUInt32BE(euros, 16); // Write euros.
   buffer.writeUInt32BE(cents, 20); // Write cents.
@@ -54,8 +53,9 @@ router.get('/generate', (req, res) => {
     //console.log(decrypted);
 
     console.log(buffer);
-    
-    QRCode.toFile(`public/images/${product.name}.png`, [{ data: buffer, mode: 'byte' }], {
+    console.log(buffer.toString('base64'));
+
+    QRCode.toFile(`public/images/${product.name}.png`, buffer.toString('base64'), {
       color: { light: '#0000' },
     }, (err) => { if (err) throw err; });
   });

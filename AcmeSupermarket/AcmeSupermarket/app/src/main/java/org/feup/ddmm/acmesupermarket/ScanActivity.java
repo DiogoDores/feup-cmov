@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import java.nio.Buffer;
 import java.security.PublicKey;
 import java.util.Arrays;
+import java.util.Base64;
 
 import javax.crypto.Cipher;
 
@@ -74,17 +75,13 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
             //PublicKey publicKey = RSAEncryption.getPEMPublicKey(supermarketKey);
             //byte[] res = RSAEncryption.decrypt(rawResult.getRawBytes(), publicKey);
 
-            // Clear dumb bytes.
-            JSONObject obj = BufferHandler.decipherTag(isoRes);
-            Log.e("Output", obj.toString());
-
-            //JSONObject jsonObject = new JSONObject(res.toString());
+            byte[] res = Base64.getDecoder().decode(rawResult.getText());
+            JSONObject obj = BufferHandler.decipherTag(res);
 
             Intent intent = new Intent();
-            intent.putExtra("MESSAGE", rawResult.getText());
+            intent.putExtra("MESSAGE", obj.toString());
             setResult(1, intent);
 
-            Toast.makeText(this, "Contents = " + rawResult.getText() +", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
