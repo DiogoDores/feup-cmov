@@ -97,13 +97,18 @@ public class BasketActivity extends AppCompatActivity {
                 }
             }
             totalPrice += product.getPrice();
-            totalPriceView.setText(totalPrice + "€");
+            totalPriceView.setText(Product.formatPrice(totalPrice));
 
             if(!inBasket)
                 this.basket.add(product);
             this.adapter.notifyDataSetChanged();
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     @Override

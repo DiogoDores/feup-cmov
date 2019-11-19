@@ -35,7 +35,7 @@ public class BasketAdapter extends ArrayAdapter<Product> {
             if (name != null)
                 name.setText(product.getName());
             if (price != null)
-                price.setText(product.getTotalPrice() + "€");
+                price.setText(product.formatPrice(product.getTotalPrice()));
             if (quantity != null)
                 quantity.setText(Integer.toString(product.getQuantity() + 1));
 

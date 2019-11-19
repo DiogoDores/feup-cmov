@@ -20,7 +20,9 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void openBasketActivity() {
-        startActivity(new Intent(getApplicationContext(), BasketActivity.class));
+        Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 

@@ -2,6 +2,8 @@ package org.feup.ddmm.acmesupermarket;
 
 import androidx.annotation.NonNull;
 
+import java.text.DecimalFormat;
+
 public class Product {
     private String uuid;
     private float price;
@@ -43,5 +45,9 @@ public class Product {
             this.totalPrice = this.price * (this.quantity + 1);
         else
             this.totalPrice = this.price * this.quantity;
+    }
+
+    public static String formatPrice(float price) {
+        return new DecimalFormat("€#,##0.00").format(price);
     }
 }

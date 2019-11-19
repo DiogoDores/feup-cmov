@@ -11,19 +11,14 @@ const generateBuffer = (product) => {
   const trimmedName = product.name.length > 35 ? product.name.slice(0, 35) : product.name;
   const buffer = Buffer.alloc(16 + 4 + 4 + 1 + trimmedName.length);
 
-  const uuidMostSignificant = parseInt(product.uuid.replace(/-/g, '').slice(0, 16), 16);
-  const uuidLeastSignificant = parseInt(product.uuid.replace(/-/g, '').slice(16), 16);
-
-  const [euros, cents] = product.price.toString().split('.');
-
   const uuid = product.uuid.replace(/-/g, '');
-
-  buffer.writeUInt32BE(parseInt(uuid.slice(0, 8), 16), 0); // Write most significant bits of UUID.
+  buffer.writeUInt32BE(parseInt(uuid.slice(0, 8), 16), 0); // Write MSB of UUID.
   buffer.writeUInt32BE(parseInt(uuid.slice(8, 16), 16), 4);
 
-  buffer.writeUInt32BE(parseInt(uuid.slice(16, 24), 16), 8); // Write least significant bits of UUID.
+  buffer.writeUInt32BE(parseInt(uuid.slice(16, 24), 16), 8); // Write LSB of UUID.
   buffer.writeUInt32BE(parseInt(uuid.slice(24, 32), 16), 12);
 
+  const [euros, cents] = product.price.toString().split('.');
   buffer.writeUInt32BE(euros, 16); // Write euros.
   buffer.writeUInt32BE(cents, 20); // Write cents.
 
