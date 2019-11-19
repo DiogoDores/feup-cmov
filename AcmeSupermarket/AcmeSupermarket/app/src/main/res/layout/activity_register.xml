@@ -5,96 +5,214 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:background="@drawable/gradient"
-    android:paddingLeft="60dp"
-    android:paddingRight="60dp"
     tools:context=".RegisterActivity">
 
-    <RelativeLayout
+
+    <ViewSwitcher
+        android:id="@+id/register_view_switcher"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dip">
+        android:layout_height="match_parent"
+        android:inAnimation="@anim/slide_in_right"
+        android:outAnimation="@anim/slide_out_left">
 
-        <TextView
-            android:layout_width="240dp"
-            android:layout_height="42dp"
-            android:fontFamily="@font/oswald_light"
-            android:layout_marginLeft="5dp"
-            android:text="@string/app_title"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp" />
+        <LinearLayout
+            android:id="@+id/register_step_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/login_title"
-            android:layout_width="wrap_content"
-            android:layout_height="113dp"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/oswald"
-            android:text="@string/register_button_confirm"
-            android:textAllCaps="true"
-            android:textColor="#FFFFFF"
-            android:textSize="80sp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dip">
 
-        <TextView
-            android:layout_width="275dp"
-            android:layout_height="42dp"
-            android:layout_below="@+id/login_title"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="-1dp"
-            android:fontFamily="@font/oswald_light"
-            android:gravity="right"
-            android:text="Step 1/2"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp" />
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="240dp"
+                    android:layout_height="42dp"
+                    android:fontFamily="@font/oswald_light"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/app_title"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp" />
 
-    <EditText
-        android:id="@+id/edit_register_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dip"
-        android:ems="10"
-        android:textColorHint="@color/colorWhite"
-        android:hint="@string/register_name_hint"
-        android:backgroundTint="@color/colorWhite"
-        android:textColor="@color/colorWhite"
-        android:inputType="textPersonName" />
+                <TextView
+                    android:id="@+id/login_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="113dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/oswald"
+                    android:text="@string/register_button_confirm"
+                    android:textAllCaps="true"
+                    android:textColor="#FFFFFF"
+                    android:textSize="80sp" />
 
-    <EditText
-        android:id="@+id/edit_register_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dip"
-        android:ems="10"
-        android:textColorHint="@color/colorWhite"
-        android:hint="@string/all_username_hint"
-        android:backgroundTint="@color/colorWhite"
-        android:textColor="@color/colorWhite"
-        android:inputType="textPersonName" />
+                <TextView
+                    android:layout_width="275dp"
+                    android:layout_height="42dp"
+                    android:layout_below="@+id/login_title"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="-1dp"
+                    android:fontFamily="@font/oswald_light"
+                    android:gravity="right"
+                    android:text="Step 1/2"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </RelativeLayout>
 
-    <EditText
-        android:id="@+id/edit_register_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dip"
-        android:ems="10"
-        android:textColorHint="@color/colorWhite"
-        android:hint="@string/all_password_hint"
-        android:backgroundTint="@color/colorAccent"
-        android:textColor="@color/colorWhite"
-        android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/edit_register_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dip"
+                android:ems="10"
+                android:textColorHint="@color/colorWhite"
+                android:hint="@string/register_name_hint"
+                android:backgroundTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/button_register_confirm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="7dip"
-        android:background="@drawable/rounded_white_button"
-        android:text="@string/register_button_confirm"
-        android:textColor="@color/colorAccent"
-        android:fontFamily="@font/catamaran_semibold"
-        android:includeFontPadding="false"
-        android:textSize="25sp" />
+            <EditText
+                android:id="@+id/edit_register_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dip"
+                android:ems="10"
+                android:textColorHint="@color/colorWhite"
+                android:hint="@string/all_username_hint"
+                android:backgroundTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/edit_register_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dip"
+                android:ems="10"
+                android:textColorHint="@color/colorWhite"
+                android:hint="@string/all_password_hint"
+                android:backgroundTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/button_continue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="7dip"
+                android:background="@drawable/rounded_white_button"
+                android:text="Continue  >"
+                android:textColor="@color/colorAccent"
+                android:fontFamily="@font/catamaran_semibold"
+                android:includeFontPadding="false"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/register_step_two"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dip">
+
+                <TextView
+                    android:layout_width="240dp"
+                    android:layout_height="42dp"
+                    android:fontFamily="@font/oswald_light"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/app_title"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/login_title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="113dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/oswald"
+                    android:text="@string/register_button_confirm"
+                    android:textAllCaps="true"
+                    android:textColor="#FFFFFF"
+                    android:textSize="80sp" />
+
+                <TextView
+                    android:layout_width="275dp"
+                    android:layout_height="42dp"
+                    android:layout_below="@+id/login_title2"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="-1dp"
+                    android:fontFamily="@font/oswald_light"
+                    android:gravity="right"
+                    android:text="Step 2/2"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+
+            <EditText
+                android:id="@+id/editText4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginBottom="30dip"
+                android:inputType="number"
+                android:textColorHint="@color/colorWhite"
+                android:hint="Credit Card Number"
+                android:backgroundTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"/>
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dip"
+                android:ems="10"
+                android:inputType="date"
+                android:textColorHint="@color/colorWhite"
+                android:hint="Expiration Date"
+                android:backgroundTint="@color/colorWhite"
+                android:textColor="@color/colorWhite" />
+
+            <EditText
+                android:id="@+id/editText6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginBottom="50dip"
+                android:inputType="number"
+                android:textColorHint="@color/colorWhite"
+                android:hint="CVV"
+                android:backgroundTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"/>
+
+            <Button
+                android:id="@+id/button_register_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="7dip"
+                android:background="@drawable/rounded_white_button"
+                android:text="@string/register_button_confirm"
+                android:textColor="@color/colorAccent"
+                android:fontFamily="@font/catamaran_semibold"
+                android:includeFontPadding="false"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+    </ViewSwitcher>
+
 
 </LinearLayout>

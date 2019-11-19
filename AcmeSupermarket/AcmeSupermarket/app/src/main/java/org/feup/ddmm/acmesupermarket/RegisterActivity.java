@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.security.KeyPairGeneratorSpec;
 import android.security.keystore.KeyProperties;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,11 +42,28 @@ import javax.security.auth.x500.X500Principal;
 
 public class RegisterActivity extends AppCompatActivity {
     private RequestQueue mQueue;
+    private ViewSwitcher viewSwitcher;
+    private LinearLayout registerStep1, registerStep2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        viewSwitcher =   (ViewSwitcher)findViewById(R.id.register_view_switcher);
+        registerStep1= findViewById(R.id.register_step_one);
+        registerStep2 = findViewById(R.id.register_step_two);
+
+        findViewById(R.id.button_continue).setOnClickListener(v -> {
+
+            // TODO Auto-generated method stub
+            if (viewSwitcher.getCurrentView() != registerStep1){
+                viewSwitcher.showPrevious();
+            } else if (viewSwitcher.getCurrentView() != registerStep2){
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                viewSwitcher.showNext();
+            }
+        });
 
         // Register button listener.
         findViewById(R.id.button_register_confirm).setOnClickListener(v -> {
