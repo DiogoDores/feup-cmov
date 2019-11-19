@@ -66,21 +66,15 @@ public class RSAEncryption {
         }
         return null;
     }
-    /*
-    public static String decrypt(String data, String base64PrivateKey) {
-        byte[] keyBytes = Base64.getDecoder().decode(base64PrivateKey);
-        X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
 
-        try {
-            KeyFactory kf = KeyFactory.getInstance("RSA/ECB/PKCS1Padding");
-            PublicKey pk = kf.generatePublic(spec);
-            return decrypt(Base64.getDecoder().decode(base64PrivateKey.getBytes()), pk);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+    public static byte[] convertHexToByteArray(String s) {
+        int len = s.length();
+        byte[] data = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4) + Character.digit(s.charAt(i+1), 16));
         }
-
-        return decrypt(Base64.getDecoder().decode(data.getBytes()), getPrivateKey());
-    }*/
+        return data;
+    }
 
     public static String formatPKCS8(String key) {
         return key.replaceAll("(-+BEGIN PUBLIC KEY-+\\r?\\n|-+END PUBLIC KEY-+\\r?\\n?|\\n)", "");

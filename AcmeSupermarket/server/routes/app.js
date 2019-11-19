@@ -1,6 +1,8 @@
 const express = require('express');
 const NodeRSA = require('node-rsa');
 const QRCode = require('qrcode');
+const fs = require('fs');
+const path = require('path');
 
 const products = require('../seeds/product.json');
 
@@ -9,22 +11,22 @@ const router = express.Router();
 const generateBuffer = (product) => {
   // Trim string if its length is higher than 35.
   const trimmedName = product.name.length > 35 ? product.name.slice(0, 35) : product.name;
-  const buffer = Buffer.alloc(16 + 4 + 4 + 1 + trimmedName.length);
-
   const uuid = product.uuid.replace(/-/g, '');
-  buffer.writeUInt32BE(parseInt(uuid.slice(0, 8), 16), 0); // Write MSB of UUID.
-  buffer.writeUInt32BE(parseInt(uuid.slice(8, 16), 16), 4);
+  const buffer = Buffer.alloc(4 + 16 + 4 + 4 + 1 + trimmedName.length);
 
-  buffer.writeUInt32BE(parseInt(uuid.slice(16, 24), 16), 8); // Write LSB of UUID.
-  buffer.writeUInt32BE(parseInt(uuid.slice(24, 32), 16), 12);
+  buffer.writeUInt32BE(0x41636D65, 0); // Write ACME tag.
+  buffer.writeUInt32BE(parseInt(uuid.slice(0, 8), 16), 4); // Write MSB of UUID.
+  buffer.writeUInt32BE(parseInt(uuid.slice(8, 16), 16), 8);
+
+  buffer.writeUInt32BE(parseInt(uuid.slice(16, 24), 16), 12); // Write LSB of UUID.
+  buffer.writeUInt32BE(parseInt(uuid.slice(24, 32), 16), 16);
 
   const [euros, cents] = product.price.toString().split('.');
-  buffer.writeUInt32BE(euros, 16); // Write euros.
-  buffer.writeUInt32BE(cents, 20); // Write cents.
+  buffer.writeUInt32BE(euros, 20); // Write euros.
+  buffer.writeUInt32BE(cents, 24); // Write cents.
 
-  buffer.writeUInt8(trimmedName.length, 24); // Write name length.
-
-  buffer.write(trimmedName, 25); // Write name string.
+  buffer.writeUInt8(trimmedName.length, 28); // Write name length.
+  buffer.write(trimmedName, 29); // Write name string.
   return buffer;
 };
 
@@ -36,25 +38,21 @@ router.get('/generate', (req, res) => {
   // Import supermarket private key.
   const key = new NodeRSA();
   key.importKey(process.env.PRIVATE_KEY, 'pkcs1-private');
+  key.setOptions({ encryptionScheme: 'pkcs1' });
 
   products.forEach((product) => {
     const buffer = generateBuffer(product);
     // Encrypt with supermarket private key.
-    const encrypted = key.encryptPrivate(buffer, 'base64');
+    const encrypted = key.encryptPrivate(buffer, 'hex');
     console.log(encrypted);
 
-    //const key2 = key.importKey(process.env.PUBLIC_KEY, 'pkcs8-public');
-    //const decrypted = key2.decryptPublic(encrypted, 'utf8');
-    //console.log(decrypted);
-
     console.log(buffer);
-    console.log(buffer.toString('base64'));
+    console.log(encrypted.toString('base64'));
 
-    QRCode.toFile(`public/images/${product.name}.png`, buffer.toString('base64'), {
+    QRCode.toFile(`public/images/${product.name}.png`, encrypted, {
       color: { light: '#0000' },
     }, (err) => { if (err) throw err; });
   });
-  res.sendStatus(200);
 });
 
 module.exports = router;

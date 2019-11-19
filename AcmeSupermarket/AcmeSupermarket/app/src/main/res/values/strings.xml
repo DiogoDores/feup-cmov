@@ -1,5 +1,5 @@
 <resources>
-    <string name="ip">http://192.168.1.4:3000</string>
+    <string name="ip">http://192.168.1.226:3000</string>
 
     <string name="app_name">AcmeSupermarket</string>
     <string name="app_title">ACME</string>
@@ -22,5 +22,4 @@
     <string name="voucher_not_found">Couldn\'t find any vouchers in this account!</string>
     <string name="voucher_applied">Applied voucher</string>
     <string name="voucher_removed">Removed voucher</string>
-
 </resources>

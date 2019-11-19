@@ -13,6 +13,7 @@ public class BufferHandler {
     public static JSONObject decipherTag(byte[] clearTag) throws JSONException {
         JSONObject product = new JSONObject();
         ByteBuffer tag = ByteBuffer.wrap(clearTag);
+        int tagId = tag.getInt(); // Tag is unused for now.
 
         product.put("uuid", new UUID(tag.getLong(), tag.getLong()));
         product.put("price", tag.getInt() + tag.getInt() / 100.0);

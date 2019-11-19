@@ -65,18 +65,19 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     }
 
     @Override
-    public void handleResult(Result rawResult) {
+    public void handleResult(Result result) {
         // TODO: Eventually encrypt and decrypt these messages.
 
         SharedPreferences preferences = getSharedPreferences("pref", MODE_PRIVATE);
-        String supermarketKey = preferences.getString("sm_public_key", null);
+        String smPublicKey = preferences.getString("sm_public_key", null);
 
         try {
-            //PublicKey publicKey = RSAEncryption.getPEMPublicKey(supermarketKey);
-            //byte[] res = RSAEncryption.decrypt(rawResult.getRawBytes(), publicKey);
+            PublicKey publicKey = RSAEncryption.getPEMPublicKey(smPublicKey);
+            byte[] msgBytes = RSAEncryption.convertHexToByteArray(result.getText());
 
-            byte[] res = Base64.getDecoder().decode(rawResult.getText());
-            JSONObject obj = BufferHandler.decipherTag(res);
+            //byte[] encrypted = Base64.getDecoder().decode(rawResult.getText());
+            byte[] decrypted = RSAEncryption.decrypt(msgBytes, publicKey);
+            JSONObject obj = BufferHandler.decipherTag(decrypted);
 
             Intent intent = new Intent();
             intent.putExtra("MESSAGE", obj.toString());
