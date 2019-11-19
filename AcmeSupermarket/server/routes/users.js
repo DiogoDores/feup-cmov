@@ -50,7 +50,7 @@ router.post('/:username/history', mw.getUser, async (req, res) => {
   const key = new NodeRSA({ b: 512 });
   const formatted = `-----BEGIN PUBLIC KEY-----\n${res.user.public_key}-----END PUBLIC KEY-----`;
   key.importKey(formatted, 'pkcs8-public-pem');
-  key.setOptions({ signingScheme: 'pkcs1-sha1' });
+  key.setOptions({ signingScheme: 'pkcs1-sha256' });
 
   if (key.verify(req.body.uuid, req.body.uuid_signed, 'utf8', 'base64')) {
     res.send(res.user);

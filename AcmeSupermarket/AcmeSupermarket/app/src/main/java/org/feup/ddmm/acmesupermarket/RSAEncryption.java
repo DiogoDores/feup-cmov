@@ -61,7 +61,7 @@ public class RSAEncryption {
     }
 
     public static byte[] sign(byte[] data, PrivateKey privateKey) throws Exception {
-        Signature sig = Signature.getInstance("SHA1WithRSA");
+        Signature sig = Signature.getInstance("SHA256withRSA");
         sig.initSign(privateKey);
         sig.update(data);
 

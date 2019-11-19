@@ -2,6 +2,9 @@ package org.feup.ddmm.acmesupermarket;
 
 import androidx.annotation.NonNull;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.DecimalFormat;
 
 public class Product {
@@ -12,9 +15,10 @@ public class Product {
     private int quantity;
 
     public Product(String uuid, float price, String name) {
+        this.price = Math.round(price * 100.0f) / 100.0f;
+        this.totalPrice = this.price;
+
         this.uuid = uuid;
-        this.price = price;
-        this.totalPrice = price;
         this.name = name;
         this.quantity = 1;
     }
@@ -32,6 +36,19 @@ public class Product {
     public String getName() { return name; }
 
     public int getQuantity() { return quantity; }
+
+    public JSONObject getJSON() {
+        JSONObject obj = new JSONObject();
+
+        try {
+            obj.put("uuid", this.uuid);
+            obj.put("price", this.price);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return obj;
+    }
 
     @NonNull
     @Override

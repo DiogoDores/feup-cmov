@@ -53,6 +53,8 @@ router.get('/generate', (req, res) => {
       color: { light: '#0000' },
     }, (err) => { if (err) throw err; });
   });
+
+  res.sendStatus(200);
 });
 
 module.exports = router;

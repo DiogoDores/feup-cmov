@@ -66,8 +66,6 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
     @Override
     public void handleResult(Result result) {
-        // TODO: Eventually encrypt and decrypt these messages.
-
         SharedPreferences preferences = getSharedPreferences("pref", MODE_PRIVATE);
         String smPublicKey = preferences.getString("sm_public_key", null);
 

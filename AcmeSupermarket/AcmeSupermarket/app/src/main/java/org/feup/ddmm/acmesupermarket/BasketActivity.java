@@ -14,12 +14,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class BasketActivity extends AppCompatActivity {
     private ArrayList<Product> basket = new ArrayList<Product>();
-    private NfcAdapter nfcAdapter;
     ListView listView;
     BasketAdapter adapter;
     TextView totalPriceView;
@@ -33,32 +36,12 @@ public class BasketActivity extends AppCompatActivity {
             startActivityForResult(new Intent(this, ScanActivity.class), 1);
         });
 
-        findViewById(R.id.start_checkout_button).setOnClickListener(v -> openCheckoutActivity());
+        findViewById(R.id.start_checkout_button).setOnClickListener(v -> {
+            openCheckoutActivity();
+        });
 
         totalPriceView = (TextView) findViewById(R.id.total_price);
         totalPrice = 0.00F;
-
-        this.nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-
-        if (this.nfcAdapter == null) {
-            Toast.makeText(this, "NFC is not available in this device", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-
-        this.nfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback() {
-            @Override
-            public NdefMessage createNdefMessage(NfcEvent event) {
-                String text = "godspeed you! black emperor";
-                return new NdefMessage(new NdefRecord[] { createMimeRecord("application/com.example.android.beam", text.getBytes()) });
-            }
-        }, this);
-
-        this.nfcAdapter.setOnNdefPushCompleteCallback(new NfcAdapter.OnNdefPushCompleteCallback() {
-            @Override
-            public void onNdefPushComplete(NfcEvent event) {
-                Toast.makeText(BasketActivity.this, "Sent!", Toast.LENGTH_SHORT).show();
-            }
-        }, this);
 
         listView = (ListView)findViewById(R.id.list_view);
 
@@ -66,15 +49,32 @@ public class BasketActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
-    public void openCheckoutActivity() {
-        startActivity(new Intent(getApplicationContext(), CheckoutActivity.class));
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    private JSONObject prepareBasketJSON(ArrayList<Product> basket) {
+        JSONObject obj = new JSONObject();
+        JSONArray arr = new JSONArray();
+
+        for (Product product : this.basket) {
+            for (int i = 0; i < product.getQuantity() + 1; i++) {
+                arr.put(product.getJSON().toString());
+            }
+        }
+
+        try {
+            obj.put("products", arr);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return obj;
     }
 
-    public NdefRecord createMimeRecord(String mimeType, byte[] payload) {
-        byte[] mimeBytes = mimeType.getBytes(Charset.forName("US-ASCII"));
-        NdefRecord mimeRecord = new NdefRecord(NdefRecord.TNF_MIME_MEDIA, mimeBytes, new byte[0], payload);
-        return mimeRecord;
+    public void openCheckoutActivity() {
+        Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
+        intent.putExtra("basket", prepareBasketJSON(this.basket).toString());
+        intent.putExtra("total", this.totalPrice);
+        
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     @Override
@@ -83,14 +83,13 @@ public class BasketActivity extends AppCompatActivity {
 
         if (requestCode == 1) {
             Toast.makeText(this, data.getStringExtra("MESSAGE"), Toast.LENGTH_SHORT).show();
-
             boolean inBasket = false;
 
             // Convert string to JSON and to Product object and push it to basket.
             Gson gson = new Gson();
             Product product = gson.fromJson(data.getStringExtra("MESSAGE"), Product.class);
 
-            for(int i = 0; i < basket.size(); i++){
+            for (int i = 0; i < basket.size(); i++){
                 if(basket.get(i).getUuid().equals(product.getUuid())){
                     basket.get(i).incrementQuantity();
                     inBasket = true;
@@ -99,8 +98,7 @@ public class BasketActivity extends AppCompatActivity {
             totalPrice += product.getPrice();
             totalPriceView.setText(Product.formatPrice(totalPrice));
 
-            if(!inBasket)
-                this.basket.add(product);
+            if (!inBasket) this.basket.add(product);
             this.adapter.notifyDataSetChanged();
 
         }
