@@ -29,10 +29,7 @@ const key = new NodeRSA({ b: 512 });
 
 // Generate the supermarket keypair.
 process.env.PUBLIC_KEY = key.exportKey('public');
-console.log(process.env.PUBLIC_KEY);
-
 process.env.PRIVATE_KEY = key.exportKey('private');
-console.log(process.env.PRIVATE_KEY);
 
 app.use(express.static('views'));
 app.use(express.static('public'));

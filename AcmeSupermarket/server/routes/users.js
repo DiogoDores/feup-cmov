@@ -1,5 +1,6 @@
 const express = require('express');
 const uuid = require('uuid/v4');
+const NodeRSA = require('node-rsa');
 
 const router = express.Router();
 const User = require('../models/user');
@@ -33,6 +34,7 @@ router.post('/', async (req, res) => {
     discount: 0.00,
     expense: 0.00,
     vouchers: [],
+    receipts: [],
   });
 
   try {
@@ -40,6 +42,20 @@ router.post('/', async (req, res) => {
     res.status(201).json({ uuid: newUser.uuid, sm_public_key: process.env.PUBLIC_KEY });
   } catch (err) {
     res.status(400).json({ message: err.message });
+  }
+});
+
+// Get receipts from UUID.
+router.post('/:username/history', mw.getUser, async (req, res) => {
+  const key = new NodeRSA({ b: 512 });
+  const formatted = `-----BEGIN PUBLIC KEY-----\n${res.user.public_key}-----END PUBLIC KEY-----`;
+  key.importKey(formatted, 'pkcs8-public-pem');
+  key.setOptions({ signingScheme: 'pkcs1-sha1' });
+
+  if (key.verify(req.body.uuid, req.body.uuid_signed, 'utf8', 'base64')) {
+    res.send(res.user);
+  } else {
+    res.sendStatus(403);
   }
 });
 

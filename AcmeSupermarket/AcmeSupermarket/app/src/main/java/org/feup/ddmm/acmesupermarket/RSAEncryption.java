@@ -1,11 +1,15 @@
 package org.feup.ddmm.acmesupermarket;
 
+import android.util.Log;
+
+import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyStore;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.Signature;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
@@ -54,6 +58,15 @@ public class RSAEncryption {
         Cipher cipher = Cipher.getInstance("RSA/NONE/PKCS1Padding");
         cipher.init(Cipher.DECRYPT_MODE, publicKey);
         return cipher.doFinal(data);
+    }
+
+    public static byte[] sign(byte[] data, PrivateKey privateKey) throws Exception {
+        Signature sig = Signature.getInstance("SHA1WithRSA");
+        sig.initSign(privateKey);
+        sig.update(data);
+
+        byte[] signedBytes = sig.sign();
+        return signedBytes;
     }
 
     public static String decrypt(byte[] data, PrivateKey privateKey) {

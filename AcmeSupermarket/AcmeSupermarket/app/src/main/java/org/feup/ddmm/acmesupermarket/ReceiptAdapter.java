@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ReceiptAdapter extends BaseExpandableListAdapter {
-
     private Context mContext;
     private ArrayList<Receipt> receipts; // header titles
     private ExpandableListView exp;
@@ -24,8 +23,8 @@ public class ReceiptAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosititon) {
-        return this.receipts.get(groupPosition).getProducts().get(childPosititon);
+    public Object getChild(int groupPosition, int childPosition) {
+        return this.receipts.get(groupPosition).getProducts().get(childPosition);
     }
 
     @Override
@@ -37,7 +36,7 @@ public class ReceiptAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
         final String productName = this.receipts.get(groupPosition).getProducts().get(childPosition).getName();
-        final String productPrice = this.receipts.get(groupPosition).getProducts().get(childPosition).getPrice() + "€";
+        final String productPrice = Product.formatPrice(this.receipts.get(groupPosition).getProducts().get(childPosition).getPrice());
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -82,7 +81,7 @@ public class ReceiptAdapter extends BaseExpandableListAdapter {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String purchaseDate = formatter.format(this.receipts.get(groupPosition).getPurchaseDate());
-        String totalPrice = this.receipts.get(groupPosition).getTotalPrice() + "€";
+        String totalPrice = Product.formatPrice(this.receipts.get(groupPosition).getTotalPrice());
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

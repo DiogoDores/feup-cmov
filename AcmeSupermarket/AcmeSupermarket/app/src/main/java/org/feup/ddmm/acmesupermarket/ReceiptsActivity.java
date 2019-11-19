@@ -16,13 +16,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -48,7 +51,7 @@ public class ReceiptsActivity extends AppCompatActivity {
         this.mQueue = Volley.newRequestQueue(this);
 
         this.pref = getSharedPreferences("pref", MODE_PRIVATE);
-
+        this.receipts = new ArrayList<Receipt>();
 
         vouchersTextView = (TextView) findViewById(R.id.no_vouchers);
         accumAmountTextView = (TextView) findViewById(R.id.accumulated_amount);
@@ -60,11 +63,50 @@ public class ReceiptsActivity extends AppCompatActivity {
         accumAmountTextView.setText(accumAmount + "€");
 
         expListView = (ExpandableListView) findViewById(R.id.receipts_view);
-        prepareListData();
-        listAdapter = new ReceiptAdapter(this, receipts, expListView);
+
+        listAdapter = new ReceiptAdapter(this, this.receipts, expListView);
         expListView.setAdapter(listAdapter);
 
         getVouchers();
+        requestReceipts();
+    }
+
+    private void requestReceipts() {
+        try {
+            String url = String.format("%s/users/%s/history", getResources().getString(R.string.ip), this.pref.getString("username", null));
+            String uuid = this.pref.getString("uuid", null);
+
+            byte[] signed = RSAEncryption.sign(uuid.getBytes(), RSAEncryption.getPrivateKey());
+            String signedStr = Base64.getEncoder().encodeToString(signed);
+
+            JSONObject payload = new JSONObject();
+            payload.put("uuid", uuid);
+            payload.put("uuid_signed", signedStr);
+
+            JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, payload, response -> {
+                try {
+                    JSONArray receipts = response.getJSONArray("receipts");
+                    ArrayList<Receipt> receiptList = this.prepareListData(receipts);
+
+                    ReceiptAdapter adapter = new ReceiptAdapter(this, receiptList, this.expListView);
+                    this.expListView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Toast.makeText(ReceiptsActivity.this, "Done!", Toast.LENGTH_SHORT).show();
+            }, error -> {
+                Toast.makeText(ReceiptsActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            });
+
+            this.mQueue.add(req);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //String url = String.format("%s/users/%s", getResources());
     }
 
     private void getVouchers() {
@@ -95,9 +137,26 @@ public class ReceiptsActivity extends AppCompatActivity {
         this.mQueue.add(req);
     }
 
-    private void prepareListData() {
-        receipts = new ArrayList<Receipt>();
+    private ArrayList<Receipt> prepareListData(JSONArray receipts) throws JSONException {
+        ArrayList<Receipt> tempReceipts = new ArrayList<Receipt>();
 
+        for (int i = 0; i < receipts.length(); i++) {
+            JSONObject receipt = receipts.getJSONObject(i);
+            ArrayList<Product> pList = new ArrayList<Product>();
+
+            for (int j = 0; j < receipt.getJSONArray("products").length(); j++) {
+                JSONObject pObj = receipt.getJSONArray("products").getJSONObject(j);
+
+                Product product = new Product(pObj.getString("uuid"), (float) pObj.getDouble("price"), pObj.getString("name"));
+                pList.add(product);
+            }
+
+            Receipt r = new Receipt(new Date(), pList, (float) receipt.getDouble("total"), receipt.has("voucher"));
+            tempReceipts.add(r);
+        }
+
+        return tempReceipts;
+        /*
         // Adding child data
         Product p1 = new Product("id1", 10.5F, "poopoo");
         Product p2 = new Product("id1", 10.5F, "peepee");
@@ -111,10 +170,11 @@ public class ReceiptsActivity extends AppCompatActivity {
         Receipt r2 = new Receipt(date, products, 10.99F, false);
         Receipt r3 = new Receipt(date, products, 10.99F, false);
         Receipt r4 = new Receipt(date, products, 10.99F, false);
-        receipts.add(r1);
-        receipts.add(r2);
-        receipts.add(r3);
-        receipts.add(r4);
+        this.receipts.add(r1);
+        this.receipts.add(r2);
+        this.receipts.add(r3);
+        this.receipts.add(r4);
+        */
     }
 
     @Override

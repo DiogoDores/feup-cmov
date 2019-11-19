@@ -74,8 +74,6 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         try {
             PublicKey publicKey = RSAEncryption.getPEMPublicKey(smPublicKey);
             byte[] msgBytes = RSAEncryption.convertHexToByteArray(result.getText());
-
-            //byte[] encrypted = Base64.getDecoder().decode(rawResult.getText());
             byte[] decrypted = RSAEncryption.decrypt(msgBytes, publicKey);
             JSONObject obj = BufferHandler.decipherTag(decrypted);
 
