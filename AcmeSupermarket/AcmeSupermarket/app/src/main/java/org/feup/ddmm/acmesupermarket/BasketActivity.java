@@ -75,6 +75,11 @@ public class BasketActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // Likely the user just pressed the back button on the scan activity.
+        if (data == null) {
+            return;
+        }
+
         if (requestCode == 1) {
             boolean inBasket = false;
 
