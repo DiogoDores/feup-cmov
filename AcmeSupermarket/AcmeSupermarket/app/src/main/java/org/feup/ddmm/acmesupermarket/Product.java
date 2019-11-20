@@ -42,6 +42,7 @@ public class Product {
 
         try {
             obj.put("uuid", this.uuid);
+            obj.put("name", this.name);
             obj.put("price", this.price);
         } catch (JSONException e) {
             e.printStackTrace();

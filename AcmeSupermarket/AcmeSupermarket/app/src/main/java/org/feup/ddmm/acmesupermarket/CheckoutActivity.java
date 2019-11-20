@@ -81,7 +81,6 @@ public class CheckoutActivity extends AppCompatActivity {
             Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG);
             snackbar.show();
         });
-
     }
 
     private String encryptNdefBasket(String basket) {

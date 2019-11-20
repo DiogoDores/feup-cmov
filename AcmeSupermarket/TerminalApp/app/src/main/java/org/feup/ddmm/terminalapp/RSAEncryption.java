@@ -16,7 +16,13 @@ public class RSAEncryption {
     public static PublicKey getPEMPublicKey(String key) throws NoSuchAlgorithmException, InvalidKeySpecException {
         KeyFactory kf = KeyFactory.getInstance("RSA");
         String clean = key.replaceAll("(-+BEGIN PUBLIC KEY-+\\r?\\n|-+END PUBLIC KEY-+\\r?\\n?|\\n)", "");
-        byte[] decoded = Base64.getDecoder().decode(clean.getBytes());
+        byte[] decoded;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            decoded = Base64.getDecoder().decode(clean.getBytes());
+        } else {
+            decoded = android.util.Base64.decode(clean.getBytes(), android.util.Base64.DEFAULT);
+        }
         return kf.generatePublic(new X509EncodedKeySpec(decoded));
     }
 
