@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/oswald_bold"
-            android:text="Checkout"
+            android:text="@string/checkout"
             android:textAllCaps="true"
             android:layout_centerVertical="true"
             android:textColor="@color/colorAccent"
@@ -42,16 +42,16 @@
             android:background="@drawable/round_button"
             android:enabled="false"
             android:drawableStart="@drawable/ic_shopping_cart_big"
-            android:paddingStart="40dp" />
+            android:paddingHorizontal="40dp" />
 
         <TextView
             android:id="@+id/waiting_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Waiting for checkout"
-            android:textColor="#000000"
+            android:text="@string/waiting"
+            android:textColor="@color/colorPrimaryDark"
             android:fontFamily="@font/catamaran_light"
-            android:textSize="20dp"/>
+            android:textSize="20sp"/>
 
         <RelativeLayout
             android:id="@+id/subtotal_price"
@@ -69,11 +69,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@id/subtotal_dummy"
-                android:text="Subtotal: "
+                android:text="@string/subtotal"
                 android:fontFamily="@font/catamaran"
                 android:includeFontPadding="false"
                 android:textColor="@color/colorAccent"
-                android:textSize="25dp"/>
+                android:textSize="25sp"/>
 
             <TextView
                 android:id="@+id/subtotal_price_value"
@@ -84,7 +84,7 @@
                 android:fontFamily="@font/catamaran"
                 android:includeFontPadding="false"
                 android:textColor="@color/colorAccent"
-                android:textSize="25dp"/>
+                android:textSize="25sp"/>
 
         </RelativeLayout>
 
@@ -110,11 +110,11 @@
                 android:includeFontPadding="false"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="5dp"
-                android:text="Apply voucher"
+                android:text="@string/voucher_apply"
                 android:textColor="@color/colorWhite"
                 android:layout_toEndOf="@id/checkout_dummy"
-                android:layout_marginStart="10dp"
-                android:textSize="20dp" />
+                android:layout_marginStart="10sp"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/discount_checkout_button"
@@ -125,11 +125,11 @@
                 android:includeFontPadding="false"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="5dp"
-                android:text="Apply discount"
+                android:text="@string/discount_apply"
                 android:textColor="@color/colorWhite"
                 android:layout_toStartOf="@id/checkout_dummy"
                 android:layout_marginEnd="10dp"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -148,11 +148,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@id/total_dummy"
-                android:text="Total: "
+                android:text="@string/total"
                 android:fontFamily="@font/catamaran_semibold"
                 android:includeFontPadding="false"
                 android:textColor="@color/colorAccent"
-                android:textSize="25dp"/>
+                android:textSize="25sp"/>
 
             <TextView
                 android:id="@+id/total_price_value"
@@ -163,7 +163,7 @@
                 android:fontFamily="@font/catamaran_semibold"
                 android:includeFontPadding="false"
                 android:textColor="@color/colorAccent"
-                android:textSize="25dp"/>
+                android:textSize="25sp"/>
 
         </RelativeLayout>
 
@@ -184,11 +184,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@id/accumulate_dummy"
-                android:text="You'll accumulate "
+                android:text="@string/will_cum"
                 android:fontFamily="@font/catamaran"
                 android:includeFontPadding="false"
                 android:textColor="@color/colorAccent"
-                android:textSize="18dp"/>
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/to_accumulate"
@@ -199,7 +199,7 @@
                 android:fontFamily="@font/catamaran"
                 android:includeFontPadding="false"
                 android:textColor="@color/colorAccent"
-                android:textSize="18dp"/>
+                android:textSize="18sp"/>
 
         </RelativeLayout>
 
@@ -214,12 +214,9 @@
             android:paddingHorizontal="20dp"
             android:layout_marginTop="50dp"
             android:paddingVertical="5dp"
-            android:text="Confirm checkout"
+            android:text="@string/confirm_checkout"
             android:textColor="@color/colorWhite"
-            android:textSize="20dp" />
-
-
-
+            android:textSize="20sp" />
 
     </LinearLayout>
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="ip">http://192.168.1.3:3000</string>
+    <string name="ip">http://192.168.1.233:3000</string>
 
     <string name="app_name">AcmeSupermarket</string>
     <string name="app_title">ACME</string>
@@ -18,8 +18,31 @@
 
     <string name="basket">Basket</string>
     <string name="receipts">Receipts</string>
+    <string name="checkout">Checkout</string>
+    <string name="vouchers_recipts">Vouchers and Receipts</string>
+    <string name="away"> away from getting a new voucher!</string>
+    <string name="you_have">You have</string>
+    <string name="vouchers">vouchers</string>
+    <string name="account">in your account</string>
 
     <string name="voucher_not_found">Couldn\'t find any vouchers in this account!</string>
+    <string name="voucher_apply">Apply voucher</string>
     <string name="voucher_applied">Applied voucher</string>
     <string name="voucher_removed">Removed voucher</string>
+    <string name="discount_apply">Apply discount</string>
+
+    <string name="waiting">Waiting for checkout</string>
+    <string name="subtotal">Subtotal: </string>
+    <string name="total">Total: </string>
+    <string name="will_cum">You\'ll accumulate </string>
+    <string name="have_cum">You\'ve accumulated </string>
+    <string name="confirm_checkout">Confirm checkout</string>
+
+    <string name="step1">Step 1/2</string>
+    <string name="step2">Step 2/2</string>
+    <string name="continue_register">Continue  ></string>
+    <string name="credit_card">Credit Card Number</string>
+    <string name="expiration_date">Expiration Date</string>
+    <string name="cvv">CVV</string>
+
 </resources>
