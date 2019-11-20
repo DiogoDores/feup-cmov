@@ -1,4 +1,4 @@
 <resources>
-    <string name="ip">http://192.168.1.3:3000</string>
+    <string name="ip">http://192.168.1.226:3000</string>
     <string name="app_name">TerminalApp</string>
 </resources>

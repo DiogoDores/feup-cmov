@@ -1,15 +1,9 @@
 package org.feup.ddmm.acmesupermarket;
 
 import android.content.Intent;
-import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
-import android.nfc.NfcAdapter;
-import android.nfc.NfcEvent;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
@@ -82,7 +76,6 @@ public class BasketActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1) {
-            Toast.makeText(this, data.getStringExtra("MESSAGE"), Toast.LENGTH_SHORT).show();
             boolean inBasket = false;
 
             // Convert string to JSON and to Product object and push it to basket.

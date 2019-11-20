@@ -16,10 +16,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.Charset;
@@ -31,8 +35,25 @@ public class CheckoutActivity extends AppCompatActivity {
     private SharedPreferences pref;
     private NfcAdapter nfcAdapter;
     private boolean hasAppliedVoucher = false, hasAppliedDiscount = false;
-
     private String basket;
+
+    private RequestQueue mQueue;
+    private float discount = 0.0f, expense = 0.0f, subtotal = 0.0f, total = 0.0f;
+
+    private void requestInfoUpdate() {
+        String url = String.format("%s/users/%s", getString(R.string.ip), this.pref.getString("username", null));
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, null, res -> {
+            try {
+                this.expense = (float) res.getDouble("expense");
+                this.discount = (float) res.getDouble("discount");
+
+            } catch (JSONException e) { e.printStackTrace(); };
+
+        }, error -> { error.printStackTrace(); });
+
+        this.mQueue.add(req);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +61,25 @@ public class CheckoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_checkout);
 
         this.pref = getSharedPreferences("pref", MODE_PRIVATE);
+        this.mQueue = Volley.newRequestQueue(this);
         this.nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         this.basket = getIntent().getStringExtra("basket");
+
+        this.subtotal = getIntent().getFloatExtra("total", 0);
+        this.total = getIntent().getFloatExtra("total", 0);
+
+        requestInfoUpdate();
 
         if (this.nfcAdapter == null) {
             Toast.makeText(this, "NFC is not available in this device", Toast.LENGTH_SHORT).show();
             finish();
         }
+
+        // Default total, subtotal and accumulate values at the start.
+        String formattedPrice = Product.formatPrice(this.subtotal);
+        ((TextView) findViewById(R.id.subtotal_price_value)).setText(formattedPrice);
+        ((TextView) findViewById(R.id.total_price_value)).setText(formattedPrice);
+        ((TextView) findViewById(R.id.to_accumulate)).setText(Product.formatPrice(this.subtotal * 0.15f));
 
         //Buttons
         Button confirmCheckout = (Button) findViewById(R.id.confirm_checkout_button);
@@ -54,7 +87,7 @@ public class CheckoutActivity extends AppCompatActivity {
         Button discountButton = (Button) findViewById(R.id.discount_checkout_button);
 
         //TextViews
-        TextView subtotal = (TextView) findViewById(R.id.discount_checkout_button);
+        TextView subtotal = (TextView) findViewById(R.id.subtotal_price_value);
         TextView total = (TextView) findViewById(R.id.total_price_value);
         TextView toAccumulate = (TextView) findViewById(R.id.to_accumulate);
 
@@ -88,6 +121,21 @@ public class CheckoutActivity extends AppCompatActivity {
         discountButton.setOnClickListener(v -> {
             this.hasAppliedDiscount = !this.hasAppliedDiscount;
             String msg = this.hasAppliedDiscount ? "Discount applied!" : "Discount removed!";
+
+            if (this.hasAppliedDiscount) {
+                this.total -= this.expense;
+            } else {
+                this.total += this.expense;
+            }
+
+            if (this.total < 0) {
+                ((TextView) findViewById(R.id.total_price_value)).setText(Product.formatPrice(0f));
+                ((TextView) findViewById(R.id.to_accumulate)).setText(Product.formatPrice(0f));
+            } else {
+                ((TextView) findViewById(R.id.total_price_value)).setText(Product.formatPrice(this.total));
+                ((TextView) findViewById(R.id.to_accumulate)).setText(Product.formatPrice(this.total * 0.15f));
+            }
+
             Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG);
             snackbar.show();
         });
@@ -100,11 +148,23 @@ public class CheckoutActivity extends AppCompatActivity {
             if (this.pref.getString("voucher", null) != null) {
                 if (!this.hasAppliedVoucher) {
                     msg = String.format("%s %s!", res.getString(R.string.voucher_applied), voucher);
+                    this.total *= 0.85f;
                 } else {
                     msg = String.format("%s %s!", res.getString(R.string.voucher_removed), voucher);
+                    this.total /= 0.85f;
                 }
+                ((TextView) findViewById(R.id.total_price_value)).setText(Product.formatPrice(this.total));
+                ((TextView) findViewById(R.id.to_accumulate)).setText(Product.formatPrice(this.total * 0.15f));
             } else {
                 msg = String.format("%s", res.getString(R.string.voucher_not_found), voucher);
+            }
+
+            if (this.total < 0) {
+                ((TextView) findViewById(R.id.total_price_value)).setText(Product.formatPrice(0f));
+                ((TextView) findViewById(R.id.to_accumulate)).setText(Product.formatPrice(0f));
+            } else {
+                ((TextView) findViewById(R.id.total_price_value)).setText(Product.formatPrice(this.total));
+                ((TextView) findViewById(R.id.to_accumulate)).setText(Product.formatPrice(this.total * 0.15f));
             }
 
             this.hasAppliedVoucher = !this.hasAppliedVoucher;

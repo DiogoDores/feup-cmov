@@ -141,7 +141,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/catamaran_semibold"
             android:includeFontPadding="false"
-            android:text="You're 99.00 "
+            android:text="€100.00"
             android:textColor="@color/colorAccent"
             android:textSize="16sp" />
 

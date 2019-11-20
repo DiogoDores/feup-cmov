@@ -1,5 +1,5 @@
 <resources>
-    <string name="ip">http://192.168.1.3:3000</string>
+    <string name="ip">http://192.168.1.226:3000</string>
 
     <string name="app_name">AcmeSupermarket</string>
     <string name="app_title">ACME</string>
@@ -32,10 +32,10 @@
     <string name="discount_apply">Apply discount</string>
 
     <string name="waiting">Waiting for checkout</string>
-    <string name="subtotal">Subtotal: </string>
-    <string name="total">Total: </string>
-    <string name="will_cum">You\'ll accumulate </string>
-    <string name="have_cum">You\'ve accumulated </string>
+    <string name="subtotal">Subtotal:\u0020</string>
+    <string name="total">Total:\u0020</string>
+    <string name="will_cum">You\'ll accumulate\u0020</string>
+    <string name="have_cum">You\'ve accumulated\u0020</string>
     <string name="confirm_checkout">Confirm checkout</string>
 
     <string name="step1">Step 1/2</string>

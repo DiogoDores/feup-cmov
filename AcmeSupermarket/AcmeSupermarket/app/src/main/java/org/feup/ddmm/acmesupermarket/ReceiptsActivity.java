@@ -31,8 +31,8 @@ import java.util.HashMap;
 
 public class ReceiptsActivity extends AppCompatActivity {
 
-    private int noVouchers;
-    private float accumAmount;
+    private int noVouchers = 0;
+    private float accumAmount = 0.0f;
     TextView vouchersTextView;
     TextView accumAmountTextView;
 
@@ -56,11 +56,8 @@ public class ReceiptsActivity extends AppCompatActivity {
         vouchersTextView = (TextView) findViewById(R.id.no_vouchers);
         accumAmountTextView = (TextView) findViewById(R.id.accumulated_amount);
 
-        noVouchers = 0; //TEMP VALUE - GET FROM SERVER
-        accumAmount = 0.00F; //TEMP VALUE - GET FROM SERVER
-
         vouchersTextView.setText(Integer.toString(noVouchers));
-        accumAmountTextView.setText(accumAmount + "€");
+        accumAmountTextView.setText(Product.formatPrice(this.accumAmount));
 
         expListView = (ExpandableListView) findViewById(R.id.receipts_view);
 
@@ -116,6 +113,13 @@ public class ReceiptsActivity extends AppCompatActivity {
                 // Delete saved voucher (it should not persist between accounts).
                 SharedPreferences.Editor editor = this.pref.edit();
                 editor.remove("voucher");
+
+                // Get accumulated amount.
+                this.accumAmount = (float) response.getDouble("expense");
+                this.accumAmountTextView.setText(Product.formatPrice(this.accumAmount));
+
+                // Calculate amount away from new voucher.
+                ((TextView) findViewById(R.id.amount_until_voucher)).setText(Product.formatPrice(100.0f - this.accumAmount) + " ");
 
                 // Update no. of available vouchers.
                 JSONArray vouchers = response.getJSONArray("vouchers");

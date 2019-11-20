@@ -108,7 +108,9 @@ public class RegisterActivity extends AppCompatActivity {
                         editor.putString("sm_public_key", res.getString("sm_public_key"));
                         editor.apply();
 
-                        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+                        finish();
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     } catch (Exception ex) {
                         ex.printStackTrace();
