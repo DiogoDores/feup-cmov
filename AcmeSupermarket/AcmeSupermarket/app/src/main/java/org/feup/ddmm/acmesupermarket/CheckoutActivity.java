@@ -8,6 +8,10 @@ import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,24 +63,61 @@ public class CheckoutActivity extends AppCompatActivity {
             }
         }, this);
 
-        // Basket button listener.
-        findViewById(R.id.go_back_checkout_button).setOnClickListener(v -> openBasketActivity());
+
+        //Buttons
+        Button confirmCheckout = (Button) findViewById(R.id.confirm_checkout_button);
+        Button voucherButton = (Button) findViewById(R.id.voucher_checkout_button);
+        Button discountButton = (Button) findViewById(R.id.discount_checkout_button);
+
+        //TextViews
+        TextView subtotal = (TextView) findViewById(R.id.discount_checkout_button);
+        TextView total = (TextView) findViewById(R.id.total_price_value);
+        TextView toAccumulate = (TextView) findViewById(R.id.to_accumulate);
+
+        //Confirmation Layouts
+        RelativeLayout subtotalPriceLayout = (RelativeLayout) findViewById(R.id.subtotal_price);
+        RelativeLayout checkoutDiscountsButtonsLayout = (RelativeLayout) findViewById(R.id.checkout_discounts_buttons);
+        RelativeLayout totalPriceCheckoutLayout = (RelativeLayout) findViewById(R.id.total_price_checkout);
+        RelativeLayout accumulatedAmountCheckoutLayout = (RelativeLayout) findViewById(R.id.accumulated_amount_checkout);
+
+        //Hidden Views on page creation
+        Button basketIcon = (Button) findViewById(R.id.checkout_basket_icon);
+        TextView waiting = (TextView) findViewById(R.id.waiting_text_view);
+
+        basketIcon.setVisibility(View.GONE);
+        waiting.setVisibility(View.GONE);
+
+        confirmCheckout.setOnClickListener(v -> {
+            basketIcon.setVisibility(View.VISIBLE);
+            waiting.setVisibility(View.VISIBLE);
+
+            subtotalPriceLayout.setVisibility(View.GONE);
+            checkoutDiscountsButtonsLayout.setVisibility(View.GONE);
+            totalPriceCheckoutLayout.setVisibility(View.GONE);
+            accumulatedAmountCheckoutLayout.setVisibility(View.GONE);
+            confirmCheckout.setVisibility(View.GONE);
+            confirmCheckout.setEnabled(false);
+
+            //TODO Activate NFC here
+
+        });
+
+        String tempVoucher = this.pref.getString("voucher", null);
+        if (tempVoucher == null)
+            voucherButton.setEnabled(false);
 
         // Apply voucher button listener.
-        findViewById(R.id.voucher_checkout_button).setOnClickListener(v -> {
+        voucherButton.setOnClickListener(v -> {
             String voucher = this.pref.getString("voucher", null), msg = "";
             Resources res = getResources();
 
-            if (voucher == null) {
-                msg = res.getString(R.string.voucher_not_found);
+            if (!this.hasAppliedVoucher) {
+                msg = String.format("%s %s!", res.getString(R.string.voucher_applied), voucher);
             } else {
-                if (!this.hasAppliedVoucher) {
-                    msg = String.format("%s %s!", res.getString(R.string.voucher_applied), voucher);
-                } else {
-                    msg = String.format("%s %s!", res.getString(R.string.voucher_removed), voucher);
-                }
-                this.hasAppliedVoucher = !this.hasAppliedVoucher;
+                msg = String.format("%s %s!", res.getString(R.string.voucher_removed), voucher);
             }
+            this.hasAppliedVoucher = !this.hasAppliedVoucher;
+
 
             Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG);
             snackbar.show();

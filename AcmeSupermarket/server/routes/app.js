@@ -1,8 +1,6 @@
 const express = require('express');
 const NodeRSA = require('node-rsa');
 const QRCode = require('qrcode');
-const fs = require('fs');
-const path = require('path');
 
 const products = require('../seeds/product.json');
 
