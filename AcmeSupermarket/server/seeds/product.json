@@ -1,6 +1,6 @@
 [
     {
-        "name": "Frozen Lasagne",
+        "name": "Frozen Lasagna",
         "uuid": "16762042-3f5d-4dd5-829a-451932901953",
         "price": 2.99
     },
@@ -18,5 +18,30 @@
         "name": "Macaroni & Cheese",
         "uuid": "140a43cc-b2a2-4a8d-b47e-dfbb2bf71881",
         "price": 1.50
+    },
+    {
+        "name": "Spaghetti and Meatballs",
+        "uuid": "6806ed37-05bf-4b99-afd0-e25433804693",
+        "price": 2.35
+    },
+    {
+        "name": "Fettuccine Alfredo",
+        "uuid": "71273176-ebc1-49a1-8ef0-3a370515b86c",
+        "price": 4.05
+    },
+    {
+        "name": "Pesto Pasta",
+        "uuid": "cb3e862c-5489-492c-ad0c-1289c11c9a18",
+        "price": 2.50
+    },
+    {
+        "name": "Spaghetti Carbonara",
+        "uuid": "c7519964-c9b4-47e6-92b9-b0193bce622e",
+        "price": 3.70
+    },
+    {
+        "name": "Mother's Spaghetti",
+        "uuid": "c043c592-2aca-4ef1-8b1b-a4045c3e4b8c",
+        "price": 80.99
     }
 ]
