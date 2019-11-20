@@ -86,12 +86,23 @@ public class CheckoutActivity extends AppCompatActivity {
 
     private String encryptNdefBasket(String basket) {
         try {
-            byte[] signed = RSAEncryption.sign(basket.getBytes(), RSAEncryption.getPrivateKey());
+            JSONObject obj = new JSONObject(this.basket); // Add unsigned basket information.
+
+            if (this.hasAppliedVoucher) {
+                obj.put("voucher", this.pref.getString("voucher", null)); // Add voucher UUID.
+            }
+
+            obj.put("username", this.pref.getString("username", null)); // Add username.
+            obj.put("uuid", this.pref.getString("uuid", null)); // Add user UUID.
+            obj.put("apply_discount", true); // Add apply discount notice.
+
+            // Sign all the information above.
+            byte[] signed = RSAEncryption.sign(obj.toString().getBytes(), RSAEncryption.getPrivateKey());
             String signedStr = Base64.getEncoder().encodeToString(signed);
 
-            JSONObject obj = new JSONObject();
-            obj.put("unsigned", this.basket);
+            obj.put("unsigned", obj.toString());
             obj.put("signed", signedStr);
+
             return obj.toString();
 
         } catch (Exception e) {

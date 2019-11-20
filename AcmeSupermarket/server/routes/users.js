@@ -99,12 +99,12 @@ router.post('/buy/:username', mw.getUser, async (req, res) => {
   }
 
   // Apply 15% and add it to accumulated discount if there's a voucher.
-  if ('voucher_id' in req.body) {
-    if (res.user.vouchers.includes(req.body.voucher_id)) {
+  if ('voucher' in req.body) {
+    if (res.user.vouchers.includes(req.body.voucher)) {
       res.user.discount += (0.15 * subtotal);
-      res.user.vouchers = res.user.vouchers.filter((v) => v !== req.body.voucher_id);
+      res.user.vouchers = res.user.vouchers.filter((v) => v !== req.body.voucher);
     } else {
-      console.log(`Voucher ${req.body.voucher_id} is invalid.`);
+      console.log(`Voucher ${req.body.voucher} is invalid.`);
     }
   }
 
@@ -122,7 +122,7 @@ router.post('/buy/:username', mw.getUser, async (req, res) => {
     products: req.body.products,
     subtotal,
     total,
-    voucher: ('voucher_id' in req.body && res.user.vouchers.includes(req.body.voucher_id)) ? req.body.voucher_id : null,
+    voucher: ('voucher' in req.body && res.user.vouchers.includes(req.body.voucher)) ? req.body.voucher : null,
     milestone: Math.round((VOUCHER_CAP - res.user.expense) * 100) / 100,
   });
 

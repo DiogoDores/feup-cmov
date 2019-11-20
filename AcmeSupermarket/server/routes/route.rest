@@ -27,7 +27,7 @@ Content-Type: application/json
       "price": 2.45
     }
   ],
-  "voucher_id": "62b62eb7-c284-44c8-9b04-117272de3f31",
+  "voucher": "62b62eb7-c284-44c8-9b04-117272de3f31",
   "apply_discount": true
 }
 

@@ -72,7 +72,7 @@ public class BasketActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
         intent.putExtra("basket", prepareBasketJSON(this.basket).toString());
         intent.putExtra("total", this.totalPrice);
-        
+
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
