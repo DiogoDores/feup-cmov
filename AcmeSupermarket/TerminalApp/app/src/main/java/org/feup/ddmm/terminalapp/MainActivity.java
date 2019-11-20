@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -26,6 +29,8 @@ import java.security.spec.InvalidKeySpecException;
 public class MainActivity extends AppCompatActivity {
     private NfcAdapter nfcAdapter;
     private RequestQueue mQueue;
+    private TextView confirmationText, price;
+    private Button confirmationIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,16 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "NFC is not available in this device", Toast.LENGTH_SHORT).show();
             finish();
         }
+
+        confirmationIcon = findViewById(R.id.checkout_basket_icon);
+        confirmationIcon.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_phonelink_ring_big, 0, 0, 0);
+
+        confirmationText = findViewById(R.id.payment_text);
+        confirmationText.setText("Scan your device here to checkout!");
+
+        price = findViewById(R.id.price);
+        price.setVisibility(View.GONE);
+
     }
 
     private void saveReceipt(String username, byte[] data) throws JSONException {
@@ -61,9 +76,19 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Stored receipt!", Toast.LENGTH_SHORT).show();
 
             // TODO: Show success icon here.
+            confirmationIcon.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_check_big, 0, 0, 0);
             try {
-                // TODO: Update some text view with this text.
-                res.getString("total");
+                confirmationText.setText("Your payment was received! Tank you!");
+                price.setVisibility(View.VISIBLE);
+                price.setText(res.getString("total") + "€");
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                        startActivity(getIntent());
+                    }
+                }, 3000);
             } catch (JSONException e) { e.printStackTrace(); }
 
         }, err -> { Toast.makeText(MainActivity.this, err.toString(), Toast.LENGTH_SHORT).show(); });
