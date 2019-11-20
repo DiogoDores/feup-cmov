@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -22,10 +25,14 @@ import org.json.JSONObject;
 
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
+import java.text.DecimalFormat;
+import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
     private NfcAdapter nfcAdapter;
     private RequestQueue mQueue;
+    private TextView confirmationText, price;
+    private Button confirmationIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,16 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "NFC is not available in this device", Toast.LENGTH_SHORT).show();
             finish();
         }
+
+        confirmationIcon = findViewById(R.id.checkout_basket_icon);
+        confirmationIcon.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_phonelink_ring_big, 0, 0, 0);
+
+        confirmationText = findViewById(R.id.payment_text);
+        confirmationText.setText("Scan your device here to checkout!");
+
+        price = findViewById(R.id.price);
+        price.setVisibility(View.GONE);
+
     }
 
     private void saveReceipt(String username, byte[] data) throws JSONException {
@@ -58,14 +75,16 @@ public class MainActivity extends AppCompatActivity {
         String url = String.format("%s/users/buy/%s", getString(R.string.ip), username);
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, payload, res -> {
-            Toast.makeText(this, "Stored receipt!", Toast.LENGTH_SHORT).show();
-
             try {
-                // TODO: Update some text view with this text.
+                Toast.makeText(this, "Stored receipt!", Toast.LENGTH_SHORT).show();
                 String total = res.getString("total");
-                Toast.makeText(this, total, Toast.LENGTH_SHORT).show();
-            } catch (JSONException e) { e.printStackTrace(); }
 
+                // TODO: Show success icon here.
+                confirmationIcon.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_check_big, 0, 0, 0);
+                confirmationText.setText("Your payment was received! Tank you!");
+                price.setVisibility(View.VISIBLE);
+                price.setText(new DecimalFormat("€#,##0.00").format(res.getString("total")));
+            } catch (JSONException e) { e.printStackTrace(); }
         }, err -> { Toast.makeText(MainActivity.this, err.toString(), Toast.LENGTH_SHORT).show(); });
         this.mQueue.add(req);
     }

@@ -48,8 +48,6 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("sm_public_key", RSAEncryption.formatPKCS8(smpk));
         editor.putString("username", username);
         editor.apply();
-
-        Toast.makeText(this, "sm_public_key: " + this.pref.getString("sm_public_key", null), Toast.LENGTH_SHORT).show();
         this.openMenuActivity();
     }
 

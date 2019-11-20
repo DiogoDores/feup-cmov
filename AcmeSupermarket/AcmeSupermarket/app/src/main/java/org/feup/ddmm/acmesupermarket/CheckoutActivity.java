@@ -30,7 +30,7 @@ import java.util.UUID;
 public class CheckoutActivity extends AppCompatActivity {
     private SharedPreferences pref;
     private NfcAdapter nfcAdapter;
-    private boolean hasAppliedVoucher;
+    private boolean hasAppliedVoucher = false, hasAppliedDiscount = false;
 
     private String basket;
 
@@ -42,27 +42,11 @@ public class CheckoutActivity extends AppCompatActivity {
         this.pref = getSharedPreferences("pref", MODE_PRIVATE);
         this.nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         this.basket = getIntent().getStringExtra("basket");
-        String ndefMsg = encryptNdefBasket(basket);
 
         if (this.nfcAdapter == null) {
             Toast.makeText(this, "NFC is not available in this device", Toast.LENGTH_SHORT).show();
             finish();
         }
-
-        this.nfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback() {
-            @Override
-            public NdefMessage createNdefMessage(NfcEvent event) {
-                return new NdefMessage(new NdefRecord[] { createMimeRecord("application/com.example.android.beam", ndefMsg.getBytes()) });
-            }
-        }, this);
-
-        this.nfcAdapter.setOnNdefPushCompleteCallback(new NfcAdapter.OnNdefPushCompleteCallback() {
-            @Override
-            public void onNdefPushComplete(NfcEvent event) {
-                Toast.makeText(CheckoutActivity.this, "Sent!", Toast.LENGTH_SHORT).show();
-            }
-        }, this);
-
 
         //Buttons
         Button confirmCheckout = (Button) findViewById(R.id.confirm_checkout_button);
@@ -98,30 +82,54 @@ public class CheckoutActivity extends AppCompatActivity {
             confirmCheckout.setVisibility(View.GONE);
             confirmCheckout.setEnabled(false);
 
-            //TODO Activate NFC here
-
+            this.setupNFC();
         });
 
-        String tempVoucher = this.pref.getString("voucher", null);
-        if (tempVoucher == null)
-            voucherButton.setEnabled(false);
+        discountButton.setOnClickListener(v -> {
+            this.hasAppliedDiscount = !this.hasAppliedDiscount;
+            String msg = this.hasAppliedDiscount ? "Discount applied!" : "Discount removed!";
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG);
+            snackbar.show();
+        });
 
         // Apply voucher button listener.
         voucherButton.setOnClickListener(v -> {
             String voucher = this.pref.getString("voucher", null), msg = "";
             Resources res = getResources();
 
-            if (!this.hasAppliedVoucher) {
-                msg = String.format("%s %s!", res.getString(R.string.voucher_applied), voucher);
+            if (this.pref.getString("voucher", null) != null) {
+                if (!this.hasAppliedVoucher) {
+                    msg = String.format("%s %s!", res.getString(R.string.voucher_applied), voucher);
+                } else {
+                    msg = String.format("%s %s!", res.getString(R.string.voucher_removed), voucher);
+                }
             } else {
-                msg = String.format("%s %s!", res.getString(R.string.voucher_removed), voucher);
+                msg = String.format("%s", res.getString(R.string.voucher_not_found), voucher);
             }
-            this.hasAppliedVoucher = !this.hasAppliedVoucher;
 
+            this.hasAppliedVoucher = !this.hasAppliedVoucher;
 
             Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG);
             snackbar.show();
         });
+    }
+
+    private void setupNFC() {
+        String ndefMsg = encryptNdefBasket(basket);
+
+        this.nfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback() {
+            @Override
+            public NdefMessage createNdefMessage(NfcEvent event) {
+                return new NdefMessage(new NdefRecord[] { createMimeRecord("application/com.example.android.beam", ndefMsg.getBytes()) });
+            }
+        }, this);
+
+        this.nfcAdapter.setOnNdefPushCompleteCallback(new NfcAdapter.OnNdefPushCompleteCallback() {
+            @Override
+            public void onNdefPushComplete(NfcEvent event) {
+                Toast.makeText(CheckoutActivity.this, "Sent!", Toast.LENGTH_SHORT).show();
+            }
+        }, this);
     }
 
     private String encryptNdefBasket(String basket) {
@@ -134,7 +142,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
             obj.put("username", this.pref.getString("username", null)); // Add username.
             obj.put("uuid", this.pref.getString("uuid", null)); // Add user UUID.
-            obj.put("apply_discount", true); // Add apply discount notice.
+            obj.put("apply_discount", this.hasAppliedDiscount); // Add apply discount notice.
 
             // Sign all the information above.
             byte[] signed = RSAEncryption.sign(obj.toString().getBytes(), RSAEncryption.getPrivateKey());
