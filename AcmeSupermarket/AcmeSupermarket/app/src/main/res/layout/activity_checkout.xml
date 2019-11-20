@@ -29,7 +29,7 @@
         android:background="@color/colorAccent" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
@@ -45,6 +45,7 @@
             android:paddingStart="40dp" />
 
         <TextView
+            android:id="@+id/waiting_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Waiting for checkout"
@@ -52,33 +53,173 @@
             android:fontFamily="@font/catamaran_light"
             android:textSize="20dp"/>
 
+        <RelativeLayout
+            android:id="@+id/subtotal_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <View
+                android:id="@+id/subtotal_dummy"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/subtotal_dummy"
+                android:text="Subtotal: "
+                android:fontFamily="@font/catamaran"
+                android:includeFontPadding="false"
+                android:textColor="@color/colorAccent"
+                android:textSize="25dp"/>
+
+            <TextView
+                android:id="@+id/subtotal_price_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/subtotal_dummy"
+                android:text="12.99€"
+                android:fontFamily="@font/catamaran"
+                android:includeFontPadding="false"
+                android:textColor="@color/colorAccent"
+                android:textSize="25dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/checkout_discounts_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginVertical="15dp">
+
+            <View
+                android:id="@+id/checkout_dummy"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true"/>
+
+            <Button
+                android:id="@+id/voucher_checkout_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_red_button"
+                android:fontFamily="@font/catamaran_semibold"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="5dp"
+                android:text="Apply voucher"
+                android:textColor="@color/colorWhite"
+                android:layout_toEndOf="@id/checkout_dummy"
+                android:layout_marginStart="10dp"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/discount_checkout_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_red_button"
+                android:fontFamily="@font/catamaran_semibold"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="5dp"
+                android:text="Apply discount"
+                android:textColor="@color/colorWhite"
+                android:layout_toStartOf="@id/checkout_dummy"
+                android:layout_marginEnd="10dp"
+                android:textSize="20dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/total_price_checkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <View
+                android:id="@+id/total_dummy"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/total_dummy"
+                android:text="Total: "
+                android:fontFamily="@font/catamaran_semibold"
+                android:includeFontPadding="false"
+                android:textColor="@color/colorAccent"
+                android:textSize="25dp"/>
+
+            <TextView
+                android:id="@+id/total_price_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/total_dummy"
+                android:text="12.99€"
+                android:fontFamily="@font/catamaran_semibold"
+                android:includeFontPadding="false"
+                android:textColor="@color/colorAccent"
+                android:textSize="25dp"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/accumulated_amount_checkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <View
+                android:id="@+id/accumulate_dummy"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/accumulate_dummy"
+                android:text="You'll accumulate "
+                android:fontFamily="@font/catamaran"
+                android:includeFontPadding="false"
+                android:textColor="@color/colorAccent"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/to_accumulate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/accumulate_dummy"
+                android:text="2.99€"
+                android:fontFamily="@font/catamaran"
+                android:includeFontPadding="false"
+                android:textColor="@color/colorAccent"
+                android:textSize="18dp"/>
+
+        </RelativeLayout>
+
+
         <Button
-            android:id="@+id/go_back_checkout_button"
+            android:id="@+id/confirm_checkout_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_red_button"
-            android:text="Go Back"
-            android:textColor="@color/colorWhite"
             android:fontFamily="@font/catamaran_semibold"
-            android:textSize="25dp"
             android:includeFontPadding="false"
             android:paddingHorizontal="20dp"
+            android:layout_marginTop="50dp"
             android:paddingVertical="5dp"
-            android:layout_marginTop="25dp"/>
+            android:text="Confirm checkout"
+            android:textColor="@color/colorWhite"
+            android:textSize="20dp" />
 
-        <Button
-            android:id="@+id/voucher_checkout_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/rounded_red_button"
-            android:fontFamily="@font/catamaran_semibold"
-            android:includeFontPadding="false"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="5dp"
-            android:text="Apply voucher"
-            android:textColor="@color/colorWhite"
-            android:textSize="25dp" />
+
+
 
     </LinearLayout>
 
