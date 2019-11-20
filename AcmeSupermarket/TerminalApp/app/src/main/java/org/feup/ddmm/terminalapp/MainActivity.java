@@ -81,9 +81,10 @@ public class MainActivity extends AppCompatActivity {
 
                 // TODO: Show success icon here.
                 confirmationIcon.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_check_big, 0, 0, 0);
-                confirmationText.setText("Your payment was received! Tank you!");
-                price.setVisibility(View.VISIBLE);
-                price.setText(new DecimalFormat("€#,##0.00").format(res.getString("total")));
+                confirmationText.setText("Your payment was received! Thank you!");
+                findViewById(R.id.price).setVisibility(View.VISIBLE);
+                ((TextView) findViewById(R.id.price)).setText(new DecimalFormat("€#,##0.00").format(res.getString("total")));
+
             } catch (JSONException e) { e.printStackTrace(); }
         }, err -> { Toast.makeText(MainActivity.this, err.toString(), Toast.LENGTH_SHORT).show(); });
         this.mQueue.add(req);

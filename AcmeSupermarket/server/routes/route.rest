@@ -10,7 +10,7 @@ GET http://localhost:3000/users/login/a
 
 ###
 
-POST http://localhost:3000/users/buy/a
+POST http://localhost:3000/users/buy/A
 Content-Type: application/json
 
 {
