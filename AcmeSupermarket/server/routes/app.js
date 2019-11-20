@@ -40,12 +40,9 @@ router.get('/generate', (req, res) => {
 
   products.forEach((product) => {
     const buffer = generateBuffer(product);
+
     // Encrypt with supermarket private key.
     const encrypted = key.encryptPrivate(buffer, 'hex');
-    console.log(encrypted);
-
-    console.log(buffer);
-    console.log(encrypted.toString('base64'));
 
     QRCode.toFile(`public/images/${product.name}.png`, encrypted, {
       color: { light: '#0000' },

@@ -138,10 +138,8 @@ public class CheckoutActivity extends AppCompatActivity {
 
             // Sign all the information above.
             byte[] signed = RSAEncryption.sign(obj.toString().getBytes(), RSAEncryption.getPrivateKey());
-            String signedStr = Base64.getEncoder().encodeToString(signed);
-
             obj.put("unsigned", obj.toString());
-            obj.put("signed", signedStr);
+            obj.put("signed", Base64.getEncoder().encodeToString(signed));
 
             return obj.toString();
 

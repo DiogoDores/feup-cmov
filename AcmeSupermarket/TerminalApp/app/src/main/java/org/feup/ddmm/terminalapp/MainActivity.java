@@ -60,10 +60,10 @@ public class MainActivity extends AppCompatActivity {
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, payload, res -> {
             Toast.makeText(this, "Stored receipt!", Toast.LENGTH_SHORT).show();
 
-            // TODO: Show success icon here.
             try {
                 // TODO: Update some text view with this text.
-                res.getString("total");
+                String total = res.getString("total");
+                Toast.makeText(this, total, Toast.LENGTH_SHORT).show();
             } catch (JSONException e) { e.printStackTrace(); }
 
         }, err -> { Toast.makeText(MainActivity.this, err.toString(), Toast.LENGTH_SHORT).show(); });
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     saveReceipt(username, data);
 
                 //} else {
-                    //Toast.makeText(this, "Couldn't validate signature!", Toast.LENGTH_SHORT).show();
+                //    Toast.makeText(this, "Couldn't validate signature!", Toast.LENGTH_SHORT).show();
                 //}
             } catch (Exception e) {
                 e.printStackTrace();

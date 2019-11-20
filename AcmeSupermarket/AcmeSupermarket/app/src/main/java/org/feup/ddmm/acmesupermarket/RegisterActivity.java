@@ -108,8 +108,6 @@ public class RegisterActivity extends AppCompatActivity {
                         editor.putString("sm_public_key", res.getString("sm_public_key"));
                         editor.apply();
 
-                        Toast.makeText(RegisterActivity.this, pref.getString("uuid", "No UUID found."), Toast.LENGTH_SHORT).show();
-
                         startActivity(new Intent(getApplicationContext(), MenuActivity.class));
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     } catch (Exception ex) {
