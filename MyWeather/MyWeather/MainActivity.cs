@@ -5,26 +5,30 @@ using Android.Runtime;
 using Android.Widget;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System;
+using Android.Content;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace MyWeather
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
+        private Dictionary<string, int> favorites = new Dictionary<string, int>();
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
-            string apiResult = "";
-            string url = "https://jsonplaceholder.typicode.com/posts/1";
-
-            Task task = new Task(() => { apiResult = AccessWebAsync(url).Result; });
-            task.Start();
-            task.Wait();
-            System.Diagnostics.Debug.WriteLine(apiResult);
+            FindViewById<Button>(Resource.Id.button1).Click += delegate
+            {
+                StartActivityForResult(new Intent(this, typeof(FavoriteActivity)), 0);
+            };
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
@@ -33,11 +37,15 @@ namespace MyWeather
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        async Task<string> AccessWebAsync(string url)
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
-            HttpClient client = new HttpClient();
-            Task<string> getStringTask = client.GetStringAsync(url);
-            return await getStringTask;
+            base.OnActivityResult(requestCode, resultCode, data);
+            
+            if (resultCode == Result.Ok)
+            {
+                string extraString = data.GetStringExtra("favorites");
+                this.favorites = JsonConvert.DeserializeObject<Dictionary<string, int>>(extraString);
+            }
         }
     }
 }

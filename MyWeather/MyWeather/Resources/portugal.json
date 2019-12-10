@@ -1,0 +1,182 @@
+﻿[
+  {
+    "id": 2267056,
+    "name": "Distrito de Lisboa",
+    "country": "PT",
+    "coord": {
+      "lon": -9.13333,
+      "lat": 39
+    }
+  },
+  {
+    "id": 2735941,
+    "name": "Distrito do Porto",
+    "country": "PT",
+    "coord": {
+      "lon": -8.33333,
+      "lat": 41.25
+    }
+  },
+  {
+    "id": 2742031,
+    "name": "Distrito de Braga",
+    "country": "PT",
+    "coord": {
+      "lon": -8.41667,
+      "lat": 41.583328
+    }
+  },
+  {
+    "id": 2262961,
+    "name": "Distrito de Setúbal",
+    "country": "PT",
+    "coord": {
+      "lon": -8.5,
+      "lat": 38.333328
+    }
+  },
+  {
+    "id": 2742610,
+    "name": "Distrito de Aveiro",
+    "country": "PT",
+    "coord": {
+      "lon": -8.5,
+      "lat": 40.75
+    }
+  },
+  {
+    "id": 2268337,
+    "name": "Distrito de Faro",
+    "country": "PT",
+    "coord": {
+      "lon": -8.16667,
+      "lat": 37.200001
+    }
+  },
+  {
+    "id": 2267094,
+    "name": "Distrito de Leiria",
+    "country": "PT",
+    "coord": {
+      "lon": -8.83333,
+      "lat": 39.666672
+    }
+  },
+  {
+    "id": 2740636,
+    "name": "Distrito de Coimbra",
+    "country": "PT",
+    "coord": {
+      "lon": -8.41667,
+      "lat": 40.200001
+    }
+  },
+  {
+    "id": 2263478,
+    "name": "Distrito de Santarém",
+    "country": "PT",
+    "coord": {
+      "lon": -8.58333,
+      "lat": 39.25
+    }
+  },
+  {
+    "id": 2732264,
+    "name": "Distrito de Viseu",
+    "country": "PT",
+    "coord": {
+      "lon": -7.83333,
+      "lat": 40.75
+    }
+  },
+  {
+    "id": 2593105,
+    "name": "Região Autónoma da Madeira",
+    "country": "PT",
+    "coord": {
+      "lon": -16.75,
+      "lat": 32.666672
+    }
+  },
+  {
+    "id": 3411865,
+    "name": "Região Autónoma dos Açores",
+    "country": "PT",
+    "coord": {
+      "lon": -28,
+      "lat": 38.5
+    }
+  },
+  {
+    "id": 2732772,
+    "name": "Distrito de Viana do Castelo",
+    "country": "PT",
+    "coord": {
+      "lon": -8.41667,
+      "lat": 41.916672
+    }
+  },
+  {
+    "id": 2732437,
+    "name": "Distrito de Vila Real",
+    "country": "PT",
+    "coord": {
+      "lon": -7.58333,
+      "lat": 41.583328
+    }
+  },
+  {
+    "id": 2269513,
+    "name": "Distrito de Castelo Branco",
+    "country": "PT",
+    "coord": {
+      "lon": -7.5,
+      "lat": 40
+    }
+  },
+  {
+    "id": 2268404,
+    "name": "Distrito de Évora",
+    "country": "PT",
+    "coord": {
+      "lon": -7.83333,
+      "lat": 38.583328
+    }
+  },
+  {
+    "id": 2738782,
+    "name": "Distrito da Guarda",
+    "country": "PT",
+    "coord": {
+      "lon": -7.16667,
+      "lat": 40.666672
+    }
+  },
+  {
+    "id": 2270984,
+    "name": "Distrito de Beja",
+    "country": "PT",
+    "coord": {
+      "lon": -7.83333,
+      "lat": 37.966671
+    }
+  },
+  {
+    "id": 2742026,
+    "name": "Distrito de Bragança",
+    "country": "PT",
+    "coord": {
+      "lon": -6.75,
+      "lat": 41.5
+    }
+  },
+  {
+    "id": 2264507,
+    "name": "Distrito de Portalegre",
+    "country": "PT",
+    "coord": {
+      "lon": -7.58333,
+      "lat": 39.25
+    }
+  }
+]
