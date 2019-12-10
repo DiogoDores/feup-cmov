@@ -16,7 +16,7 @@ namespace MyWeather
     public class MainActivity : AppCompatActivity
     {
         private Dictionary<string, int> favorites = new Dictionary<string, int>();
-        private List<District> districts = new List<District>();
+        private List<HourlyForecast> districts = new List<HourlyForecast>();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -50,7 +50,7 @@ namespace MyWeather
 
             foreach(KeyValuePair<string, int> entry in this.favorites)
             {
-                District dist = RESTClient.RequestWeatherInfo(entry.Value);
+                HourlyForecast dist = RESTClient.SendRequest<HourlyForecast>(entry.Value);
                 this.districts.Add(dist);
             }
 

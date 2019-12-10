@@ -18,8 +18,7 @@ namespace MyWeather
     public class DistrictInfo
     {
         public int id;
-        public string name, country;
-        public Coord coord;
+        public string name;
     }
 
     [Activity(Label = "FavoriteActivity")]

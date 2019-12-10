@@ -25,15 +25,14 @@ namespace MyWeather
             client.BaseAddress = new Uri(@base);
         }
 
-        public static District RequestWeatherInfo(int id)
+        public static dynamic SendRequest<Type>(int id)
         {
-            string url = RESTClient.BuildRefreshUrl(id), res = "";
-
+            string url = BuildAPIUrl(typeof(Type), id), res = "";
             Task task = new Task(() => res = RESTClient.AccessWebAsync(url).Result);
             task.Start();
             task.Wait();
 
-            return JsonConvert.DeserializeObject<District>(res);
+            return JsonConvert.DeserializeObject<Type>(res);
         }
         
         public async static Task<string> AccessWebAsync(string url)
@@ -42,9 +41,10 @@ namespace MyWeather
             return await getStringTask;
         }
 
-        public static string BuildRefreshUrl(int id)
+        private static string BuildAPIUrl(System.Type type, int id)
         {
-            return String.Format("/data/2.5/weather?id={0}&appid={1}", id.ToString(), RESTClient.apiKey);
+            string header = (type == typeof(HourlyForecast) ? "weather" : "forecast");
+            return String.Format("/data/2.5/{0}?id={1}&appid={2}&units=metric", header, id.ToString(), RESTClient.apiKey);
         }
     }
 }

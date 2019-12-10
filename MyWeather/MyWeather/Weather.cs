@@ -12,10 +12,17 @@ using Android.Widget;
 using Newtonsoft.Json;
 
 namespace MyWeather
-{
+{   
     public class Coord
     {
         public double lon, lat;
+    }
+
+    public class City
+    {
+        public int id, timezone, sunrise, sunset;
+        public string name, country;
+        public Coord coord;
     }
 
     public class Weather
@@ -26,14 +33,25 @@ namespace MyWeather
 
     public class Main
     {
-        public double temp, temp_min, temp_max;
-        public int pressure, humidity;
+        public double temp, temp_min, temp_max, pressure, sea_level, grnd_level, humidity, temp_kf;
     }
 
     public class Wind
     {
-        public double speed;
         public int deg;
+        public double speed, gust;
+    }
+
+    public class Snow
+    {
+        [JsonProperty("3h")]
+        public double _3h;
+    }
+
+    public class Rain
+    {
+        [JsonProperty("3h")]
+        public double _3h;
     }
 
     public class Clouds
@@ -45,55 +63,28 @@ namespace MyWeather
     {
         public int type, id, sunrise, sunset;
         public double message;
-        public string country;
+        public string country, pod;
     }
 
-    public class District
+    public class HourlyForecast
     {
         public Coord coord;
         public List<Weather> weather;
-        public string name;
+        public string name, dt_text;
         public Main main;
         public int visibility, dt, id, cod;
         public Wind wind;
         public Clouds clouds;
+        public Snow snow;
         public Sys sys;
+    }
 
-        public double GetTemp()
-        {
-            return this.main.temp;
-        }
-
-        public double GetTempMin()
-        {
-            return this.main.temp_min;
-        }
-
-        public double GetTempMax()
-        {
-            return this.main.temp_max;
-        }
-
-        public int GetPressure()
-        {
-            return this.main.pressure;
-        }
-
-        public int GetPrecipitation()
-        {   
-            // TODO: Where to get precipitation?
-            return -1;
-        }
-
-        public int GetHumidity()
-        {
-            return this.main.humidity;
-        }
-
-
-        public double GetWindSpeed()
-        {
-            return this.wind.speed;
-        }
+    public class WeeklyForecast
+    {
+        public string cod;
+        public double message;
+        public int cnt;
+        public List<HourlyForecast> list;
+        public City city;
     }
 }
