@@ -14,32 +14,37 @@ using Newtonsoft.Json;
 
 namespace MyWeather
 {
-    public static class RESTClient
+    public class RESTClient
     {
         public static string apiKey = "06b6cee85ee48cacb7685d8b039e1339";
+        private static HttpClient client = new HttpClient();
 
-        public class RootObject
+        public static void Initialize()
         {
-            public int cnt;
-            public List<Info> list;
+            const string @base = "http://api.openweathermap.org";
+            client.BaseAddress = new Uri(@base);
         }
-        /*
-        public static void Refresh()
+
+        public static District RequestWeatherInfo(int id)
         {
-            string res;
+            string url = RESTClient.BuildRefreshUrl(id), res = "";
 
             Task task = new Task(() => res = RESTClient.AccessWebAsync(url).Result);
             task.Start();
             task.Wait();
-            RootObject obj = JsonConvert.DeserializeObject<RootObject>(res);
+
+            return JsonConvert.DeserializeObject<District>(res);
         }
-        */
         
         public async static Task<string> AccessWebAsync(string url)
         {
-            HttpClient client = new HttpClient();
-            Task<string> getStringTask = client.GetStringAsync(url);
+            Task<string> getStringTask = RESTClient.client.GetStringAsync(url);
             return await getStringTask;
+        }
+
+        public static string BuildRefreshUrl(int id)
+        {
+            return String.Format("/data/2.5/weather?id={0}&appid={1}", id.ToString(), RESTClient.apiKey);
         }
     }
 }

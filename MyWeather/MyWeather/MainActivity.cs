@@ -16,6 +16,7 @@ namespace MyWeather
     public class MainActivity : AppCompatActivity
     {
         private Dictionary<string, int> favorites = new Dictionary<string, int>();
+        private List<District> districts = new List<District>();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -35,6 +36,25 @@ namespace MyWeather
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        protected override void OnStart()
+        {
+            RESTClient.Initialize();
+            base.OnStart();
+        }
+
+        protected override void OnResume()
+        {
+            this.districts.Clear();
+
+            foreach(KeyValuePair<string, int> entry in this.favorites)
+            {
+                District dist = RESTClient.RequestWeatherInfo(entry.Value);
+                this.districts.Add(dist);
+            }
+
+            base.OnResume();
         }
 
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)

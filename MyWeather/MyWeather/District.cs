@@ -26,8 +26,8 @@ namespace MyWeather
 
     public class Main
     {
-        public double temp;
-        public int pressure, humidity, temp_min, temp_max;
+        public double temp, temp_min, temp_max;
+        public int pressure, humidity;
     }
 
     public class Wind
@@ -48,7 +48,7 @@ namespace MyWeather
         public string country;
     }
 
-    public class Info
+    public class District
     {
         public Coord coord;
         public List<Weather> weather;
@@ -58,41 +58,25 @@ namespace MyWeather
         public Wind wind;
         public Clouds clouds;
         public Sys sys;
-    }
-
-    public class District
-    {
-        private Info info;
-        private string id;
-
-        public District(string id)
-        {
-            this.id = id;
-        }
-
-        public void Update()
-        {
-            string url = String.Format("https://api.openweathermap.org/data/2.5/weather?id={0}&appid={1}", this.id, "@string/api_key"), res = "";
-        }
 
         public double GetTemp()
         {
-            return this.info.main.temp;
+            return this.main.temp;
         }
 
         public double GetTempMin()
         {
-            return this.info.main.temp_min;
+            return this.main.temp_min;
         }
 
         public double GetTempMax()
         {
-            return this.info.main.temp_max;
+            return this.main.temp_max;
         }
 
         public int GetPressure()
         {
-            return this.info.main.pressure;
+            return this.main.pressure;
         }
 
         public int GetPrecipitation()
@@ -103,13 +87,13 @@ namespace MyWeather
 
         public int GetHumidity()
         {
-            return this.info.main.humidity;
+            return this.main.humidity;
         }
 
 
         public double GetWindSpeed()
         {
-            return this.info.wind.speed;
+            return this.wind.speed;
         }
     }
 }
