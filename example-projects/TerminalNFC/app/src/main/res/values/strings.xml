@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">TerminalNFC</string>
-    <string name="tv_title">NFC Receiver</string>
-    <string name="tv_waiting">Waiting for a tap</string>
-</resources>

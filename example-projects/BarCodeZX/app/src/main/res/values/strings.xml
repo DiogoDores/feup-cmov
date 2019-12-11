@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">BarCodeZX</string>
-    <string name="msg_hint">11 digit number</string>
-    <string name="msg_text">Enter an 11 digit number:</string>
-    <string name="bt_label">Generate</string>
-    <string name="img_desc">Generated barcode</string>
-</resources>
