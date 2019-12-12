@@ -6,7 +6,11 @@
              mc:Ignorable="d"
              x:Class="OurWeather.MainPage">
 
+    
+
     <StackLayout>
+        <CarouselView ItemsSource="{Binding Items}" />
+        
         <!-- Place new controls here -->
         <Label Text="Welcome to Xamarin.Forms!" 
            HorizontalOptions="Center"

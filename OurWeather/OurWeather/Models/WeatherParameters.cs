@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace OurWeather
+namespace OurWeather.Models
 {
     public class Coord
     {
@@ -19,7 +19,7 @@ namespace OurWeather
         public Coord coord;
     }
 
-    public class Weather
+    public class WeatherParameters
     {
         public int id;
         public string main, description, icon;
@@ -58,27 +58,5 @@ namespace OurWeather
         public int type, id, sunrise, sunset;
         public double message;
         public string country, pod;
-    }
-
-    public class HourlyForecast
-    {
-        public Coord coord;
-        public List<Weather> weather;
-        public string name, dt_text;
-        public Main main;
-        public int visibility, dt, id, cod;
-        public Wind wind;
-        public Clouds clouds;
-        public Snow snow;
-        public Sys sys;
-    }
-
-    public class WeeklyForecast
-    {
-        public string cod;
-        public double message;
-        public int cnt;
-        public List<HourlyForecast> list;
-        public City city;
     }
 }

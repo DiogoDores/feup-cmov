@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using OurWeather.Models;
+using OurWeather.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,8 +16,7 @@ namespace OurWeather
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        private FavouritesPage favouritesPage;
-        private List<HourlyForecast> districts = new List<HourlyForecast>();
+        private readonly FavouritesPage favouritesPage;
 
         public MainPage()
         {
@@ -24,6 +25,13 @@ namespace OurWeather
 
             // Serialize the district JSON and send it to the favourites page.
             this.favouritesPage.SetDistricts(this.DictionarySerializeDistrictJSON());
+        }
+
+        private CarouselViewModel PopulateCarousel(List<ForecastHour> districts)
+        {
+            List<CarouselItem> items = new List<CarouselItem>();
+            districts.ForEach(dist => items.Add(new CarouselItem { Name = dist.name }));
+            return new CarouselViewModel { Items = items };
         }
 
         private List<DistrictInfo> DictionarySerializeDistrictJSON()
@@ -40,11 +48,17 @@ namespace OurWeather
 
         protected override void OnAppearing()
         {
+            List<ForecastHour> districts = new List<ForecastHour>();
+
             this.favouritesPage.GetFavourites().ForEach(favourite => 
             {
-                HourlyForecast forecast = RESTClient.SendRequest<HourlyForecast>(favourite.id);
-                this.districts.Add(forecast);
+                ForecastHour forecast = RESTClient.SendRequest<ForecastHour>(favourite.id);
+                districts.Add(forecast);
             });
+
+            // Populate carousel and bind it to context.
+            CarouselViewModel model = this.PopulateCarousel(districts);
+            BindingContext = model;
 
             base.OnAppearing();
         }

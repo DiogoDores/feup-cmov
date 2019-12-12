@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using OurWeather.Models;
 
 namespace OurWeather
 {
@@ -37,7 +38,7 @@ namespace OurWeather
 
         private static string BuildAPIUrl(System.Type type, int id)
         {
-            string header = (type == typeof(HourlyForecast) ? "weather" : "forecast");
+            string header = (type == typeof(ForecastHour) ? "weather" : "forecast");
             return String.Format("/data/2.5/{0}?id={1}&appid={2}&units=metric", header, id.ToString(), RESTClient.apiKey);
         }
     }
