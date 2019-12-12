@@ -11,14 +11,10 @@ using Xamarin.Forms;
 
 namespace OurWeather
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
         private FavouritesPage favouritesPage;
-
-        private Dictionary<string, int> favorites = new Dictionary<string, int>();
         private List<HourlyForecast> districts = new List<HourlyForecast>();
 
         public MainPage()
@@ -27,11 +23,10 @@ namespace OurWeather
             this.favouritesPage = new FavouritesPage();
 
             // Serialize the district JSON and send it to the favourites page.
-            Dictionary<string, int> dist = this.DictionarySerializeDistrictJSON();
-            this.favouritesPage.SetDistricts(dist);
+            this.favouritesPage.SetDistricts(this.DictionarySerializeDistrictJSON());
         }
 
-        private Dictionary<string, int> DictionarySerializeDistrictJSON()
+        private List<DistrictInfo> DictionarySerializeDistrictJSON()
         {
             Assembly assembly = IntrospectionExtensions.GetTypeInfo(typeof(MainPage)).Assembly;
             Stream stream = assembly.GetManifestResourceStream("OurWeather.Portugal.json");
@@ -39,13 +34,19 @@ namespace OurWeather
             using (var reader = new StreamReader(stream))
             {
                 string jsonStr = reader.ReadToEnd();
-                List<DistrictInfo> distsList = JsonConvert.DeserializeObject<List<DistrictInfo>>(jsonStr);
-
-                Dictionary<string, int> distsDict = new Dictionary<string, int>();
-                distsList.ForEach(dist => distsDict.Add(dist.name, dist.id));
-
-                return distsDict;
+                return JsonConvert.DeserializeObject<List<DistrictInfo>>(jsonStr);
             }
+        }
+
+        protected override void OnAppearing()
+        {
+            this.favouritesPage.GetFavourites().ForEach(favourite => 
+            {
+                HourlyForecast forecast = RESTClient.SendRequest<HourlyForecast>(favourite.id);
+                this.districts.Add(forecast);
+            });
+
+            base.OnAppearing();
         }
 
 
@@ -53,7 +54,5 @@ namespace OurWeather
         {
             await Navigation.PushAsync(favouritesPage);
         }
-
-        
     }
 }

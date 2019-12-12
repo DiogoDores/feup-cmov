@@ -6,14 +6,8 @@
              mc:Ignorable="d"
              x:Class="OurWeather.FavouritesPage">
     <StackLayout Margin="20,35,20,20">
-        <ListView>
-            <ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>porto</x:String>
-                    <x:String>lisboa</x:String>
-                    <x:String>coimbra</x:String>
-                </x:Array>
-            </ListView.ItemsSource>
-        </ListView>
+        <ListView ItemsSource="{Binding districts}" 
+                  ItemSelected="OnListViewItemSelected"
+                  ItemTapped="OnListViewItemTapped" />
     </StackLayout>
 </ContentPage>

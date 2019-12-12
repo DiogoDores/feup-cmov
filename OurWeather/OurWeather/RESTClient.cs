@@ -19,7 +19,7 @@ namespace OurWeather
             client.BaseAddress = new Uri(@base);
         }
 
-        public static dynamic SendRequest<Type>(int id)
+        public static Type SendRequest<Type>(int id)
         {
             string url = BuildAPIUrl(typeof(Type), id), res = "";
             Task task = new Task(() => res = RESTClient.AccessWebAsync(url).Result);

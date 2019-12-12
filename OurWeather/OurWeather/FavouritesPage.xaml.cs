@@ -15,20 +15,50 @@ namespace OurWeather
     {
         public int id;
         public string name;
+        public bool isFavourite = false;
+
+        public override string ToString()
+        {
+            return this.name;
+        }
+
+        public void ToggleFavourite()
+        {
+            this.isFavourite = !this.isFavourite;
+        }
     }
 
     public partial class FavouritesPage : ContentPage
     {
-        private Dictionary<string, int> districts = new Dictionary<string, int>();
+        public IList<DistrictInfo> districts { get; private set; }
 
         public FavouritesPage()
         {
             InitializeComponent();
         }
 
-        public void SetDistricts(Dictionary<string, int> districts)
+        public List<DistrictInfo> GetFavourites()
+        {
+            List<DistrictInfo> dist = this.districts.Where<DistrictInfo>(d => d.isFavourite).ToList();
+            return dist;
+        }
+
+
+        public void SetDistricts(List<DistrictInfo> districts)
         {
             this.districts = districts;
+            BindingContext = this;
+        }
+
+        private void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            DistrictInfo selectedItem = args.SelectedItem as DistrictInfo;
+        }
+
+        private void OnListViewItemTapped(object sender, ItemTappedEventArgs args)
+        {
+            DistrictInfo tappedItem = args.Item as DistrictInfo;
+            tappedItem.ToggleFavourite();
         }
     }
 }
