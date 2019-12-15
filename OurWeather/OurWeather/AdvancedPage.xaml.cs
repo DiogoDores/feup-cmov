@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OurWeather.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,14 +13,23 @@ namespace OurWeather
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AdvancedPage : ContentPage
     {
-        private DistrictInfo district;
-
         public AdvancedPage(DistrictInfo district)
         {
             InitializeComponent();
-            this.district = district;
 
-            // TODO: Make REST call for advanced stuff here.
+            ForecastHour hourly = RESTClient.SendRequest<ForecastHour>(district.id); // TODO: Probably recycle this API call.
+            ForecastWeek weekly = RESTClient.SendRequest<ForecastWeek>(district.id);
+
+            BindingContext = new AdvancedItem
+            {
+                Name = hourly.name,
+                Temperature = (int)Math.Round(hourly.main.temp),
+                Weather = hourly.weather[0].main,
+                Pressure = hourly.main.pressure,
+                WindSpeed = hourly.wind.speed,
+                WindDegrees = hourly.wind.deg,
+                Humidity = hourly.main.humidity
+            };
         }
     }
 }
