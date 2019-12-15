@@ -1,18 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             
              mc:Ignorable="d"
              x:Class="OurWeather.AdvancedPage">
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding Name}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-            <Label Text="{Binding Temperature}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-            <Label Text="{Binding Weather}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-            <Label Text="{Binding Pressure}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-            <Label Text="{Binding WindSpeed}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-            <Label Text="{Binding Humidity}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding Name}" VerticalOptions="Start" HorizontalOptions="Start" />
+            <Label Text="{Binding Temperature}" VerticalOptions="Start" HorizontalOptions="Start" />
+            <Label Text="{Binding Weather}" VerticalOptions="Start" HorizontalOptions="Start" />
+            <Label Text="{Binding Pressure}" VerticalOptions="Start" HorizontalOptions="Start" />
+            <Label Text="{Binding WindSpeed}" VerticalOptions="Start" HorizontalOptions="Start" />
+            <Label Text="{Binding Humidity}" VerticalOptions="Start" HorizontalOptions="Start" />
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Today" HorizontalOptions="Start" BackgroundColor="Transparent" Clicked="OnTodayButtonClick" />
+                <Button Text="Tomorrow" HorizontalOptions="Start" BackgroundColor="Transparent" Clicked="OnTomorrowButtonClick" />
+            </StackLayout>
+
+            <microcharts:ChartView x:Name="ChartViewToday" HeightRequest="250"/>
+            <microcharts:ChartView x:Name="ChartViewTomorrow" HeightRequest="250" IsVisible="False" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -70,7 +70,7 @@ namespace OurWeather
                 }
 
                 items.Add(new CarouselItem {
-                    Name = name.Substring(12),
+                    Name = name,
                     Temperature = (int) Math.Round(dist.main.temp),
                     Weather = dist.weather[0].main,
                     Tip = tip,

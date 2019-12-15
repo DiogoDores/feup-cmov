@@ -6,8 +6,7 @@
              mc:Ignorable="d"
              x:Class="OurWeather.FavouritesPage">
     <StackLayout Margin="20,35,20,20">
-        <ListView ItemsSource="{Binding districts}" 
-                  ItemSelected="OnListViewItemSelected"
-                  ItemTapped="OnListViewItemTapped" />
+        <ListView ItemsSource="{Binding districts}" ItemSelected="OnListViewItemSelected" ItemTapped="OnListViewItemTapped">
+        </ListView>
     </StackLayout>
 </ContentPage>

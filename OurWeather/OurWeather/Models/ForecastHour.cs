@@ -8,7 +8,7 @@ namespace OurWeather.Models
     {
         public Coord coord;
         public List<WeatherParameters> weather;
-        public string name, dt_text;
+        public string name, dt_text, dt_txt;
         public Main main;
         public int visibility, dt, id, cod;
         public Wind wind;
