@@ -18,11 +18,12 @@ namespace OurWeather
     {
         private readonly FavouritesPage favouritesPage;
         private readonly List<Color> _backgroundColors = new List<Color>();
+        
         public MainPage()
         {
-
             InitializeComponent();
 
+            /*
             var model = new CarouselViewModel
             {
                 Items = new List<CarouselItem>()
@@ -33,20 +34,11 @@ namespace OurWeather
                     new CarouselItem{ Type="SWEET AND GREEN", ImageSrc="pear.png", Name = "PEAR PARTY", Price = 140, Title = "PEAR PARTY", BackgroundColor= Color.FromHex("#425cfc"), StartColor=Color.FromHex("#33ccf3"),  EndColor=Color.FromHex("#ccee44")}
                 }
             };
-
             BindingContext = model;
+            */
 
-            // Create out a list of background colors based on our items colors so we can do a gradient on scroll.
-            for (int i = 0; i < model.Items.Count; i++)
-            {
-                var current = model.Items[i];
-                var next = model.Items.Count > i + 1 ? model.Items[i + 1] : null;
 
-                if (next != null)
-                    _backgroundColors.AddRange(SetGradients(current.BackgroundColor, next.BackgroundColor, 375));
-                else
-                    _backgroundColors.Add(current.BackgroundColor);
-            }
+
 
             this.favouritesPage = new FavouritesPage();
 
@@ -54,12 +46,21 @@ namespace OurWeather
             this.favouritesPage.SetDistricts(this.DictionarySerializeDistrictJSON());
         }
 
-        /*private CarouselViewModel PopulateCarousel(List<ForecastHour> districts)
+        private CarouselViewModel PopulateCarousel(List<ForecastHour> districts)
         {
             List<CarouselItem> items = new List<CarouselItem>();
-            districts.ForEach(dist => items.Add(new CarouselItem { Name = dist.name }));
+            districts.ForEach(dist => items.Add(new CarouselItem
+            {
+                Name = dist.name,
+                Temperature = (int) Math.Round(dist.main.temp),
+                Weather = dist.weather[0].main,
+                Tip = "Don't forget your frozen lasagne!",
+                BackgroundColor = Color.FromHex("#000000"),
+                StartColor = Color.FromHex("#f3463f"),
+                EndColor = Color.FromHex("#fece49")
+            }));
             return new CarouselViewModel { Items = items };
-        }*/
+        }
 
         public void Handle_Scrolled(object sender, ItemsViewScrolledEventArgs e)
         {
@@ -98,16 +99,38 @@ namespace OurWeather
             });
 
             // Populate carousel and bind it to context.
-            //CarouselViewModel model = this.PopulateCarousel(districts);
-            //BindingContext = model;
+            CarouselViewModel model = this.PopulateCarousel(districts);
+            BindingContext = model;
 
-            //base.OnAppearing();
+            // Create out a list of background colors based on our items colors so we can do a gradient on scroll.
+            for (int i = 0; i < model.Items.Count; i++)
+            {
+                var current = model.Items[i];
+                var next = model.Items.Count > i + 1 ? model.Items[i + 1] : null;
+
+                if (next != null)
+                    _backgroundColors.AddRange(SetGradients(current.BackgroundColor, next.BackgroundColor, 375));
+                else
+                    _backgroundColors.Add(current.BackgroundColor);
+            }
+
+            base.OnAppearing();
         }
 
 
         private async void OnButtonClicked(object sender, EventArgs args)
         {
             await Navigation.PushAsync(favouritesPage);
+        }
+
+        private async void OnCarouselTapped(object sender, EventArgs args)
+        {
+            Grid item = (Grid) sender;
+            CarouselItem context = (CarouselItem) item.BindingContext;
+
+            // Fetch district object whose name matches the binding context's title.
+            DistrictInfo district = favouritesPage.GetFavourites().Find(fav => fav.name == context.Name);
+            await Navigation.PushAsync(new AdvancedPage(district));
         }
 
         // Create a list of all the colors in between our start and end color.

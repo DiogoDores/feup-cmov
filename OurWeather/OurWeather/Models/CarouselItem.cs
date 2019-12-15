@@ -7,15 +7,16 @@ namespace OurWeather.Models
 {
     public class CarouselItem : INotifyPropertyChanged
     {
-        public string Title { get; set; }
-        public int Price { get; set; }
         public string Name { get; set; }
+        public int Temperature { get; set; }
+        public string Weather { get; set; }
+        public string Tip { get; set; }
+
+
         public Color StartColor { get; set; }
         public Color EndColor { get; set; }
         public Color BackgroundColor { get; set; }
-        public string Type { get; set; }
         public string ImageSrc { get; set; }
-        public string Description { get; set; } = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pretium dolor sed felis varius, at elementum nunc blandit.";
 
         private double _position;
         private double _scale;
