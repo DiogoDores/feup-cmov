@@ -22,24 +22,6 @@ namespace OurWeather
         public MainPage()
         {
             InitializeComponent();
-
-            /*
-            var model = new CarouselViewModel
-            {
-                Items = new List<CarouselItem>()
-                {
-                    // Just create some dummy data here for now.
-                    new CarouselItem{ Type="JUICY AND ORANGE", ImageSrc="logo.png", Name = "Porto", Price = 120, Title = "22º", BackgroundColor= Color.FromHex("#000000"), StartColor=Color.FromHex("#f3463f"),  EndColor=Color.FromHex("#fece49")},
-                    new CarouselItem{ Type="NOT A TYPICAL FRUIT", ImageSrc="tomato.png", Name = "TERRIBLE TOMATO", Price = 129, Title = "TERRIBLE TOMATO", BackgroundColor= Color.FromHex("#fab62a"), StartColor=Color.FromHex("#42a7ff"),  EndColor=Color.FromHex("#fab62a")},
-                    new CarouselItem{ Type="SWEET AND GREEN", ImageSrc="pear.png", Name = "PEAR PARTY", Price = 140, Title = "PEAR PARTY", BackgroundColor= Color.FromHex("#425cfc"), StartColor=Color.FromHex("#33ccf3"),  EndColor=Color.FromHex("#ccee44")}
-                }
-            };
-            BindingContext = model;
-            */
-
-
-
-
             this.favouritesPage = new FavouritesPage();
 
             // Serialize the district JSON and send it to the favourites page.
@@ -49,16 +31,56 @@ namespace OurWeather
         private CarouselViewModel PopulateCarousel(List<ForecastHour> districts)
         {
             List<CarouselItem> items = new List<CarouselItem>();
-            districts.ForEach(dist => items.Add(new CarouselItem
-            {
-                Name = dist.name,
-                Temperature = (int) Math.Round(dist.main.temp),
-                Weather = dist.weather[0].main,
-                Tip = "Don't forget your frozen lasagne!",
-                BackgroundColor = Color.FromHex("#000000"),
-                StartColor = Color.FromHex("#f3463f"),
-                EndColor = Color.FromHex("#fece49")
-            }));
+
+            Color startC, endC;
+            String src, tip, name;
+
+            foreach (var dist in districts) {
+
+                name = dist.name;
+
+                if (dist.weather[0].main == "Rain" || dist.weather[0].main == "Drizzle") {
+                    startC = Color.FromHex("#174159");
+                    endC = Color.FromHex("#4899C6");
+                    src = "rainy_icon.png";
+                    tip = "Don't forget your umbrella!";
+                }
+                else if (dist.weather[0].main == "Clear") {
+                    startC = Color.FromHex("#f3463f");
+                    endC = Color.FromHex("#fece49");
+                    src = "sunny_icon.png";
+                    tip = "Don't forget your sunglasses!";
+                }
+                else if (dist.weather[0].main == "Clouds") {
+                    startC = Color.FromHex("#4F4F4F");
+                    endC = Color.FromHex("#959595");
+                    src = "cloudy_icon.png";
+                    tip = "Seems like it's gonna be a gloomy day";
+                }
+                else if (dist.weather[0].main == "Thunderstorm") {
+                    startC = Color.FromHex("#f3463f");
+                    endC = Color.FromHex("#fece49");
+                    src = "sunny_icon.png";
+                    tip = "WTF AAAAAAAAAAAAAAAAAAAAAa";
+                } else {
+                    startC = Color.FromHex("#4F4F4F");
+                    endC = Color.FromHex("#959595");
+                    src = "cloudy_icon.png";
+                    tip = "";
+                }
+
+                items.Add(new CarouselItem {
+                    Name = name.Substring(12),
+                    Temperature = (int) Math.Round(dist.main.temp),
+                    Weather = dist.weather[0].main,
+                    Tip = tip,
+                    BackgroundColor = Color.FromHex("#FFFFFF"),
+                    StartColor = startC,
+                    EndColor = endC,
+                    ImageSrc = src,
+                });
+            }
+
             return new CarouselViewModel { Items = items };
         }
 

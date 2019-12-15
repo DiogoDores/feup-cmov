@@ -10,7 +10,7 @@
         <CarouselView x:Name="carousel" Scrolled="Handle_Scrolled" ItemsSource="{Binding Items}"
             VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <CarouselView.Behaviors>
-                <behaviors:CarouselViewParallaxBehavior ParallaxOffset="100"/>
+                <behaviors:CarouselViewParallaxBehavior ParallaxOffset="0"/>
             </CarouselView.Behaviors>
             <CarouselView.ItemTemplate>
                 <DataTemplate>
@@ -25,29 +25,26 @@
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="OnCarouselTapped" NumberOfTapsRequired="1" />
                                         </Grid.GestureRecognizers>
-                                        <Label Text="{Binding Temperature}" HorizontalOptions="Center" TextColor="#55000000" VerticalOptions="End" Margin="0,0,0,24" FontSize="140" FontAttributes="Bold" LineBreakMode="NoWrap" />
+                                        <Label Text="{Binding Temperature, StringFormat='{0}º'}" HorizontalOptions="Start" TextColor="White" VerticalOptions="CenterAndExpand" Margin="30,0,0,0" FontSize="120" FontAttributes="Bold" LineBreakMode="NoWrap" />
                                         <StackLayout>
                                             <StackLayout Orientation="Horizontal">
-                                                <Image TranslationX="{Binding Position}" Opacity="0.7" Source="logo.jpg" HeightRequest="32" Margin="24,24,24,0" />
+                                                <ImageButton HorizontalOptions="EndAndExpand" Source="star_filled_icon.png" HeightRequest="32" Margin="24,24,24,0" />
                                             </StackLayout>
                                             <Label  TranslationX="{Binding Position}" Text="{Binding Name}" TextColor="#FFFFFF" Margin="24,0,24,0" FontSize="26" FontAttributes="Bold" LineBreakMode="NoWrap" />
                                             <Label  TranslationX="{Binding Position}" Text="{Binding Weather}" TextColor="#FFFFFF" Margin="24,0,24,0" FontSize="16" LineBreakMode="NoWrap" />
                                         </StackLayout>
+                                        <StackLayout>
+                                            <Label TranslationX="{Binding Position}"  Margin="0,0,0,50" TextColor="White" Text="{Binding Tip}" FontSize="14" HorizontalOptions="Center" VerticalOptions="EndAndExpand"/>
+                                        </StackLayout>
                                     </Grid>
                                 </custom:PancakeView>
-                                <StackLayout BackgroundColor="#FFFFFF" VerticalOptions="FillAndExpand" Margin="0,-32,0,32">
-                                    <StackLayout VerticalOptions="CenterAndExpand" Margin="0,32,0,0">
-                                        <Label TranslationX="{Binding Position}"  Margin="0,8,0,0" TextColor="Gray" Text="{Binding Tip}" FontSize="10" HorizontalOptions="Center" />
-                                        <Button BackgroundColor="#FFFFFF" TranslationX="{Binding Position}"  Padding="20,0" CornerRadius="20" TextColor="{Binding BackgroundColor}" FontSize="12" BorderColor="{Binding BackgroundColor}" BorderWidth="2" HeightRequest="40" Text="WISH LIST" HorizontalOptions="Center" />
-                                    </StackLayout>
-                                </StackLayout>
                             </StackLayout>
                         </custom:PancakeView>
-                        <Image TranslationX="{Binding Position}" Source="{Binding ImageSrc}" WidthRequest="300" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,-56,152" />
+                        <Image TranslationX="{Binding Position}" Source="{Binding ImageSrc}" Opacity="0.7" WidthRequest="300" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,-56,152" />
                     </Grid>
                 </DataTemplate>
             </CarouselView.ItemTemplate>
         </CarouselView>
-        <Button Text="Favorites" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Clicked="OnButtonClicked" />
+        <ImageButton Source="cities_icon.jpg" HorizontalOptions="End" VerticalOptions="StartAndExpand" Clicked="OnButtonClicked" Margin="0,0,40,0" WidthRequest="50"/>
     </Grid>
 </ContentPage>
