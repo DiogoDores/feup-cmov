@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
+
 
 namespace OurWeather.Models
 {
@@ -13,6 +15,8 @@ namespace OurWeather.Models
         public double WindSpeed { get; set; }
         public int WindDegrees { get; set; }
         public double Humidity { get; set; }
+        public Color StartColor { get; set; }
+        public Color EndColor { get; set; }
 
     }
 }

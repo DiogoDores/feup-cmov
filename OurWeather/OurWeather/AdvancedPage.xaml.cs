@@ -23,6 +23,40 @@ namespace OurWeather
             ForecastHour hourly = RESTClient.SendRequest<ForecastHour>(district.id); // TODO: Probably recycle this API call.
             ForecastWeek weekly = RESTClient.SendRequest<ForecastWeek>(district.id);
 
+            Color startC, endC;
+
+            if (hourly.weather[0].main == "Rain" || hourly.weather[0].main == "Drizzle")
+            {
+                startC = Color.FromHex("#174159");
+                endC = Color.FromHex("#4899C6");
+            }
+            else if (hourly.weather[0].main == "Clear")
+            {
+                startC = Color.FromHex("#FFBC58");
+                endC = Color.FromHex("#FF7448");
+            }
+            else if (hourly.weather[0].main == "Clouds")
+            {
+                startC = Color.FromHex("#4F4F4F");
+                endC = Color.FromHex("#959595");
+            }
+            else if (hourly.weather[0].main == "Snow")
+            {
+                startC = Color.FromHex("#174159");
+                endC = Color.FromHex("#4899C6");
+
+            }
+            else if (hourly.weather[0].main == "Thunderstorm")
+            {
+                startC = Color.FromHex("#174159");
+                endC = Color.FromHex("#4899C6");
+            }
+            else
+            {
+                startC = Color.FromHex("#4F4F4F");
+                endC = Color.FromHex("#959595");
+            }
+
             BindingContext = new AdvancedItem
             {
                 Name = hourly.name,
@@ -31,7 +65,9 @@ namespace OurWeather
                 Pressure = hourly.main.pressure,
                 WindSpeed = hourly.wind.speed,
                 WindDegrees = hourly.wind.deg,
-                Humidity = hourly.main.humidity
+                Humidity = hourly.main.humidity,
+                StartColor = startC,
+                EndColor = endC,
             };
 
             this.chartViewToday = (Microcharts.Forms.ChartView) FindByName("ChartViewToday");

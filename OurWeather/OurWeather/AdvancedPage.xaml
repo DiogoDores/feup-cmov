@@ -9,48 +9,61 @@
              x:Class="OurWeather.AdvancedPage"
              NavigationPage.HasNavigationBar="False">
 
-    <CarouselView x:Name="carousel" VerticalOptions="Start" ItemsSource="{Binding Items}"
-             HorizontalOptions="FillAndExpand" Margin="0,30,0,20">
-        <CarouselView.ItemTemplate>
-            <DataTemplate>
-                <Grid Padding="32,32,32,128">
-                    <custom:PancakeView CornerRadius="32" BackgroundColor="#000000">
-                        <StackLayout VerticalOptions="Fill" HorizontalOptions="Fill">
-                            <custom:PancakeView VerticalOptions="FillAndExpand" HeightRequest="400" CornerRadius="32"
-                                                    BackgroundGradientStartColor="{Binding StartColor}"
-                                                    BackgroundGradientEndColor="{Binding EndColor}">
-                                <Grid>
-                                    <StackLayout Margin="0, 30, 0, 0">
-                                        <Label  TranslationX="{Binding Position}" Text="{Binding FormattedName}" TextColor="#FFFFFF" Margin="30,0,0,0" FontSize="26" FontAttributes="Bold" LineBreakMode="NoWrap" />
-                                        <Label Text="{Binding Temperature, StringFormat='{0}º'}" HorizontalOptions="Start" TextColor="White" Margin="30,0,0,0" FontSize="50" FontAttributes="Bold" LineBreakMode="NoWrap" />
-                                        <Label  TranslationX="{Binding Position}" Text="{Binding Weather}" TextColor="#FFFFFF" Margin="30,0,0,0" FontSize="16" LineBreakMode="NoWrap" />
-                                    </StackLayout>
-                                    <StackLayout>
-                                        <Label TranslationX="{Binding Position}"  Margin="0,0,0,50" TextColor="White" Text="{Binding Tip}" FontSize="14" HorizontalOptions="Center" VerticalOptions="EndAndExpand"/>
-                                    </StackLayout>
+    <Grid>
+        <custom:PancakeView BackgroundColor="#f5f5f5">
+            <StackLayout VerticalOptions="Fill" HorizontalOptions="Fill">
+                <custom:PancakeView VerticalOptions="FillAndExpand" HeightRequest="400"
+                                        BackgroundGradientStartColor="{Binding StartColor}"
+                                        BackgroundGradientEndColor="{Binding EndColor}">
+                    <Grid>
+                        <StackLayout Margin="0, 30, 0, 0">
+                            <Label Text="{Binding Name}" TextColor="#FFFFFF" Margin="30,0,0,0" FontSize="26" FontAttributes="Bold" LineBreakMode="NoWrap" />
+                            <Label Text="{Binding Temperature, StringFormat='{0}º'}" HorizontalOptions="Start" TextColor="#FFFFFF" Margin="30,0,0,0" FontSize="50" FontAttributes="Bold" LineBreakMode="NoWrap" />
+                            <Label Text="{Binding Weather}" TextColor="#FFFFFF" Margin="30,0,0,0" FontSize="20" LineBreakMode="NoWrap" />
+                            <StackLayout Margin="0,0,0,0">
+                                <Grid x:Name="basicInfo" RowSpacing="1" ColumnSpacing="1" Margin="-300,0,0,0" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="pressure.png" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"/>
+                                    <Label Text="Pressure" TextColor="#FFFFFF"  FontSize="16" LineBreakMode="NoWrap" Grid.Row="1" Grid.Column="2" Margin="-80,0,0,0"/>
+                                    <Label Text="{Binding Pressure}" TextColor="#FFFFFF" FontSize="16" LineBreakMode="NoWrap" Grid.Row="2" Grid.Column="2" Margin="-80,0,0,0" FontAttributes="Bold"/>
+
+                                    <Image Source="rainy.png" Grid.Row="3" Grid.RowSpan="2" Grid.Column="1"/>
+                                    <Label Text="Precipitation" TextColor="#FFFFFF"  FontSize="16" LineBreakMode="NoWrap" Grid.Row="3" Grid.Column="2" Margin="-80,0,0,0"/>
+                                    <Label Text="{Binding Pressure}" TextColor="#FFFFFF" FontSize="16" LineBreakMode="NoWrap" Grid.Row="4" Grid.Column="2" Margin="-80,0,0,0" FontAttributes="Bold"/>
+
+                                    <Image Source="wind.png" Grid.Row="5" Grid.RowSpan="2" Grid.Column="1"/>
+                                    <Label Text="Wind Speed" TextColor="#FFFFFF"  FontSize="16" LineBreakMode="NoWrap" Grid.Row="5" Grid.Column="2" Margin="-80,0,0,0"/>
+                                    <Label Text="{Binding WindSpeed}" TextColor="#FFFFFF" FontSize="16" LineBreakMode="NoWrap" Grid.Row="6" Grid.Column="2" Margin="-80,0,0,0" FontAttributes="Bold"/>
+
+                                    <Image Source="humidity.png" Grid.Row="7" Grid.RowSpan="2" Grid.Column="1"/>
+                                    <Label Text="Humidity" TextColor="#FFFFFF"  FontSize="16" LineBreakMode="NoWrap" Grid.Row="7" Grid.Column="2" Margin="-80,0,0,0"/>
+                                    <Label Text="{Binding Humidity}" TextColor="#FFFFFF" FontSize="16" LineBreakMode="NoWrap" Grid.Row="8" Grid.Column="2" Margin="-80,0,0,0" FontAttributes="Bold"/>
                                 </Grid>
-                            </custom:PancakeView>
+                            </StackLayout>
                         </StackLayout>
-                    </custom:PancakeView>
-                    <Image Source="{Binding ImageSrc}" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,50,0,0" WidthRequest="250" HeightRequest="250"/>
-                </Grid>
-            </DataTemplate>
-        </CarouselView.ItemTemplate>
-    </CarouselView>
-    <!--<StackLayout>
-        <Label Text="{Binding Name}" VerticalOptions="Start" HorizontalOptions="Start" />
-        <Label Text="{Binding Temperature}" VerticalOptions="Start" HorizontalOptions="Start" />
-        <Label Text="{Binding Weather}" VerticalOptions="Start" HorizontalOptions="Start" />
-        <Label Text="{Binding Pressure}" VerticalOptions="Start" HorizontalOptions="Start" />
-        <Label Text="{Binding WindSpeed}" VerticalOptions="Start" HorizontalOptions="Start" />
-        <Label Text="{Binding Humidity}" VerticalOptions="Start" HorizontalOptions="Start" />
+                    </Grid>
+                </custom:PancakeView>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Today" HorizontalOptions="Start" BackgroundColor="Transparent" Clicked="OnTodayButtonClick" />
+                    <Button Text="Tomorrow" HorizontalOptions="Start" BackgroundColor="Transparent" Clicked="OnTomorrowButtonClick" />
+                </StackLayout>
 
-        <StackLayout Orientation="Horizontal">
-            <Button Text="Today" HorizontalOptions="Start" BackgroundColor="Transparent" Clicked="OnTodayButtonClick" />
-            <Button Text="Tomorrow" HorizontalOptions="Start" BackgroundColor="Transparent" Clicked="OnTomorrowButtonClick" />
-        </StackLayout>
-
-        <microcharts:ChartView x:Name="ChartViewToday" HeightRequest="250"/>
-        <microcharts:ChartView x:Name="ChartViewTomorrow" HeightRequest="250" IsVisible="False" />
-    </StackLayout>-->
+                <microcharts:ChartView x:Name="ChartViewToday" HeightRequest="250"/>
+                <microcharts:ChartView x:Name="ChartViewTomorrow" HeightRequest="250" IsVisible="False" />
+            </StackLayout>
+        </custom:PancakeView>
+    </Grid>
 </ContentPage>
