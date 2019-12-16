@@ -53,7 +53,7 @@ namespace OurWeather
             this.chartViewTomorrow.IsVisible = true;
         }
 
-        private Microcharts.PointChart BuildTemperatureGraph(ForecastWeek forecast, DateTime targetDate)
+        private Microcharts.LineChart BuildTemperatureGraph(ForecastWeek forecast, DateTime targetDate)
         {
             List<Microcharts.Entry> entries = new List<Microcharts.Entry>();
             string day = targetDate.ToString("yyyy-MM-dd");
@@ -72,7 +72,7 @@ namespace OurWeather
                 }
             });
 
-            return new Microcharts.PointChart()
+            return new Microcharts.LineChart()
             {
                 Entries = entries.ToArray(),
                 BackgroundColor = SKColors.Transparent,

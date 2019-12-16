@@ -1,67 +1,67 @@
 ﻿[
   {
     "id": 2267056,
-    "name": "Lisboa"
+    "name": "Distrito de Lisboa"
   },
   {
     "id": 2735941,
-    "name": "Porto"
+    "name": "Distrito de Porto"
   },
   {
     "id": 2742031,
-    "name": "Braga"
+    "name": "Distrito de Braga"
   },
   {
     "id": 2262961,
-    "name": "Setúbal"
+    "name": "Distrito de Setúbal"
   },
   {
     "id": 2742610,
-    "name": "Aveiro"
+    "name": "Distrito de Aveiro"
   },
   {
     "id": 2268337,
-    "name": "Faro"
+    "name": "Distrito de Faro"
   },
   {
     "id": 2267094,
-    "name": "Leiria"
+    "name": "Distrito de Leiria"
   },
   {
     "id": 2740636,
-    "name": "Coimbra"
+    "name": "Distrito de Coimbra"
   },
   {
     "id": 2263478,
-    "name": "Santarém"
+    "name": "Distrito de Santarém"
   },
   {
     "id": 2732264,
-    "name": "Viseu"
+    "name": "Distrito de Viseu"
   },
   {
     "id": 2593105,
-    "name": "Madeira"
+    "name": "Região Autónoma da Madeira"
   },
   {
     "id": 3411865,
-    "name": "Açores"
+    "name": "Região Autónoma dos Açores"
   },
   {
     "id": 2732772,
-    "name": "Viana do Castelo"
+    "name": "Distrito de Viana do Castelo"
   },
   {
     "id": 2732437,
-    "name": "Vila Real"
+    "name": "Distrito de Vila Real"
   },
   {
     "id": 2269513,
-    "name": "Castelo Branco"
+    "name": "Distrito de Castelo Branco"
   },
   {
     "id": 2268404,
-    "name": "Évora"
+    "name": "Distrito de Évora"
   },
   {
     "id": 2738782,
@@ -69,14 +69,14 @@
   },
   {
     "id": 2270984,
-    "name": "Beja"
+    "name": "Distrito de Beja"
   },
   {
     "id": 2742026,
-    "name": "Bragança"
+    "name": "Distrito de Bragança"
   },
   {
     "id": 2264507,
-    "name": "Portalegre"
+    "name": "Distrito de Portalegre"
   }
 ]

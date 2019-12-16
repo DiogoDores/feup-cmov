@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -11,11 +12,15 @@ using Xamarin.Forms.Xaml;
 namespace OurWeather
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public class DistrictInfo
+    public class DistrictInfo : INotifyPropertyChanged
     {
         public int id;
-        public string name;
+        public string name { get; set; }
         public bool isFavourite = false;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public string Icon { get; set; } = "star_not_filled_icon.png";
 
         public override string ToString()
         {
@@ -25,6 +30,13 @@ namespace OurWeather
         public void ToggleFavourite()
         {
             this.isFavourite = !this.isFavourite;
+            this.Icon = this.isFavourite ? "star_filled_icon.png" : "star_not_filled_icon.png";
+            this.OnPropertyChanged("Icon");
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 

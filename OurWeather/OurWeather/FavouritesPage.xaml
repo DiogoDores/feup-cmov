@@ -4,9 +4,31 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="OurWeather.FavouritesPage">
-    <StackLayout Margin="20,35,20,20">
-        <ListView ItemsSource="{Binding districts}" ItemSelected="OnListViewItemSelected" ItemTapped="OnListViewItemTapped">
+             x:Class="OurWeather.FavouritesPage"
+             BackgroundColor="LightGray"
+             Title="OurWeather">
+
+    <StackLayout>
+        <ListView ItemsSource="{Binding districts}" ItemSelected="OnListViewItemSelected" ItemTapped="OnListViewItemTapped" SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="30,10,10,5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Text="{Binding name}" TextColor="White" FontSize="18" />
+                            <Image x:Name="StarLogo" Grid.Column="1" Source="{Binding Icon}" HorizontalOptions="End" Margin="0,0,10,0" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
 </ContentPage>
