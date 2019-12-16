@@ -12,7 +12,6 @@ namespace OurWeather.Models
         public int Temperature { get; set; }
         public string Weather { get; set; }
         public string Tip { get; set; }
-        public Uri Icon { get; set; }
 
 
         public Color StartColor { get; set; }

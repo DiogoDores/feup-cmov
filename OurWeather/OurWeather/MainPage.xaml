@@ -4,18 +4,20 @@
              xmlns:behaviors="clr-namespace:OurWeather.Behaviors"
              xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              x:Class="OurWeather.MainPage"
+             BackgroundColor="#F5F5F5"
              NavigationPage.HasNavigationBar="False">
+    
     <Grid x:Name="page" Padding="0,60">
+        <Label x:Name="title" Text="OurWeather" HorizontalOptions="Start" FontSize="25" TextColor="#000000" Margin="32,0,0,0"/>
         <Label x:Name="debug"  HorizontalOptions="Center" TextColor="#000000" />
-        <CarouselView x:Name="carousel" Scrolled="Handle_Scrolled" ItemsSource="{Binding Items}"
-            VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,0,0,20">
+        <CarouselView x:Name="carousel" Scrolled="Handle_Scrolled" VerticalOptions="Start" ItemsSource="{Binding Items}"
+             HorizontalOptions="FillAndExpand" Margin="0,30,0,20">
             <CarouselView.Behaviors>
                 <behaviors:CarouselViewParallaxBehavior ParallaxOffset="0"/>
             </CarouselView.Behaviors>
             <CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="32,64,32,64">
-
+                    <Grid Padding="32,32,32,128">
                         <custom:PancakeView CornerRadius="32" BackgroundColor="#FFFFFF">
                             <StackLayout VerticalOptions="Fill" HorizontalOptions="Fill">
                                 <custom:PancakeView VerticalOptions="FillAndExpand" HeightRequest="400" CornerRadius="32"
@@ -37,11 +39,11 @@
                                 </custom:PancakeView>
                             </StackLayout>
                         </custom:PancakeView>
-                        <Image  Source="{Binding Icon}" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,50,100" />
+                        <Image Source="{Binding ImageSrc}" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,50,0,0" WidthRequest="250" HeightRequest="250"/>
                     </Grid>
                 </DataTemplate>
             </CarouselView.ItemTemplate>
         </CarouselView>
-        <Button Image="cities_icon.png" Text="    Add a City" TextColor="White" HorizontalOptions="Center" VerticalOptions="End" Clicked="OnButtonClicked" BackgroundColor="Transparent"/>
+        <Button Image="cities_icon.png" Text="    Add a City" TextColor="Black" HorizontalOptions="Center" VerticalOptions="End" Clicked="OnButtonClicked" BackgroundColor="Transparent" Margin="0,0,0,50"/>
     </Grid>
 </ContentPage>

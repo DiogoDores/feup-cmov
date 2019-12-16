@@ -5720,7 +5720,7 @@ namespace OurWeather.Droid
 			public const int cities_icon = 2131165276;
 			
 			// aapt resource value: 0x7F07005D
-			public const int cloudy_icon = 2131165277;
+			public const int cloudy = 2131165277;
 			
 			// aapt resource value: 0x7F07005E
 			public const int design_bottom_navigation_item_background = 2131165278;
@@ -5795,22 +5795,28 @@ namespace OurWeather.Droid
 			public const int notify_panel_notification_icon_bg = 2131165301;
 			
 			// aapt resource value: 0x7F070076
-			public const int rainy_icon = 2131165302;
+			public const int rainy = 2131165302;
 			
 			// aapt resource value: 0x7F070077
-			public const int star_filled_icon = 2131165303;
+			public const int snowy = 2131165303;
 			
 			// aapt resource value: 0x7F070078
-			public const int star_not_filled_icon = 2131165304;
+			public const int star_filled_icon = 2131165304;
 			
 			// aapt resource value: 0x7F070079
-			public const int sunny_icon = 2131165305;
+			public const int star_not_filled_icon = 2131165305;
 			
 			// aapt resource value: 0x7F07007A
-			public const int tooltip_frame_dark = 2131165306;
+			public const int stormy = 2131165306;
 			
 			// aapt resource value: 0x7F07007B
-			public const int tooltip_frame_light = 2131165307;
+			public const int sunny = 2131165307;
+			
+			// aapt resource value: 0x7F07007C
+			public const int tooltip_frame_dark = 2131165308;
+			
+			// aapt resource value: 0x7F07007D
+			public const int tooltip_frame_light = 2131165309;
 			
 			static Drawable()
 			{

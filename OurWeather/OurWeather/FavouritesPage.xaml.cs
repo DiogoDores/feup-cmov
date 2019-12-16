@@ -46,6 +46,7 @@ namespace OurWeather
 
         public FavouritesPage()
         {
+            NavigationPage.SetHasBackButton(this, false);
             InitializeComponent();
         }
 

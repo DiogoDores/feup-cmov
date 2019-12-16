@@ -32,7 +32,7 @@ namespace OurWeather
         {
             List<CarouselItem> items = new List<CarouselItem>();
 
-            Color startC, endC, background;
+            Color startC, endC;
             String src, tip, name;
 
             foreach (var dist in districts) {
@@ -42,30 +42,40 @@ namespace OurWeather
                 if (dist.weather[0].main == "Rain" || dist.weather[0].main == "Drizzle") {
                     startC = Color.FromHex("#174159");
                     endC = Color.FromHex("#4899C6");
-                    src = "rainy_icon.png";
+                    src = "rainy.png";
                     tip = "Don't forget your umbrella!";
-                    background = Color.FromHex("#1C5782");
                 }
                 else if (dist.weather[0].main == "Clear") {
                     startC = Color.FromHex("#FFBC58");
                     endC = Color.FromHex("#FF7448");
-                    src = "sunny_icon.png";
+                    src = "sunny.png";
                     tip = "Don't forget your sunglasses!";
-                    background = Color.FromHex("#FFCB67");
                 }
                 else if (dist.weather[0].main == "Clouds") {
                     startC = Color.FromHex("#4F4F4F");
                     endC = Color.FromHex("#959595");
-                    src = "cloudy_icon.png";
+                    src = "cloudy.png";
                     tip = "Seems like it's gonna be a gloomy day";
-                    background = Color.FromHex("#7C7C7C");
+                }
+                else if (dist.weather[0].main == "Snow")
+                {
+                    startC = Color.FromHex("#174159");
+                    endC = Color.FromHex("#4899C6");
+                    src = "snowy.png";
+                    tip = "Make sure to wear a warm jacket!";
+                }
+                else if (dist.weather[0].main == "Thunderstorm")
+                {
+                    startC = Color.FromHex("#174159");
+                    endC = Color.FromHex("#4899C6");
+                    src = "stormy.png";
+                    tip = "Avoid being outside for too long!";
                 }
                 else {
                     startC = Color.FromHex("#4F4F4F");
                     endC = Color.FromHex("#959595");
-                    src = "cloudy_icon.png";
+                    src = "clear.png";
                     tip = "";
-                    background = Color.FromHex("#7C7C7C");
                 }
 
                 items.Add(new CarouselItem {
@@ -74,11 +84,10 @@ namespace OurWeather
                     Temperature = (int) Math.Round(dist.main.temp),
                     Weather = dist.weather[0].main,
                     Tip = tip,
-                    BackgroundColor = background,
+                    BackgroundColor = Color.FromHex("#F5F5F5"),
                     StartColor = startC,
                     EndColor = endC,
                     ImageSrc = src,
-                    Icon = new Uri("http://openweathermap.org/img/wn/" + dist.weather[0].icon + "@2x.png"),
             });
             }
 
