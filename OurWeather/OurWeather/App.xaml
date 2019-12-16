@@ -4,6 +4,11 @@
              x:Class="OurWeather.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Color x:Key="BarBackgroundColor">#FFFFFF</Color>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="#FFFFFF"></Setter>
+                <Setter Property="BarTextColor" Value="#000000"></Setter>
+            </Style>           
             <OnPlatform x:Key="font_extrabold" x:TypeArguments="x:String">
                 <On Platform="Android" Value="Montserrat-ExtraBold.ttf#Montserrat-ExtraBold" />
                 <On Platform="iOS" Value="Montserrat-ExtraBold" />
