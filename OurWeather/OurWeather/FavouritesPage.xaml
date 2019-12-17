@@ -9,7 +9,7 @@
              NavigationPage.HasNavigationBar="False">
 
     <StackLayout>
-        <Label x:Name="title" Text="Cities" HorizontalOptions="Start" FontSize="25" TextColor="#000000" Margin="30,15,0,15"/>
+        <Label x:Name="title" Text="Cities" FontFamily="{StaticResource font_sarala}" HorizontalOptions="Start" FontSize="25" TextColor="#000000" Margin="30,15,0,15"/>
         <ListView ItemsSource="{Binding districts}" ItemSelected="OnListViewItemSelected" ItemTapped="OnListViewItemTapped" SeparatorVisibility="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -24,7 +24,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Column="0" Text="{Binding name}" TextColor="#989898" FontSize="18"/>
+                            <Label Grid.Column="0" Text="{Binding name}" FontFamily="{StaticResource font_sarala}" TextColor="#989898" FontSize="18"/>
                             <Image x:Name="StarLogo" Grid.Column="1" Source="{Binding Icon}" HorizontalOptions="End" Margin="0,0,10,0" />
                         </Grid>
                     </ViewCell>

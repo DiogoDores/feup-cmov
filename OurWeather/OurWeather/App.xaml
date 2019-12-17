@@ -8,19 +8,14 @@
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="#F5F5F5"></Setter>
                 <Setter Property="BarTextColor" Value="Black"></Setter>
-            </Style>           
-            <OnPlatform x:Key="font_extrabold" x:TypeArguments="x:String">
-                <On Platform="Android" Value="Montserrat-ExtraBold.ttf#Montserrat-ExtraBold" />
-                <On Platform="iOS" Value="Montserrat-ExtraBold" />
+            </Style>
+            <OnPlatform x:Key="font_sarala" x:TypeArguments="x:String">
+                <On Platform="Android" Value="Sarala-Regular.ttf#Sarala" />
                 <On Platform="UWP" Value="Assets/Fonts/Lobster-Regular.ttf#Lobster" />
             </OnPlatform>
-            <OnPlatform x:Key="font_bold" x:TypeArguments="x:String">
-                <On Platform="Android" Value="Montserrat-Bold.ttf#Montserrat-Bold" />
-                <On Platform="iOS" Value="Montserrat-Bold" />
-            </OnPlatform>
-            <OnPlatform x:Key="font_regular" x:TypeArguments="x:String">
-                <On Platform="Android" Value="Montserrat-Regular.ttf#Montserrat-Regular" />
-                <On Platform="iOS" Value="Montserrat-Regular" />
+            <OnPlatform x:Key="font_sarala_bold" x:TypeArguments="x:String">
+                <On Platform="Android" Value="Sarala Bold.ttf#Sarala" />
+                <On Platform="UWP" Value="Assets/Fonts/Lobster-Regular.ttf#Lobster" />
             </OnPlatform>
         </ResourceDictionary>
     </Application.Resources>
