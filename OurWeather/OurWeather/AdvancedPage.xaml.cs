@@ -14,9 +14,9 @@ namespace OurWeather
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AdvancedPage : ContentPage
     {
-        private Microcharts.Forms.ChartView chartViewToday, chartViewTomorrow;
-        private ForecastHour hourly;
-        private ForecastWeek weekly;
+        private readonly Microcharts.Forms.ChartView chartViewToday, chartViewTomorrow;
+        private readonly ForecastHour hourly;
+        private readonly ForecastWeek weekly;
 
         public AdvancedPage(DistrictInfo district)
         {
@@ -37,6 +37,7 @@ namespace OurWeather
             this.chartViewTomorrow.Chart = BuildTemperatureGraph(weekly, DateTime.UtcNow.AddDays(1));
 
             Label warning = (Label)FindByName("LabelUnavailablePlot");
+            this.chartViewToday.IsVisible = this.chartViewToday.Chart.Entries.Count() != 0;
             warning.IsVisible = this.chartViewToday.Chart.Entries.Count() == 0;
         }
 
@@ -165,6 +166,7 @@ namespace OurWeather
 
             Label warning = (Label) FindByName("LabelUnavailablePlot");
             warning.IsVisible = this.chartViewToday.Chart.Entries.Count() == 0;
+            this.chartViewToday.IsVisible = this.chartViewToday.Chart.Entries.Count() != 0;
 
             BindingContext = BuildWeatherItem<ForecastHour>(this.hourly);
         }
