@@ -52,7 +52,8 @@ namespace OurWeather
 
         public FavouritesPage()
         {
-            NavigationPage.SetHasBackButton(this, false);
+            if (Device.RuntimePlatform == Device.Android)
+                NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
         }
 

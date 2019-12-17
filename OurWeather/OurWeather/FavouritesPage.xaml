@@ -5,8 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="OurWeather.FavouritesPage"
-             BackgroundColor="#F5F5F5"
-             NavigationPage.HasNavigationBar="False">
+             BackgroundColor="#F5F5F5">
 
     <StackLayout>
         <Label x:Name="title" Text="Cities" FontFamily="{StaticResource font_sarala}" HorizontalOptions="Start" FontSize="25" TextColor="#000000" Margin="30,15,0,15"/>
