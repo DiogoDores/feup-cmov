@@ -67,6 +67,7 @@
                         </StackLayout>
                         <StackLayout>
                             <microcharts:ChartView x:Name="ChartViewToday" HeightRequest="150"/>
+                            <Label x:Name="LabelUnavailablePlot" Text="Couldn't find weather data to plot for today." FontFamily="{StaticResource font_sarala}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="12" TextColor="#FFFFFF" Margin="0,0,0,0" IsVisible="False"/>
                             <microcharts:ChartView x:Name="ChartViewTomorrow" HeightRequest="150" IsVisible="False" />
                         </StackLayout>
 
