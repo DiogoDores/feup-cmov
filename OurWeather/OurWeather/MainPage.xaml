@@ -14,7 +14,7 @@
         <Label x:Name="NoFavouritesFoundLabel" Text="No favourite cities found!" FontFamily="{StaticResource font_sarala}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="16" TextColor="#000000" Margin="0,0,0,0" IsVisible="False"/>
 
         <CarouselView x:Name="carousel" Scrolled="Handle_Scrolled" VerticalOptions="Start" ItemsSource="{Binding Items}"
-             HorizontalOptions="FillAndExpand" Margin="0,30,0,20">
+             HorizontalOptions="FillAndExpand" Margin="0,50,0,20">
             <CarouselView.Behaviors>
                 <behaviors:CarouselViewParallaxBehavior ParallaxOffset="0"/>
             </CarouselView.Behaviors>
@@ -32,8 +32,8 @@
                                         </Grid.GestureRecognizers>
                                         <StackLayout Margin="0, 30, 0, 0">
                                             <Label  TranslationX="{Binding Position}" FontFamily="{StaticResource font_sarala}" Text="{Binding FormattedName}" TextColor="#FFFFFF" Margin="30,0,0,0" FontSize="26" FontAttributes="Bold" LineBreakMode="NoWrap" />
-                                            <Label Text="{Binding Temperature, StringFormat='{0}º'}" FontFamily="{StaticResource font_sarala}" HorizontalOptions="Start" TextColor="White" Margin="30,0,0,0" FontSize="50" FontAttributes="Bold" LineBreakMode="NoWrap" />
-                                            <Label  TranslationX="{Binding Position}" FontFamily="{StaticResource font_sarala}" Text="{Binding Weather}" TextColor="#FFFFFF" Margin="30,0,0,0" FontSize="16" LineBreakMode="NoWrap" />
+                                            <Label Text="{Binding Temperature, StringFormat='{0}º'}" FontFamily="{StaticResource font_sarala_bold}" HorizontalOptions="Start" TextColor="White" Margin="30,-25,0,0" FontSize="50" FontAttributes="Bold" LineBreakMode="NoWrap" />
+                                            <Label  TranslationX="{Binding Position}" FontFamily="{StaticResource font_sarala}" Text="{Binding Weather}" TextColor="#FFFFFF" Margin="30,-25,0,0" FontSize="16" LineBreakMode="NoWrap" />
                                         </StackLayout>
                                         <StackLayout>
                                             <Label TranslationX="{Binding Position}" FontFamily="{StaticResource font_sarala}" Margin="0,0,0,50" TextColor="White" Text="{Binding Tip}" FontSize="14" HorizontalOptions="Center" VerticalOptions="EndAndExpand"/>
@@ -47,6 +47,6 @@
                 </DataTemplate>
             </CarouselView.ItemTemplate>
         </CarouselView>
-        <Button Image="cities_icon.png" Text="    Add a City" TextColor="Black" FontFamily="{StaticResource font_sarala}" HorizontalOptions="Center" VerticalOptions="End" Clicked="OnButtonClicked" BackgroundColor="Transparent" Margin="0,0,0,50"/>
+        <Button Image="cities_icon.png" Text="    Add a City" TextColor="Black"  FontFamily="{StaticResource font_sarala}" HorizontalOptions="Center" VerticalOptions="End" Clicked="OnButtonClicked" BackgroundColor="Transparent" Margin="0,0,0,70"/>
     </Grid>
 </ContentPage>

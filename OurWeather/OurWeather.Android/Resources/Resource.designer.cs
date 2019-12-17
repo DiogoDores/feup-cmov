@@ -5819,13 +5819,16 @@ namespace OurWeather.Droid
 			public const int sunny = 2131165309;
 			
 			// aapt resource value: 0x7F07007E
-			public const int tooltip_frame_dark = 2131165310;
+			public const int temperature_icon = 2131165310;
 			
 			// aapt resource value: 0x7F07007F
-			public const int tooltip_frame_light = 2131165311;
+			public const int tooltip_frame_dark = 2131165311;
 			
 			// aapt resource value: 0x7F070080
-			public const int wind = 2131165312;
+			public const int tooltip_frame_light = 2131165312;
+			
+			// aapt resource value: 0x7F070081
+			public const int wind = 2131165313;
 			
 			static Drawable()
 			{
