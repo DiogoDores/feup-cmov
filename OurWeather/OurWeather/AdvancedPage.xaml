@@ -19,9 +19,12 @@
                         <StackLayout Margin="0, 30, 0, 0">
                             <Label Text="{Binding Name}" FontFamily="{StaticResource font_sarala}" TextColor="#FFFFFF" Margin="30,0,0,0" FontSize="26" FontAttributes="Bold" LineBreakMode="NoWrap" />
                             <Label Text="{Binding Temperature, StringFormat='{0}º'}" FontFamily="{StaticResource font_sarala_bold}" HorizontalOptions="Start" TextColor="#FFFFFF" Margin="30,-20,0,0" FontSize="50" FontAttributes="Bold" LineBreakMode="NoWrap" />
+                            <Label Text="{Binding TemperatureMin, StringFormat='{0}º'}" FontFamily="{StaticResource font_sarala_bold}" HorizontalOptions="Start" TextColor="#FFFFFF" Margin="30,-20,0,0" FontSize="20" LineBreakMode="NoWrap" />
+                            <Label Text="{Binding TemperatureMax, StringFormat='{0}º'}" FontFamily="{StaticResource font_sarala_bold}" HorizontalOptions="Start" TextColor="#FFFFFF" Margin="30,-20,0,20" FontSize="20" LineBreakMode="NoWrap" />
+
                             <Label Text="{Binding Weather}" TextColor="#FFFFFF" FontFamily="{StaticResource font_sarala}" Margin="30,-25,0,0" FontSize="20" LineBreakMode="NoWrap" />
                             
-                            <Grid x:Name="basicInfo" RowSpacing="10" ColumnSpacing="10" Margin="10,20,0,30" HorizontalOptions="Start" VerticalOptions="Center">
+                            <Grid x:Name="basicInfo" RowSpacing="10" ColumnSpacing="10" Margin="10,10,0,10" HorizontalOptions="Start" VerticalOptions="Center">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto" />
                                     <RowDefinition Height="auto" />
@@ -59,12 +62,12 @@
 
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                            <Button Text="Today" BackgroundColor="Transparent" TextColor="White" Clicked="OnTodayButtonClick" HorizontalOptions="Center"/>
-                            <Button Text="Tomorrow" HorizontalOptions="Center" BackgroundColor="Transparent" TextColor="White" Clicked="OnTomorrowButtonClick" />
+                            <Button x:Name="ButtonToday" Text="Today" FontFamily="{StaticResource font_sarala}" BackgroundColor="Transparent" TextColor="White" Clicked="OnTodayButtonClick" HorizontalOptions="Center"/>
+                            <Button x:Name="ButtonTomorrow" Text="Tomorrow" FontFamily="{StaticResource font_sarala}" HorizontalOptions="Center" BackgroundColor="Transparent" TextColor="White" Clicked="OnTomorrowButtonClick"/>
                         </StackLayout>
                         <StackLayout>
-                            <microcharts:ChartView x:Name="ChartViewToday" HeightRequest="250"/>
-                            <microcharts:ChartView x:Name="ChartViewTomorrow" HeightRequest="250" IsVisible="False" />
+                            <microcharts:ChartView x:Name="ChartViewToday" HeightRequest="150"/>
+                            <microcharts:ChartView x:Name="ChartViewTomorrow" HeightRequest="150" IsVisible="False" />
                         </StackLayout>
 
                     </StackLayout>

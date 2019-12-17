@@ -10,6 +10,8 @@ namespace OurWeather.Models
     {
         public string Name { get; set; }
         public int Temperature { get; set; }
+        public int TemperatureMin { get; set; }
+        public int TemperatureMax { get; set; }
         public string Weather { get; set; }
         public double Pressure { get; set; }
         public double Precipitation { get; set; }

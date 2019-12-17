@@ -74,7 +74,9 @@ namespace OurWeather
                 return new AdvancedItem
                 {
                     Name = hourly.name,
-                    Temperature = (int)Math.Round(hourly.main.temp),
+                    Temperature = (int) Math.Round(hourly.main.temp),
+                    TemperatureMin = (int) Math.Round(hourly.main.temp_min),
+                    TemperatureMax = (int) Math.Round(hourly.main.temp_max),
                     Weather = hourly.weather[0].main,
                     Pressure = hourly.main.pressure,
                     Precipitation = hourly.rain == null ? 0 : hourly.rain._3h,
@@ -99,12 +101,16 @@ namespace OurWeather
 
         private void OnTodayButtonClick(object sender, EventArgs e)
         {
+            ((Button)FindByName("ButtonTomorrow")).TextColor = Color.LightGray;
+            ((Button)FindByName("ButtonToday")).TextColor = Color.White;
             this.chartViewToday.IsVisible = true;
             this.chartViewTomorrow.IsVisible = false;
         }
 
         private void OnTomorrowButtonClick(object sender, EventArgs e)
         {
+            ((Button)FindByName("ButtonTomorrow")).TextColor = Color.White;
+            ((Button)FindByName("ButtonToday")).TextColor = Color.LightGray;
             this.chartViewToday.IsVisible = false;
             this.chartViewTomorrow.IsVisible = true;
         }
@@ -123,7 +129,9 @@ namespace OurWeather
                     entries.Add(new Microcharts.Entry(value)
                     {
                         Label = DateTime.Parse(entry.dt_txt).ToString("HH:mm"),
-                        ValueLabel = value.ToString()
+                        ValueLabel = value.ToString(),
+                        TextColor = SKColors.White,
+                        Color = SKColors.White
                     });
                 }
             });
@@ -132,7 +140,9 @@ namespace OurWeather
             {
                 Entries = entries.ToArray(),
                 BackgroundColor = SKColors.Transparent,
-                LabelTextSize = 25
+                LineAreaAlpha = 0,
+                LineSize = 10,
+                LabelTextSize = 30
             };
         }
     }
