@@ -98,6 +98,11 @@ namespace OurWeather
         {
             var position = e.HorizontalOffset;
 
+            if (_backgroundColors.Count == 0)
+            {
+                return;
+            }
+
             // Set the background color of our page to the item in the color gradient
             // array, matching the current scrollindex.
             if (position > _backgroundColors.Count - 1)
@@ -134,6 +139,10 @@ namespace OurWeather
 
             // Populate carousel and bind it to context.
             CarouselViewModel model = this.PopulateCarousel(districts);
+
+            Label label = (Label) FindByName("NoFavouritesFoundLabel");
+            label.IsVisible = model.Items.Count == 0 ? true : false;
+
             BindingContext = model;
 
             // Create out a list of background colors based on our items colors so we can do a gradient on scroll.

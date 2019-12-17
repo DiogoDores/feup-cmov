@@ -11,6 +11,7 @@ namespace OurWeather.Models
         public string name, dt_text, dt_txt;
         public Main main;
         public int visibility, dt, id, cod;
+        public Rain rain;
         public Wind wind;
         public Clouds clouds;
         public Snow snow;

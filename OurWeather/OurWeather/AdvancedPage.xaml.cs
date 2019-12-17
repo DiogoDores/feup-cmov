@@ -57,24 +57,44 @@ namespace OurWeather
                 endC = Color.FromHex("#959595");
             }
 
-            BindingContext = new AdvancedItem
-            {
-                Name = hourly.name,
-                Temperature = (int)Math.Round(hourly.main.temp),
-                Weather = hourly.weather[0].main,
-                Pressure = hourly.main.pressure,
-                WindSpeed = hourly.wind.speed,
-                WindDegrees = hourly.wind.deg,
-                Humidity = hourly.main.humidity,
-                StartColor = startC,
-                EndColor = endC,
-            };
+            BindingContext = this.BuildWeatherItem<ForecastHour>(hourly, startC, endC);
 
             this.chartViewToday = (Microcharts.Forms.ChartView) FindByName("ChartViewToday");
             this.chartViewTomorrow = (Microcharts.Forms.ChartView) FindByName("ChartViewTomorrow");
 
             this.chartViewToday.Chart = BuildTemperatureGraph(weekly, DateTime.UtcNow);
             this.chartViewTomorrow.Chart = BuildTemperatureGraph(weekly, DateTime.UtcNow.AddDays(1));
+        }
+
+        private AdvancedItem BuildWeatherItem<T>(T forecast, Color startColor, Color endColor)
+        {
+            if (typeof(T) == typeof(ForecastHour))
+            {
+                ForecastHour hourly = forecast as ForecastHour;
+                return new AdvancedItem
+                {
+                    Name = hourly.name,
+                    Temperature = (int)Math.Round(hourly.main.temp),
+                    Weather = hourly.weather[0].main,
+                    Pressure = hourly.main.pressure,
+                    Precipitation = hourly.rain == null ? 0 : hourly.rain._3h,
+                    WindSpeed = hourly.wind.speed,
+                    WindDegrees = hourly.wind.deg,
+                    Humidity = hourly.main.humidity,
+                    StartColor = startColor,
+                    EndColor = endColor,
+                };
+            }
+            else if (typeof(T) == typeof(ForecastWeek))
+            {
+                ForecastWeek weekly = forecast as ForecastWeek;
+                return new AdvancedItem
+                {
+
+                };
+            }
+
+            return null;
         }
 
         private void OnTodayButtonClick(object sender, EventArgs e)

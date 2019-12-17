@@ -38,6 +38,11 @@ namespace OurWeather.Behaviors
             //var layout = carousel.ItemsLayout;
             var adjust = Device.RuntimePlatform == Device.Android ? 3 : 1;
 
+            if (e.LastVisibleItemIndex < 0)
+            {
+                return;
+            } 
+
             /*if (layout is ListView listItemsLayout)
             {
                 if (listItemsLayout.Orientation == ItemsLayoutOrientation.Horizontal)
