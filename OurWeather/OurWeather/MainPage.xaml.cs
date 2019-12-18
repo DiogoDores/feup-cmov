@@ -33,11 +33,18 @@ namespace OurWeather
             List<CarouselItem> items = new List<CarouselItem>();
 
             Color startC, endC;
-            String src, tip, name;
+            String src, tip, fName;
 
             foreach (var dist in districts) {
 
-                name = dist.name;
+                if (dist.name.IndexOf("da") != -1)
+                    fName = dist.name.Substring(dist.name.IndexOf("da" , StringComparison.Ordinal) + 3);
+                else if (dist.name.IndexOf("de") != -1)
+                    fName = dist.name.Substring(dist.name.IndexOf("de", StringComparison.Ordinal) + 3);
+                else if (dist.name.IndexOf("dos") != -1)
+                    fName = dist.name.Substring(dist.name.IndexOf("dos", StringComparison.Ordinal) + 4);
+                else
+                    fName = dist.name.Substring(dist.name.IndexOf("do", StringComparison.Ordinal) + 3);
 
                 if (dist.weather[0].main == "Rain" || dist.weather[0].main == "Drizzle") {
                     startC = Color.FromHex("#174159");
@@ -79,8 +86,8 @@ namespace OurWeather
                 }
 
                 items.Add(new CarouselItem {
-                    Name = name,
-                    FormattedName = name.Split(' ').LastOrDefault(),
+                    Name = dist.name,
+                    FormattedName = fName,
                     Temperature = (int) Math.Round(dist.main.temp),
                     Weather = dist.weather[0].main,
                     Tip = tip,
